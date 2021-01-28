@@ -1,0 +1,21 @@
+{
+  "name": "gymapplication",
+  "version": "1.0.0",
+  "description": "An application for your gym club members.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "server": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FirescuOvidiu/Gym-Application.git"
+  },
+  "author": "Firescu Ovidiu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FirescuOvidiu/Gym-Application/issues"
+  },
+  "homepage": "https://github.com/FirescuOvidiu/Gym-Application#readme"
+}
