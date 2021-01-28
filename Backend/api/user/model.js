@@ -11,14 +11,18 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
+    minlength: 8,
   },
   password: {
     type: String,
     required: true,
+    minlength: 8,
   },
   phone: {
     type: String,
     required: true,
+    minlength: 10,
+    maxlength: 10,
   },
   address: {
     type: String,
@@ -27,6 +31,7 @@ const userSchema = new mongoose.Schema({
   birthday: {
     type: Date,
     required: true,
+    min: "1900-01-01",
   },
   gender: {
     type: String,
