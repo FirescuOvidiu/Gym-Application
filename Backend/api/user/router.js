@@ -1,5 +1,7 @@
 const userController = require("./controller");
 
+const { checkUserAuth } = require("../middleware/auth-validation");
+
 const router = require("express").Router();
 
 // Route to register a new user with email and password
