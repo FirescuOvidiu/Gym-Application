@@ -30,7 +30,7 @@ const login = async (req, res, next) => {
 
     // Check if the user password from the database is identical with the password provided
     if (!user || !bcrypt.compareSync(req.body.password, user.password)) {
-      return next("Email or password incorrect.");
+      return next({ message: "Email or password incorrect." });
     }
 
     //Use the payload to store information about the user
