@@ -19,7 +19,7 @@ const register = async (req, res, next) => {
       .status(200)
       .json({ status: "The registration has been completed.", user: user });
   } catch (error) {
-    return next(error.message);
+    return next(error);
   }
 };
 
@@ -55,7 +55,7 @@ const login = async (req, res, next) => {
     // Send the access token to the client
     res.status(200).send({ accessToken: accessToken });
   } catch (error) {
-    return next(error.message);
+    return next(error);
   }
 };
 
