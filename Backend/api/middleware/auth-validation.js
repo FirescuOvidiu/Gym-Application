@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 // Method used to verify if the user is authorized
 const checkAuthorization = (req, res, next) => {
-  let accessToken = req.header("authorization");
+  const accessToken = req.header("authorization");
 
   // If there is no token stored in the header, the request is unauthorized
   if (!accessToken) {
