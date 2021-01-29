@@ -1,4 +1,5 @@
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const User = require("./model");
 
@@ -22,8 +23,40 @@ const register = async (req, res, next) => {
   }
 };
 
-const login = async (req, res) => {
-  res.status(200).send("Login Succesful");
+const login = async (req, res, next) => {
+  try {
+    // Look for the user in the database by email
+    const user = await User.findOne({ email: req.body.email });
+
+    // Check if the user password from the database is identical with the password provided
+    if (!user || !bcrypt.compareSync(req.body.password, user.password)) {
+      return next("Email or password incorrect.");
+    }
+
+    //Use the payload to store information about the user
+    let payload = {
+      _id: user._id,
+      email: user.email,
+      username: user.username,
+      phone: user.phone,
+      address: user.address,
+      birthday: user.birthday,
+      gender: user.gender,
+      name: user.name,
+      date: user.date,
+      role: user.role,
+    };
+
+    // Create the access token
+    let accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
+      algorithm: "HS256",
+      expiresIn: process.env.ACCESS_TOKEN_LIFE,
+    });
+    // Send the access token to the client
+    res.status(200).send({ accessToken: accessToken });
+  } catch (error) {
+    return next(error.message);
+  }
 };
 
 module.exports = {
