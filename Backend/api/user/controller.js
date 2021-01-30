@@ -72,8 +72,12 @@ const login = async (req, res, next) => {
   }
 };
 
+// Method used to update a book based on a filter
+const updateUser = async (req, res, next) => {};
+
 module.exports = {
   getUser,
   register,
   login,
+  updateUser,
 };

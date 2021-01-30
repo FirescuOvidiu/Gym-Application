@@ -14,4 +14,7 @@ router.post("/register", checkUser, checkBody, userController.register);
 // Route used to login with email and password
 router.post("/login", userController.login);
 
+// Route used to update a user
+router.put("/", checkUserAuth, userController.updateUser);
+
 module.exports = router;
