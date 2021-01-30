@@ -3,6 +3,9 @@ const jwt = require("jsonwebtoken");
 
 const User = require("./model");
 
+// Method used to get all users
+const getUser = async (req, res, next) => {};
+
 const register = async (req, res, next) => {
   // Hash user password
   req.body.password = bcrypt.hashSync(req.body.password, 10);
@@ -60,6 +63,7 @@ const login = async (req, res, next) => {
 };
 
 module.exports = {
+  getUser,
   register,
   login,
 };
