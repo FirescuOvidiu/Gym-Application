@@ -7,11 +7,11 @@ const User = require("./model");
 const getUser = async (req, res, next) => {
   try {
     // Find current user by id
-    var user = await User.findById(req.user._id);
+    let user = await User.findById(req.user.payload._id);
     user["password"] = undefined;
     user["__v"] = undefined;
 
-    res.status(200).json({ user: user });
+    res.status(200).json({ user });
   } catch (error) {
     return next(error);
   }
@@ -23,15 +23,14 @@ const register = async (req, res, next) => {
 
   try {
     // Create a new user with the informations provided
-    var user = new User(req.body);
+    let user = new User(req.body);
     user.role = "user";
+
     // Insert new user into the database
     user = await user.save();
-    user["password"] = undefined;
+
     // Respond with registration completed
-    res
-      .status(200)
-      .json({ status: "The registration has been completed.", user: user });
+    res.status(200).json({ status: "The registration has been completed." });
   } catch (error) {
     return next(error);
   }
@@ -49,14 +48,16 @@ const login = async (req, res, next) => {
 
     //Use the payload to store information about the user
     let payload = user;
+    payload["password"] = undefined;
+    payload["__v"] = undefined;
 
     // Create the access token
-    let accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
+    let accessToken = jwt.sign({ payload }, process.env.ACCESS_TOKEN_SECRET, {
       algorithm: "HS256",
       expiresIn: process.env.ACCESS_TOKEN_LIFE,
     });
     // Send the access token to the client
-    res.status(200).send({ accessToken: accessToken });
+    res.status(200).send({ accessToken });
   } catch (error) {
     return next(error);
   }
@@ -65,7 +66,7 @@ const login = async (req, res, next) => {
 // Method used to update a user
 const updateUser = async (req, res, next) => {
   try {
-    var user = await User.findById(req.user._id);
+    let user = await User.findById(req.user.payload._id);
 
     if (!user) {
       return next({ message: "The user was not found." });
@@ -82,10 +83,8 @@ const updateUser = async (req, res, next) => {
     user.name = req.body.name || user.name;
 
     user = await user.save();
-    user["password"] = undefined;
-    user["__v"] = undefined;
 
-    res.status(200).json({ status: "The user was updated.", user: user });
+    res.status(200).json({ status: "The user was updated." });
   } catch (error) {
     return next(error);
   }

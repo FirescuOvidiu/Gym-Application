@@ -17,7 +17,7 @@ const checkAuthorization = (req, res, next) => {
     return jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
   } catch (error) {
     // Throw an error if the token has expired or has a invalid signature
-    return next(erorr);
+    return next(error);
   }
 };
 
