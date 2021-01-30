@@ -9,6 +9,7 @@ const getUser = async (req, res, next) => {
     // Find current user by id
     var user = await User.findById(req.user._id);
     user["password"] = undefined;
+    user["__v"] = undefined;
 
     res.status(200).json({ user: user });
   } catch (error) {
@@ -72,8 +73,34 @@ const login = async (req, res, next) => {
   }
 };
 
-// Method used to update a book based on a filter
-const updateUser = async (req, res, next) => {};
+// Method used to update a user
+const updateUser = async (req, res, next) => {
+  try {
+    var user = await User.findById(req.user._id);
+
+    if (!user) {
+      return next({ message: "The user was not found." });
+    }
+    console.log(user);
+    user.username = req.body.username || user.username;
+    user.email = req.body.email || user.email;
+    if (req.body.password)
+      user.password = crypt.hashSync(req.body.password, 10) || user.password;
+    user.phone = req.body.phone || user.phone;
+    user.address = req.body.address || user.address;
+    user.birthday = req.body.birthday || user.birthday;
+    user.gender = req.body.gender || user.gender;
+    user.name = req.body.name || user.name;
+
+    user = await user.save();
+    user["password"] = undefined;
+    user["__v"] = undefined;
+
+    res.status(200).json({ status: "The user was updated.", user: user });
+  } catch (error) {
+    return next(error);
+  }
+};
 
 module.exports = {
   getUser,
