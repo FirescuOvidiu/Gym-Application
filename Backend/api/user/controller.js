@@ -3,8 +3,18 @@ const jwt = require("jsonwebtoken");
 
 const User = require("./model");
 
-// Method used to get all users
-const getUser = async (req, res, next) => {};
+// Method used to get user informations
+const getUser = async (req, res, next) => {
+  try {
+    // Find current user by id
+    var user = await User.findById(req.user._id);
+    user["password"] = undefined;
+
+    res.status(200).json({ user: user });
+  } catch (error) {
+    return next(error);
+  }
+};
 
 const register = async (req, res, next) => {
   // Hash user password
