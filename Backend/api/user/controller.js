@@ -74,7 +74,7 @@ const updateUser = async (req, res, next) => {
     user.username = req.body.username || user.username;
     user.email = req.body.email || user.email;
     if (req.body.password)
-      user.password = crypt.hashSync(req.body.password, 10) || user.password;
+      user.password = bcrypt.hashSync(req.body.password, 10) || user.password;
     user.phone = req.body.phone || user.phone;
     user.address = req.body.address || user.address;
     user.birthday = req.body.birthday || user.birthday;
