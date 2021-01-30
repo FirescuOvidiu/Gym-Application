@@ -48,18 +48,7 @@ const login = async (req, res, next) => {
     }
 
     //Use the payload to store information about the user
-    let payload = {
-      _id: user._id,
-      email: user.email,
-      username: user.username,
-      phone: user.phone,
-      address: user.address,
-      birthday: user.birthday,
-      gender: user.gender,
-      name: user.name,
-      date: user.date,
-      role: user.role,
-    };
+    let payload = user;
 
     // Create the access token
     let accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
@@ -81,7 +70,7 @@ const updateUser = async (req, res, next) => {
     if (!user) {
       return next({ message: "The user was not found." });
     }
-    console.log(user);
+
     user.username = req.body.username || user.username;
     user.email = req.body.email || user.email;
     if (req.body.password)
