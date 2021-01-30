@@ -15,6 +15,6 @@ router.post("/register", checkUser, checkBody, userController.register);
 router.post("/login", userController.login);
 
 // Route used to update a user
-router.put("/", checkUserAuth, userController.updateUser);
+router.put("/", checkUserAuth, checkUser, checkBody, userController.updateUser);
 
 module.exports = router;
