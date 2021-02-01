@@ -6,6 +6,7 @@ const User = require("./model");
 // Method used to get user informations
 const getUser = async (req, res, next) => {
   try {
+    // TEST 2
     // Find current user by id
     let user = await User.findById(req.user.payload._id);
     user["password"] = undefined;
