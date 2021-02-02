@@ -27,6 +27,17 @@ const checkUserAuth = (req, res, next) => {
   next();
 };
 
+const checkAdminAuth = (req, res, next) => {
+  decoded = checkAuthorization(req, res, next);
+  if (decoded.role === "admin") {
+    req.user = decoded;
+    next();
+  } else {
+    return next({ message: "Access denied." });
+  }
+};
+
 module.exports = {
   checkUserAuth,
+  checkAdminAuth,
 };

@@ -1,6 +1,9 @@
 const userController = require("./controller");
 
-const { checkUserAuth } = require("../middleware/auth-validation");
+const {
+  checkUserAuth,
+  checkAdminAuth,
+} = require("../middleware/auth-validation");
 const { isUserValid, checkBody } = require("../middleware/body-validation");
 
 const router = require("express").Router();
