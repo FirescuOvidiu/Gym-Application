@@ -8,7 +8,7 @@ const { isUserValid, checkBody } = require("../middleware/body-validation");
 
 const router = require("express").Router();
 
-router.get("/", checkUserAuth, userController.getUser);
+router.get("/:id", checkUserAuth, userController.getUser);
 router.post("/register", isUserValid, checkBody, userController.register);
 router.post("/login", userController.login);
 router.put(

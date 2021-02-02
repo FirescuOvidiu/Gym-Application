@@ -6,7 +6,16 @@ const User = require("./model");
 // Method used to get user informations
 const getUser = async (req, res, next) => {
   try {
-    let user = await User.findById(req.user.payload._id);
+    let user = await User.findById(req.params._id);
+
+    if (!user) {
+      return next({ message: "The user was not found." });
+    }
+
+    if (req.user.payload.role === "user" && user._id != req.user.payload._id) {
+      return next({ message: "A user can't search for another user." });
+    }
+
     user["password"] = undefined;
     user["__v"] = undefined;
 
@@ -23,6 +32,7 @@ const register = async (req, res, next) => {
     let user = new User(req.body);
     user.role = "user";
     user = await user.save();
+
     res.status(200).json({ status: "The registration has been completed." });
   } catch (error) {
     return next(error);
