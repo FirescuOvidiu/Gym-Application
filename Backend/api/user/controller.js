@@ -81,9 +81,25 @@ const updateUser = async (req, res, next) => {
   }
 };
 
+// Method used to delete a user
+const deleteUser = async (req, res, next) => {
+  try {
+    let user = await User.findByIdAndDelete(req.params._id);
+
+    if (!user) {
+      return next({ message: "The user was not found." });
+    }
+
+    res.status(200).json({ status: "The user was deleted." });
+  } catch (error) {
+    return next(error);
+  }
+};
+
 module.exports = {
   getUser,
   register,
   login,
   updateUser,
+  deleteUser,
 };
