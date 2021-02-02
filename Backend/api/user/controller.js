@@ -57,10 +57,14 @@ const login = async (req, res, next) => {
 // Method used to update a user
 const updateUser = async (req, res, next) => {
   try {
-    let user = await User.findById(req.user.payload._id);
+    let user = await User.findById(req.params._id);
 
     if (!user) {
       return next({ message: "The user was not found." });
+    }
+
+    if (req.user.payload.role === "user" && user._id != req.user.payload._id) {
+      return next({ message: "A user can't update another user." });
     }
 
     user.username = req.body.username || user.username;
@@ -72,6 +76,9 @@ const updateUser = async (req, res, next) => {
     user.birthday = req.body.birthday || user.birthday;
     user.gender = req.body.gender || user.gender;
     user.name = req.body.name || user.name;
+    if (req.user.role === "admin") {
+      user.role = req.body.role || user.role;
+    }
 
     user = await user.save();
 
