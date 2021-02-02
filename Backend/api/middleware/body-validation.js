@@ -9,7 +9,7 @@ const checkBody = (req, res, next) => {
   next();
 };
 
-const checkUser = [
+const isUserValid = [
   check("email")
     .notEmpty()
     .withMessage("Email is required.")
@@ -64,5 +64,5 @@ const checkUser = [
 
 module.exports = {
   checkBody,
-  checkUser,
+  isUserValid,
 };

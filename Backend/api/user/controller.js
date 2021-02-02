@@ -6,9 +6,6 @@ const User = require("./model");
 // Method used to get user informations
 const getUser = async (req, res, next) => {
   try {
-    // TEST 2
-    // TEST 3
-    // Find current user by id
     let user = await User.findById(req.user.payload._id);
     user["password"] = undefined;
     user["__v"] = undefined;
@@ -20,18 +17,12 @@ const getUser = async (req, res, next) => {
 };
 
 const register = async (req, res, next) => {
-  // Hash user password
   req.body.password = bcrypt.hashSync(req.body.password, 10);
 
   try {
-    // Create a new user with the informations provided
     let user = new User(req.body);
     user.role = "user";
-
-    // Insert new user into the database
     user = await user.save();
-
-    // Respond with registration completed
     res.status(200).json({ status: "The registration has been completed." });
   } catch (error) {
     return next(error);
@@ -40,10 +31,8 @@ const register = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   try {
-    // Look for the user in the database by email
     const user = await User.findOne({ email: req.body.email });
 
-    // Check if the user password from the database is identical with the password provided
     if (!user || !bcrypt.compareSync(req.body.password, user.password)) {
       return next({ message: "Email or password incorrect." });
     }
@@ -58,7 +47,7 @@ const login = async (req, res, next) => {
       algorithm: "HS256",
       expiresIn: process.env.ACCESS_TOKEN_LIFE,
     });
-    // Send the access token to the client
+
     res.status(200).send({ accessToken });
   } catch (error) {
     return next(error);
