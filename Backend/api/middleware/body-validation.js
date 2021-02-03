@@ -1,6 +1,6 @@
 const { check, validationResult } = require("express-validator");
 
-const checkBody = (req, res, next) => {
+const valdiationResults = (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -63,6 +63,6 @@ const isUserValid = [
 ];
 
 module.exports = {
-  checkBody,
+  valdiationResults,
   isUserValid,
 };
