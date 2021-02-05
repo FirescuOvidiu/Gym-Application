@@ -6,6 +6,7 @@ import 'react-native-gesture-handler';
 
 import LoginScreen from './src/screens/loginScreen';
 import RegisterScreen from './src/screens/registerScreen';
+import TabNavigatorRoutes from './src/screens/tabNavigatorRoutes';
 
 const Stack = createStackNavigator();
 
@@ -33,6 +34,11 @@ const App = () => {
         <Stack.Screen
           name="Auth"
           component={Auth}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="TabNavigatorRoutes"
+          component={TabNavigatorRoutes}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
