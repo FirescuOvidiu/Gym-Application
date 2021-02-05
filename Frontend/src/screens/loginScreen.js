@@ -11,11 +11,11 @@ const LoginScreen = ({navigation}) => {
 
   const handleSubmitPress = async () => {
     if (!userEmail) {
-      alert('Please fill Email');
+      alert('Please fill Email.');
       return;
     }
     if (!userPassword) {
-      alert('Please fill Password');
+      alert('Please fill Password.');
       return;
     }
 
@@ -29,7 +29,7 @@ const LoginScreen = ({navigation}) => {
       );
 
       await AsyncStorage.setItem('accessToken', response.data.accessToken);
-      //navigation.replace('');
+      navigation.replace('TabNavigatorRoutes');
     } catch (error) {
       alert(error.response.data.message);
     }
