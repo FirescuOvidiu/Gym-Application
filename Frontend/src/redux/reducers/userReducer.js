@@ -10,7 +10,7 @@ const INITIAL_STATE = {
   gender: '',
   name: {
     first: '',
-    second: '',
+    last: '',
   },
   date: '',
   role: 'user',
