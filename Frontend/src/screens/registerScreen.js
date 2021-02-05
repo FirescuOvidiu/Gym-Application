@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {TextInput, View, Text, TouchableOpacity} from 'react-native';
+import {
+  TextInput,
+  View,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 
 const axios = require('axios').default;
 
@@ -7,6 +13,7 @@ const RegisterScreen = ({navigation}) => {
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
+  const [userRetypePassword, setUserRetypePassword] = useState('');
   const [userPhone, setUserPhone] = useState('');
   const [userAddress, setUserAddress] = useState('');
   const [userBirthday, setUserBirthday] = useState('');
@@ -25,6 +32,10 @@ const RegisterScreen = ({navigation}) => {
     }
     if (!userPassword) {
       alert('Please fill Password');
+      return;
+    }
+    if (!userRetypePassword) {
+      alert('Please fill Re-type Password');
       return;
     }
     if (!userPhone) {
@@ -49,6 +60,10 @@ const RegisterScreen = ({navigation}) => {
     }
     if (!userLastName) {
       alert('Please fill Last Name');
+      return;
+    }
+    if (userRetypePassword !== userPassword) {
+      alert('Password should be identical with Re-type password');
       return;
     }
 
@@ -76,7 +91,7 @@ const RegisterScreen = ({navigation}) => {
   };
 
   return (
-    <View>
+    <ScrollView>
       <Text>Welcome to the Gym Application</Text>
       <View>
         <Text>Email</Text>
@@ -102,6 +117,19 @@ const RegisterScreen = ({navigation}) => {
         <Text>Password</Text>
         <TextInput
           onChangeText={(UserPassword) => setUserPassword(UserPassword)}
+          placeholder="Enter Password"
+          placeholderTextColor="#8b9cb5"
+          returnKeyType="next"
+          blurOnSubmit={false}
+          secureTextEntry={true}
+        />
+      </View>
+      <View>
+        <Text>Re-type Password</Text>
+        <TextInput
+          onChangeText={(UserRetypePassword) =>
+            setUserRetypePassword(UserRetypePassword)
+          }
           placeholder="Enter Password"
           placeholderTextColor="#8b9cb5"
           returnKeyType="next"
@@ -176,7 +204,7 @@ const RegisterScreen = ({navigation}) => {
         <Text> Already have an account? </Text>
         <Text onPress={() => navigation.navigate('LoginScreen')}>Sign In</Text>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
