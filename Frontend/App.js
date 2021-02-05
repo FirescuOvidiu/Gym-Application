@@ -5,17 +5,21 @@ import {createStackNavigator} from '@react-navigation/stack';
 import 'react-native-gesture-handler';
 
 import LoginScreen from './src/screens/loginScreen';
+import RegisterScreen from './src/screens/registerScreen';
 
 const Stack = createStackNavigator();
-//const store = createStore(userReducer);
 
 const Auth = () => {
-  // Stack Navigator for Login and Sign up Screen
   return (
     <Stack.Navigator initialRouteName="LoginScreen">
       <Stack.Screen
         name="LoginScreen"
         component={LoginScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="RegisterScreen"
+        component={RegisterScreen}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
