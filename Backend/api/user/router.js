@@ -11,7 +11,7 @@ const {
 
 const router = require("express").Router();
 
-router.get("/:id", checkUserAuth, userController.getUser);
+router.get("/:id?", checkUserAuth, userController.getUser);
 
 router.post(
   "/register",

@@ -5,6 +5,8 @@ const User = require("./model");
 
 // Method used to get user informations
 const getUser = async (req, res, next) => {
+  req.params._id = req.params._id || req.user.payload._id;
+
   try {
     let user = await User.findById(req.params._id);
 
