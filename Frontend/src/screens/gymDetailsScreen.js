@@ -65,7 +65,7 @@ const GymDetailsScreen = ({navigation}) => {
       <Text>address: {gymReducer.address} </Text>
       <Text>openingTime: {gymReducer.openingTime} </Text>
       <Text>closingTime: {gymReducer.closingTime} </Text>
-      <Text>date: {gymReducer.date} </Text>
+      <Text>date: {gymReducer.date.substring(0, 10)} </Text>
       <TouchableOpacity
         onPress={() => {
           Alert.alert(
