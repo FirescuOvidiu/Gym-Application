@@ -1,6 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {View, Text, TextInput, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -9,24 +15,23 @@ const axios = require('axios').default;
 import {updateUser} from '../redux/actions/userActions';
 
 const UpdateProfileScreen = () => {
-  /*
   const userReducer = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
-  const [email, setEmail] = useState(userReducer.data.user.email);
-  const [username, setUsername] = useState(userReducer.data.user.username);
-  const [phone, setPhone] = useState(userReducer.data.user.phone);
-  const [address, setAddress] = useState(userReducer.data.user.address);
-  const [birthday, setBirthday] = useState(userReducer.data.user.birthday);
-  const [gender, setGender] = useState(userReducer.data.user.gender);
-  const [name, setName] = useState(userReducer.data.user.name);
-  const [password, setPassword] = useState('');
+  const [email, setUserEmail] = useState(userReducer.email);
+  const [username, setUserUsername] = useState(userReducer.username);
+  const [phone, setUserPhone] = useState(userReducer.phone);
+  const [address, setUserAddress] = useState(userReducer.address);
+  const [birthday, setUserBirthday] = useState(userReducer.birthday);
+  const [gender, setUserGender] = useState(userReducer.gender);
+  const [name, setUserName] = useState(userReducer.name);
+  const [password, setUserPassword] = useState('');
   const [userModified, setUserModified] = useState(false);
 
   const _updateUser = async () => {
     try {
       const token = await AsyncStorage.getItem('accessToken');
       const response = await axios.put(
-        `http://192.168.100.2:3000/api/user/${userReducer.data.user._id}`,
+        `http://192.168.100.2:3000/api/user/${userReducer._id}`,
         {
           email: email,
           username: username,
@@ -46,6 +51,7 @@ const UpdateProfileScreen = () => {
       alert(`${response.data.status}`);
       setUserModified(!userModified);
     } catch (error) {
+      console.log(error);
       alert(error.response.data.message);
     }
   };
@@ -63,11 +69,88 @@ const UpdateProfileScreen = () => {
       }),
     );
   }, [userModified]);
-*/
+
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>It works</Text>
-    </View>
+    <ScrollView>
+      <View>
+        <Text>Email</Text>
+        <TextInput
+          defaultValue={userReducer.email}
+          onChangeText={(UserEmail) => setUserEmail(UserEmail)}
+        />
+      </View>
+      <View>
+        <Text>Username</Text>
+        <TextInput
+          defaultValue={userReducer.username}
+          onChangeText={(UserName) => setUserUsername(UserName)}
+        />
+      </View>
+      <View>
+        <Text>Password</Text>
+        <TextInput
+          onChangeText={(UserPassword) => setUserPassword(UserPassword)}
+          placeholder="Enter Password"
+        />
+      </View>
+      <View>
+        <Text>Phone</Text>
+        <TextInput
+          defaultValue={userReducer.phone}
+          onChangeText={(UserPhone) => setUserPhone(UserPhone)}
+        />
+      </View>
+      <View>
+        <Text>Address</Text>
+        <TextInput
+          defaultValue={userReducer.address}
+          onChangeText={(UserAddress) => setUserAddress(UserAddress)}
+        />
+      </View>
+      <View>
+        <Text>Birthday</Text>
+        <TextInput
+          defaultValue={userReducer.birthday.substring(0, 10)}
+          onChangeText={(UserBirthday) => setUserBirthday(UserBirthday)}
+        />
+      </View>
+      <View>
+        <Text>Gender</Text>
+        <TextInput
+          defaultValue={userReducer.gender}
+          onChangeText={(UserGender) => setUserGender(UserGender)}
+        />
+      </View>
+      <View>
+        <Text>First Name</Text>
+        <TextInput
+          defaultValue={userReducer.name.first}
+          onChangeText={(UserFirstName) =>
+            setUserName((prevState) => ({
+              ...prevState,
+              first: UserFirstName,
+            }))
+          }
+        />
+      </View>
+      <View>
+        <Text>Last Name</Text>
+        <TextInput
+          defaultValue={userReducer.name.last}
+          onChangeText={(UserLastName) =>
+            setUserName((prevState) => ({
+              ...prevState,
+              last: UserLastName,
+            }))
+          }
+        />
+      </View>
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <TouchableOpacity activeOpacity={0.5} onPress={_updateUser}>
+          <Text>Update</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   );
 };
 
