@@ -14,7 +14,7 @@ const axios = require('axios').default;
 
 import {updateUser} from '../redux/actions/userActions';
 
-const UpdateProfileScreen = () => {
+const UpdateProfileScreen = ({navigation}) => {
   const userReducer = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
   const [email, setUserEmail] = useState(userReducer.email);
@@ -145,7 +145,12 @@ const UpdateProfileScreen = () => {
         />
       </View>
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <TouchableOpacity activeOpacity={0.5} onPress={_updateUser}>
+        <TouchableOpacity
+          activeOpacity={0.5}
+          onPress={() => {
+            _updateUser();
+            navigation.navigate('Profile');
+          }}>
           <Text>Update</Text>
         </TouchableOpacity>
       </View>
