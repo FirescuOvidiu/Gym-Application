@@ -4,7 +4,6 @@ const {
   checkUserAuth,
   checkAdminAuth,
 } = require("../middleware/auth-validation");
-
 const {
   isGymValid,
   valdiationResults,
