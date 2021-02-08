@@ -90,6 +90,7 @@ const UpdateProfileScreen = ({navigation}) => {
         <TextInput
           onChangeText={(UserPassword) => setUserPassword(UserPassword)}
           placeholder="Enter Password"
+          secureTextEntry={true}
         />
       </View>
       <View>
