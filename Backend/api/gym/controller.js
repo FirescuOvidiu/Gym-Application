@@ -1,6 +1,24 @@
 const Gym = require("./model");
 
-const getGym = async (req, res, next) => {};
+const getGym = async (req, res, next) => {
+  try {
+    let gym;
+
+    if (req.params._id) {
+      gym = await Gym.findById(req.params._id);
+    } else {
+      gym = await Gym.find();
+    }
+
+    if (!gym) {
+      return next({ message: "The user was not found." });
+    }
+
+    res.status(200).json({ gym });
+  } catch (error) {
+    return next(error);
+  }
+};
 
 const createGym = async (req, res, next) => {
   try {
