@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
 import 'react-native-gesture-handler';
 
 import {NavigationContainer} from '@react-navigation/native';
@@ -10,10 +9,9 @@ import SplashScreen from './src/screens/splashScreen';
 import LoginScreen from './src/screens/loginScreen';
 import RegisterScreen from './src/screens/registerScreen';
 import TabNavigatorRoutes from './src/screens/tabNavigatorRoutes';
-import userReducer from './src/redux/reducers/userReducer';
+import store from './src/redux/store';
 
 const Stack = createStackNavigator();
-const store = createStore(userReducer);
 
 const Auth = () => {
   return (

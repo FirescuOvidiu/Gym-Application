@@ -9,7 +9,7 @@ import {addUser} from '../redux/actions/userActions';
 
 import axios from 'axios';
 
-const GymDetailsScreen = (props) => {
+const GymDetailsScreen = ({navigation}) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const GymDetailsScreen = (props) => {
           delete user.data.user.password;
         }
 
-        dispatch(addUser(user));
+        dispatch(addUser(user.data.user));
       } catch (error) {
         alert(error.response.data.message);
       }
@@ -57,7 +57,7 @@ const GymDetailsScreen = (props) => {
                   text: 'Confirm',
                   onPress: () => {
                     AsyncStorage.clear();
-                    props.navigation.replace('Auth');
+                    navigation.replace('Auth');
                   },
                 },
               ],
