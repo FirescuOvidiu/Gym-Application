@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, Alert, TouchableOpacity} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {useEffect} from 'react';
 
@@ -9,20 +9,19 @@ import {addUser} from '../redux/actions/userActions';
 
 import axios from 'axios';
 
-const GymDetailsScreen = () => {
+const GymDetailsScreen = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     const saveUser = async () => {
       const token = await AsyncStorage.getItem('accessToken');
       try {
-        var user = await axios.get('http://192.168.100.2:3000/api/user', {
+        let user = await axios.get('http://192.168.100.2:3000/api/user', {
           headers: {
             authorization: token,
           },
         });
 
-        console.log(user.data);
         if (user.data.user) {
           delete user.data.user.__v;
           delete user.data.user.password;
@@ -37,8 +36,37 @@ const GymDetailsScreen = () => {
   }, []);
 
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Gym Details Screen</Text>
+    <View>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text>Home!</Text>
+      </View>
+      <View>
+        <TouchableOpacity
+          onPress={() => {
+            Alert.alert(
+              'Logout',
+              'Are you sure? You want to logout?',
+              [
+                {
+                  text: 'Cancel',
+                  onPress: () => {
+                    return null;
+                  },
+                },
+                {
+                  text: 'Confirm',
+                  onPress: () => {
+                    AsyncStorage.clear();
+                    props.navigation.replace('Auth');
+                  },
+                },
+              ],
+              {cancelable: false},
+            );
+          }}>
+          <Text>Logout</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

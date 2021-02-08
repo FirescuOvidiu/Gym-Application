@@ -5,6 +5,8 @@ import {View, Text} from 'react-native';
 const ProfileScreen = () => {
   const userReducer = useSelector((state) => state.userReducer);
 
+  console.log('RTET');
+  console.log(userReducer);
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <Text>email: {userReducer.data.user.email} </Text>
