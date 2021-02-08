@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Text, View, Alert, TouchableOpacity} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {useEffect} from 'react';
 
 import AsyncStorage from '@react-native-community/async-storage';
@@ -11,6 +11,7 @@ import {addGym} from '../redux/actions/gymActions';
 import axios from 'axios';
 
 const GymDetailsScreen = ({navigation}) => {
+  const gymReducer = useSelector((state) => state.gymReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -44,9 +45,9 @@ const GymDetailsScreen = ({navigation}) => {
         });
 
         if (gym.data.gym) {
-          delete gym.data.gym.__v;
+          delete gym.data.gym[0].__v;
         }
-        dispatch(addGym(gym.data.gym));
+        dispatch(addGym(gym.data.gym[0]));
       } catch (error) {
         alert(error.response.data.message);
       }
@@ -56,8 +57,20 @@ const GymDetailsScreen = ({navigation}) => {
   }, []);
 
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
       <Text>Gym Details!</Text>
+      <Text>name: {gymReducer.name} </Text>
+      <Text>email: {gymReducer.email} </Text>
+      <Text>phone: {gymReducer.phone} </Text>
+      <Text>address: {gymReducer.address} </Text>
+      <Text>openingTime: {gymReducer.openingTime} </Text>
+      <Text>closingTime: {gymReducer.closingTime} </Text>
+      <Text>date: {gymReducer.date} </Text>
       <TouchableOpacity
         onPress={() => {
           Alert.alert(
