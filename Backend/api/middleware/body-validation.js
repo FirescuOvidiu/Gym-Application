@@ -4,7 +4,7 @@ const valdiationResults = (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    return next({ message: errors.array()[0].msg });
   }
   next();
 };
@@ -44,7 +44,7 @@ const isUserValid = [
     .notEmpty()
     .withMessage("Birthday is required")
     .matches(/^\d{4}-\d{2}-\d{2}$/)
-    .withMessage("Invalid birthday date. Format YYYY-MM-YY."),
+    .withMessage("Invalid birthday date. Format YYYY-MM-DD."),
   check("gender")
     .notEmpty()
     .withMessage("Gender is required.")

@@ -26,7 +26,8 @@ const GymDetailsScreen = ({navigation}) => {
           delete user.data.user.__v;
           delete user.data.user.password;
         }
-
+        user.data.user.birthday = user.data.user.birthday.substring(0, 10);
+        user.data.user.date = user.data.user.date.substring(0, 10);
         dispatch(addUser(user.data.user));
       } catch (error) {
         alert(error.response.data.message);

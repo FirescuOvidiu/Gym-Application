@@ -51,7 +51,6 @@ const UpdateProfileScreen = () => {
       alert(`${response.data.status}`);
       setUserModified(!userModified);
     } catch (error) {
-      console.log(error);
       alert(error.response.data.message);
     }
   };
@@ -110,7 +109,7 @@ const UpdateProfileScreen = () => {
       <View>
         <Text>Birthday</Text>
         <TextInput
-          defaultValue={userReducer.birthday.substring(0, 10)}
+          defaultValue={userReducer.birthday}
           onChangeText={(UserBirthday) => setUserBirthday(UserBirthday)}
         />
       </View>
