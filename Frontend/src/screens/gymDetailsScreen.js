@@ -6,6 +6,7 @@ import {useEffect} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import {addUser} from '../redux/actions/userActions';
+import {addGym} from '../redux/actions/gymActions';
 
 import axios from 'axios';
 
@@ -33,41 +34,55 @@ const GymDetailsScreen = ({navigation}) => {
         alert(error.response.data.message);
       }
     };
+    const saveGym = async () => {
+      const token = await AsyncStorage.getItem('accessToken');
+      try {
+        let gym = await axios.get('http://192.168.100.2:3000/api/gym', {
+          headers: {
+            authorization: token,
+          },
+        });
+
+        if (gym.data.gym) {
+          delete gym.data.gym.__v;
+        }
+        dispatch(addGym(gym.data.gym));
+      } catch (error) {
+        alert(error.response.data.message);
+      }
+    };
     saveUser();
+    saveGym();
   }, []);
 
   return (
-    <View>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>Home!</Text>
-      </View>
-      <View>
-        <TouchableOpacity
-          onPress={() => {
-            Alert.alert(
-              'Logout',
-              'Are you sure? You want to logout?',
-              [
-                {
-                  text: 'Cancel',
-                  onPress: () => {
-                    return null;
-                  },
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>Gym Details!</Text>
+      <TouchableOpacity
+        onPress={() => {
+          Alert.alert(
+            'Logout',
+            'Are you sure? You want to logout?',
+            [
+              {
+                text: 'Cancel',
+                onPress: () => {
+                  return null;
                 },
-                {
-                  text: 'Confirm',
-                  onPress: () => {
-                    AsyncStorage.clear();
-                    navigation.replace('Auth');
-                  },
+              },
+              {
+                text: 'Confirm',
+                onPress: () => {
+                  AsyncStorage.clear();
+                  navigation.replace('Auth');
                 },
-              ],
-              {cancelable: false},
-            );
-          }}>
-          <Text>Logout</Text>
-        </TouchableOpacity>
-      </View>
+              },
+            ],
+            {cancelable: false},
+          );
+        }}>
+        <Text>Logout</Text>
+      </TouchableOpacity>
     </View>
   );
 };
