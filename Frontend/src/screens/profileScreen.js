@@ -1,8 +1,8 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 
-const ProfileScreen = () => {
+const ProfileScreen = ({navigation}) => {
   const userReducer = useSelector((state) => state.userReducer);
 
   return (
@@ -16,6 +16,9 @@ const ProfileScreen = () => {
       <Text>gender: {userReducer.gender} </Text>
       <Text>first name: {userReducer.name.first} </Text>
       <Text>last name: {userReducer.name.last} </Text>
+      <TouchableOpacity onPress={() => navigation.navigate('UpdateProfile')}>
+        <Text>Update Profile</Text>
+      </TouchableOpacity>
     </View>
   );
 };

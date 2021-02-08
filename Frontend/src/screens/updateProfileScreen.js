@@ -8,7 +8,8 @@ const axios = require('axios').default;
 
 import {updateUser} from '../redux/actions/userActions';
 
-const ProfileScreen = () => {
+const UpdateProfileScreen = () => {
+  /*
   const userReducer = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
   const [email, setEmail] = useState(userReducer.data.user.email);
@@ -62,19 +63,12 @@ const ProfileScreen = () => {
       }),
     );
   }, [userModified]);
-
+*/
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>email: {userReducer.data.user.email} </Text>
-      <Text>username: {userReducer.data.user.username} </Text>
-      <Text>role: {userReducer.data.user.role} </Text>
-      <Text>phone: {userReducer.data.user.phone} </Text>
-      <Text>address: {userReducer.data.user.address} </Text>
-      <Text>birthday: {userReducer.data.user.birthday} </Text>
-      <Text>gender: {userReducer.data.user.gender} </Text>
-      <Text>name: {userReducer.data.user.name} </Text>
+      <Text>It works</Text>
     </View>
   );
 };
 
-export default ProfileScreen;
+export default UpdateProfileScreen;
