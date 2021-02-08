@@ -62,7 +62,38 @@ const isUserValid = [
     .withMessage("Last name should contain only letters."),
 ];
 
+const isGymValid = [
+  check("name")
+    .notEmpty()
+    .withMessage("First name is required.")
+    .matches(/^[a-zA-Z\s]+$/)
+    .withMessage("First name should contain only letters."),
+  check("email")
+    .notEmpty()
+    .withMessage("Email is required.")
+    .normalizeEmail()
+    .isEmail()
+    .withMessage("Invalid email."),
+  check("phone")
+    .notEmpty()
+    .withMessage("Phone is required.")
+    .matches(/^\d{10}$/)
+    .withMessage("Phone number must contain 10 digits."),
+  check("address").notEmpty().withMessage("Address is required."),
+  check("openingTime")
+    .notEmpty()
+    .withMessage("Opening time is required")
+    .matches(/^(\d{2}):(\d{2})$/)
+    .withMessage("Invalid opening time. Format HH-MM."),
+  check("closingTime")
+    .notEmpty()
+    .withMessage("Closing time is required")
+    .matches(/^(\d{2}):(\d{2})$/)
+    .withMessage("Invalid closing time. Format HH-MM."),
+];
+
 module.exports = {
   valdiationResults,
   isUserValid,
+  isGymValid,
 };
