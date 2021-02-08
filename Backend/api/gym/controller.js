@@ -14,6 +14,20 @@ const createGym = async (req, res, next) => {
 };
 
 const updateGym = async (req, res, next) => {};
-const deleteGym = async (req, res, next) => {};
+
+const deleteGym = async (req, res, next) => {
+  try {
+    const gym = await Gym.findByIdAndDelete(req.params._id);
+    if (!gym) {
+      return next({ message: "The gym was not found." });
+    }
+
+    res.status(200).json({ status: "The gym was deleted." });
+  } catch (error) {
+    if (error) {
+      return next(error);
+    }
+  }
+};
 
 module.exports = { getGym, createGym, updateGym, deleteGym };
