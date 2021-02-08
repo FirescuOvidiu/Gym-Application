@@ -57,12 +57,7 @@ const GymDetailsScreen = ({navigation}) => {
   }, []);
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text>Gym Details!</Text>
       <Text>name: {gymReducer.name} </Text>
       <Text>email: {gymReducer.email} </Text>

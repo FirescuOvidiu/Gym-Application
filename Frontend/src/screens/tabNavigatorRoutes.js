@@ -13,8 +13,16 @@ const Stack = createStackNavigator();
 function ProfileStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Profile" component={ProfileScreen} />
-      <Stack.Screen name="UpdateProfile" component={UpdateProfileScreen} />
+      <Stack.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{title: 'Profile'}}
+      />
+      <Stack.Screen
+        name="UpdateProfile"
+        component={UpdateProfileScreen}
+        options={{title: 'Update Profile'}}
+      />
     </Stack.Navigator>
   );
 }
@@ -22,13 +30,18 @@ function ProfileStack() {
 const TabNavigatorRoutes = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="GymDetails" component={GymDetailsScreen}></Tab.Screen>
+      <Tab.Screen
+        name="GymDetails"
+        component={GymDetailsScreen}
+        options={{title: 'Gym Details'}}
+      />
       <Tab.Screen
         name="Profile"
         component={ProfileStack}
         options={{
           unmountOnBlur: true,
-        }}></Tab.Screen>
+        }}
+      />
     </Tab.Navigator>
   );
 };
