@@ -5,7 +5,7 @@ const userRoutes = require("./user/router");
 const gymRoutes = require("./gym/router");
 
 apiRouter.use("/user", userRoutes);
-apiRouter.use("/gymn", gymRoutes);
+apiRouter.use("/gym", gymRoutes);
 
 apiRouter.use((error, req, res, next) => {
   res.status(500);
