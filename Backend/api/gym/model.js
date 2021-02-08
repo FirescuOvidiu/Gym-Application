@@ -21,8 +21,8 @@ const gymSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  openingTime: { type: Date, required: true },
-  closingTime: { type: Date, required: true },
+  openingTime: { type: String, required: true },
+  closingTime: { type: String, required: true },
   date: { type: Date, default: Date.now },
 });
 
