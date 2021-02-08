@@ -23,7 +23,12 @@ const TabNavigatorRoutes = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen name="GymDetails" component={GymDetailsScreen}></Tab.Screen>
-      <Tab.Screen name="Profile" component={ProfileStack}></Tab.Screen>
+      <Tab.Screen
+        name="Profile"
+        component={ProfileStack}
+        options={{
+          unmountOnBlur: true,
+        }}></Tab.Screen>
     </Tab.Navigator>
   );
 };
