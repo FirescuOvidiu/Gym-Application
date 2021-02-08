@@ -5,18 +5,17 @@ import {View, Text} from 'react-native';
 const ProfileScreen = () => {
   const userReducer = useSelector((state) => state.userReducer);
 
-  console.log('RTET');
-  console.log(userReducer);
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>email: {userReducer.data.user.email} </Text>
-      <Text>username: {userReducer.data.user.username} </Text>
-      <Text>role: {userReducer.data.user.role} </Text>
-      <Text>phone: {userReducer.data.user.phone} </Text>
-      <Text>address: {userReducer.data.user.address} </Text>
-      <Text>birthday: {userReducer.data.user.birthday} </Text>
-      <Text>gender: {userReducer.data.user.gender} </Text>
-      <Text>name: {userReducer.data.user.name} </Text>
+      <Text>email: {userReducer.email} </Text>
+      <Text>username: {userReducer.username} </Text>
+      <Text>role: {userReducer.role} </Text>
+      <Text>phone: {userReducer.phone} </Text>
+      <Text>address: {userReducer.address} </Text>
+      <Text>birthday: {userReducer.birthday} </Text>
+      <Text>gender: {userReducer.gender} </Text>
+      <Text>first name: {userReducer.name.first} </Text>
+      <Text>last name: {userReducer.name.last} </Text>
     </View>
   );
 };
