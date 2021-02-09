@@ -84,7 +84,7 @@ const RegisterScreen = ({navigation}) => {
 
       alert('Registration successful.');
     } catch (error) {
-      console.log('TEST');
+      console.log('TEST2');
       error.response.data.errors.forEach((element) => {
         alert(element.msg);
       });
