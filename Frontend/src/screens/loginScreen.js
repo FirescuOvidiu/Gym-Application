@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     flex: 1.5,
     marginLeft: '10%',
     marginRight: '10%',
-    marginTop: '10%',
+    marginTop: '20%',
   },
   headerText: {
     color: '#6da7f2',
