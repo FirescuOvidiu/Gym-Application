@@ -45,41 +45,41 @@ const LoginScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require('../images/authBackground.png.jpg')}
-        style={styles.image}>
+        source={require('../images/authBackground.jpg')}
+        style={styles.backgroundImage}>
         <View>
-          <Text>Welcome back</Text>
+          <Text style={styles.titleText}>Welcome back</Text>
         </View>
-        <View>
-          <View>
-            <Text>Email</Text>
-            <TextInput
-              onChangeText={(UserEmail) => setUserEmail(UserEmail)}
-              placeholder="Enter Email"
-              returnKeyType="next"
-              blurOnSubmit={false}
-            />
-          </View>
-          <View>
-            <Text>Password</Text>
-            <TextInput
-              onChangeText={(UserPassword) => setUserPassword(UserPassword)}
-              placeholder="Enter Password"
-              blurOnSubmit={false}
-              returnKeyType="next"
-              secureTextEntry={true}
-            />
-          </View>
-          <Text onPress={() => navigation.navigate('')}>Forgot password?</Text>
-          <TouchableOpacity onPress={() => handleSubmitPress()}>
-            <Text>Sign in</Text>
-          </TouchableOpacity>
-          <View style={{flexDirection: 'row'}}>
-            <Text> Don't have an account? </Text>
-            <Text onPress={() => navigation.navigate('RegisterScreen')}>
-              Sign Up
-            </Text>
-          </View>
+        <View style={styles.body}>
+          <Text>Email</Text>
+          <TextInput
+            onChangeText={(UserEmail) => setUserEmail(UserEmail)}
+            placeholder="Enter Email"
+            placeholderTextColor="blue"
+            returnKeyType="next"
+            blurOnSubmit={false}
+          />
+        </View>
+        <View style={styles.body}>
+          <Text>Password</Text>
+          <TextInput
+            onChangeText={(UserPassword) => setUserPassword(UserPassword)}
+            placeholder="Enter Password"
+            placeholderTextColor="blue"
+            blurOnSubmit={false}
+            returnKeyType="next"
+            secureTextEntry={true}
+          />
+        </View>
+        <Text onPress={() => navigation.navigate('')}>Forgot password?</Text>
+        <TouchableOpacity onPress={() => handleSubmitPress()}>
+          <Text>Sign in</Text>
+        </TouchableOpacity>
+        <View style={{flexDirection: 'row'}}>
+          <Text> Don't have an account? </Text>
+          <Text onPress={() => navigation.navigate('RegisterScreen')}>
+            Sign Up
+          </Text>
         </View>
       </ImageBackground>
     </View>
@@ -87,10 +87,18 @@ const LoginScreen = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
+  titleText: {
+    color: 'blue',
+    textAlign: 'center',
+    fontSize: 30,
+  },
+  body: {
+    marginLeft: '10%',
+  },
   container: {
     flex: 1,
   },
-  image: {
+  backgroundImage: {
     flex: 1,
     resizeMode: 'cover',
     justifyContent: 'center',
