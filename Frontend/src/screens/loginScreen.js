@@ -77,7 +77,7 @@ const LoginScreen = ({navigation}) => {
             <TouchableOpacity
               style={styles.signin}
               onPress={() => handleSubmitPress()}>
-              <Text>Sign in</Text>
+              <Text style={{color: 'white'}}>Sign in</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.signup}>
@@ -95,22 +95,6 @@ const LoginScreen = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  header: {
-    flex: 1,
-    justifyContent: 'flex-end',
-  },
-
-  headerText: {
-    color: 'deepskyblue',
-    textAlign: 'center',
-    fontSize: 30,
-  },
-  body: {
-    flex: 1.5,
-    marginLeft: '10%',
-    marginRight: '10%',
-    marginTop: '10%',
-  },
   container: {
     flex: 1,
   },
@@ -119,12 +103,26 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     justifyContent: 'center',
   },
+  header: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  body: {
+    flex: 1.5,
+    marginLeft: '10%',
+    marginRight: '10%',
+    marginTop: '10%',
+  },
+  headerText: {
+    color: 'deepskyblue',
+    textAlign: 'center',
+    fontSize: 30,
+  },
   forgotPassword: {
     color: 'deepskyblue',
     textAlign: 'right',
   },
   signin: {
-    color: 'white',
     padding: 10,
     alignItems: 'center',
     backgroundColor: 'deepskyblue',
