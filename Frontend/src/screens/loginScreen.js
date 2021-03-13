@@ -51,39 +51,39 @@ const LoginScreen = ({navigation}) => {
           <Text style={styles.headerText}>Welcome back</Text>
         </View>
         <View style={styles.body}>
-          <View>
-            <Text>Email</Text>
-            <TextInput
-              onChangeText={(UserEmail) => setUserEmail(UserEmail)}
-              placeholder="Enter Email"
-              placeholderTextColor="deepskyblue"
-              returnKeyType="next"
-              blurOnSubmit={false}
-            />
-            <Text>Password</Text>
-            <TextInput
-              onChangeText={(UserPassword) => setUserPassword(UserPassword)}
-              placeholder="Enter Password"
-              placeholderTextColor="deepskyblue"
-              blurOnSubmit={false}
-              returnKeyType="next"
-              secureTextEntry={true}
-            />
-            <Text
-              style={styles.forgotPassword}
-              onPress={() => navigation.navigate('')}>
-              Forgot password?
-            </Text>
-            <TouchableOpacity
-              style={styles.signin}
-              onPress={() => handleSubmitPress()}>
-              <Text style={{color: 'white'}}>Sign in</Text>
-            </TouchableOpacity>
-          </View>
+          <Text style={styles.textBeforeTextInput}>Email</Text>
+          <TextInput
+            style={styles.textInput}
+            onChangeText={(UserEmail) => setUserEmail(UserEmail)}
+            placeholder="Enter Email"
+            placeholderTextColor="#6da7f2"
+            returnKeyType="next"
+            blurOnSubmit={false}
+          />
+          <Text style={styles.textBeforeTextInput}>Password</Text>
+          <TextInput
+            style={styles.textInput}
+            onChangeText={(UserPassword) => setUserPassword(UserPassword)}
+            placeholder="Enter Password"
+            placeholderTextColor="#6da7f2"
+            blurOnSubmit={false}
+            returnKeyType="next"
+            secureTextEntry={true}
+          />
+          <Text
+            style={styles.forgotPassword}
+            onPress={() => navigation.navigate('')}>
+            Forgot password?
+          </Text>
+          <TouchableOpacity
+            style={styles.signInButton}
+            onPress={() => handleSubmitPress()}>
+            <Text style={styles.signInText}>Sign In</Text>
+          </TouchableOpacity>
           <View style={styles.signup}>
-            <Text> Don't have an account ? </Text>
+            <Text style={{fontSize: 15}}> Don't have an account ? </Text>
             <Text
-              style={{color: 'deepskyblue'}}
+              style={{color: '#6da7f2', fontSize: 15, fontWeight: 'bold'}}
               onPress={() => navigation.navigate('RegisterScreen')}>
               Sign Up
             </Text>
@@ -114,21 +114,36 @@ const styles = StyleSheet.create({
     marginTop: '10%',
   },
   headerText: {
-    color: 'deepskyblue',
+    color: '#6da7f2',
     textAlign: 'center',
     fontSize: 30,
+    fontWeight: 'bold',
+  },
+  textInput: {
+    borderBottomColor: '#6da7f2',
+    borderBottomWidth: 1,
+    marginBottom: '5%',
+  },
+  textBeforeTextInput: {
+    color: 'gray',
   },
   forgotPassword: {
-    color: 'deepskyblue',
+    color: '#6da7f2',
     textAlign: 'right',
+    fontWeight: 'bold',
   },
-  signin: {
+  signInButton: {
     padding: 10,
     alignItems: 'center',
-    backgroundColor: 'deepskyblue',
+    backgroundColor: '#6da7f2',
     borderRadius: 10,
     marginTop: '5%',
     marginBottom: '5%',
+  },
+  signInText: {
+    color: 'white',
+    fontSize: 15,
+    fontWeight: 'bold',
   },
   signup: {
     flexDirection: 'row',
