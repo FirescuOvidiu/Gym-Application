@@ -60,8 +60,6 @@ const LoginScreen = ({navigation}) => {
               returnKeyType="next"
               blurOnSubmit={false}
             />
-          </View>
-          <View>
             <Text>Password</Text>
             <TextInput
               onChangeText={(UserPassword) => setUserPassword(UserPassword)}
@@ -71,17 +69,17 @@ const LoginScreen = ({navigation}) => {
               returnKeyType="next"
               secureTextEntry={true}
             />
+            <Text
+              style={styles.forgotPassword}
+              onPress={() => navigation.navigate('')}>
+              Forgot password?
+            </Text>
+            <TouchableOpacity
+              style={styles.signin}
+              onPress={() => handleSubmitPress()}>
+              <Text>Sign in</Text>
+            </TouchableOpacity>
           </View>
-          <Text
-            style={styles.forgotPassword}
-            onPress={() => navigation.navigate('')}>
-            Forgot password?
-          </Text>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => handleSubmitPress()}>
-            <Text>Sign in</Text>
-          </TouchableOpacity>
           <View style={styles.signup}>
             <Text> Don't have an account ? </Text>
             <Text
@@ -108,7 +106,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   body: {
-    flex: 2,
+    flex: 1.5,
     marginLeft: '10%',
     marginRight: '10%',
     marginTop: '10%',
@@ -125,12 +123,14 @@ const styles = StyleSheet.create({
     color: 'deepskyblue',
     textAlign: 'right',
   },
-  button: {
+  signin: {
     color: 'white',
     padding: 10,
     alignItems: 'center',
     backgroundColor: 'deepskyblue',
     borderRadius: 10,
+    marginTop: '5%',
+    marginBottom: '5%',
   },
   signup: {
     flexDirection: 'row',
