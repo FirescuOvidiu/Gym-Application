@@ -1,18 +1,19 @@
 import * as React from 'react';
-import {Text, View, TextInput} from 'react-native';
+import {StyleSheet, Text, View, TextInput} from 'react-native';
 
 const AuthInputField = ({
   title,
   setData,
-  placeholderTextColor = '#8b9cb5',
+  placeholderTextColor = '#6da7f2',
   returnKeyType = 'next',
   blurOnSubmit = false,
   secureTextEntry = false,
 }) => {
   return (
     <View>
-      <Text>{title}</Text>
+      <Text style={styles.textBeforeTextInput}>{title}</Text>
       <TextInput
+        style={styles.textInput}
         onChangeText={(UserData) => setData(UserData)}
         placeholder={'Enter ' + title}
         placeholderTextColor={placeholderTextColor}
@@ -23,5 +24,16 @@ const AuthInputField = ({
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  textInput: {
+    borderBottomColor: '#6da7f2',
+    borderBottomWidth: 1,
+    marginBottom: '5%',
+  },
+  textBeforeTextInput: {
+    color: 'gray',
+  },
+});
 
 export default AuthInputField;
