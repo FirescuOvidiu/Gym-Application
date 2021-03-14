@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import AuthInputField from '../components/authInputField';
+
 const axios = require('axios').default;
 
 const RegisterScreen = ({navigation}) => {
@@ -84,7 +86,6 @@ const RegisterScreen = ({navigation}) => {
 
       alert('Registration successful.');
     } catch (error) {
-      console.log('TEST4');
       error.response.data.errors.forEach((element) => {
         alert(element.msg);
       });
@@ -94,110 +95,24 @@ const RegisterScreen = ({navigation}) => {
   return (
     <ScrollView>
       <Text>Welcome to the Gym Application</Text>
-      <View>
-        <Text>Email</Text>
-        <TextInput
-          onChangeText={(UserEmail) => setUserEmail(UserEmail)}
-          placeholder="Enter Email"
-          placeholderTextColor="#8b9cb5"
-          returnKeyType="next"
-          blurOnSubmit={false}
-        />
-      </View>
-      <View>
-        <Text>Username</Text>
-        <TextInput
-          onChangeText={(UserName) => setUserName(UserName)}
-          placeholder="Enter Name"
-          placeholderTextColor="#8b9cb5"
-          returnKeyType="next"
-          blurOnSubmit={false}
-        />
-      </View>
-      <View>
-        <Text>Password</Text>
-        <TextInput
-          onChangeText={(UserPassword) => setUserPassword(UserPassword)}
-          placeholder="Enter Password"
-          placeholderTextColor="#8b9cb5"
-          returnKeyType="next"
-          blurOnSubmit={false}
-          secureTextEntry={true}
-        />
-      </View>
-      <View>
-        <Text>Re-type Password</Text>
-        <TextInput
-          onChangeText={(UserRetypePassword) =>
-            setUserRetypePassword(UserRetypePassword)
-          }
-          placeholder="Enter Password"
-          placeholderTextColor="#8b9cb5"
-          returnKeyType="next"
-          blurOnSubmit={false}
-          secureTextEntry={true}
-        />
-      </View>
-      <View>
-        <Text>Phone</Text>
-        <TextInput
-          onChangeText={(UserPhone) => setUserPhone(UserPhone)}
-          placeholder="Enter Phone"
-          placeholderTextColor="#8b9cb5"
-          returnKeyType="next"
-          blurOnSubmit={false}
-        />
-      </View>
-      <View>
-        <Text>Address</Text>
-        <TextInput
-          onChangeText={(UserAddress) => setUserAddress(UserAddress)}
-          placeholder="Enter Address"
-          placeholderTextColor="#8b9cb5"
-          returnKeyType="next"
-          blurOnSubmit={false}
-        />
-      </View>
-      <View>
-        <Text>Birthday</Text>
-        <TextInput
-          onChangeText={(UserBirthday) => setUserBirthday(UserBirthday)}
-          placeholder="Enter Birthday"
-          placeholderTextColor="#8b9cb5"
-          returnKeyType="next"
-          blurOnSubmit={false}
-        />
-      </View>
-      <View>
-        <Text>Gender</Text>
-        <TextInput
-          onChangeText={(UserGender) => setUserGender(UserGender)}
-          placeholder="Enter Gender"
-          placeholderTextColor="#8b9cb5"
-          returnKeyType="next"
-          blurOnSubmit={false}
-        />
-      </View>
-      <View>
-        <Text>First Name</Text>
-        <TextInput
-          onChangeText={(UserFirstName) => setUserFirstName(UserFirstName)}
-          placeholder="Enter First Name"
-          placeholderTextColor="#8b9cb5"
-          returnKeyType="next"
-          blurOnSubmit={false}
-        />
-      </View>
-      <View>
-        <Text>Last Name</Text>
-        <TextInput
-          onChangeText={(UserLastName) => setUserLastName(UserLastName)}
-          placeholder="Enter Last Name"
-          placeholderTextColor="#8b9cb5"
-          returnKeyType="next"
-          blurOnSubmit={false}
-        />
-      </View>
+      <AuthInputField title="Email" setData={setUserEmail} />
+      <AuthInputField title="Username" setData={setUserName} />
+      <AuthInputField
+        title="Password"
+        setData={setUserPassword}
+        secureTextEntry={true}
+      />
+      <AuthInputField
+        title="Re-type Password"
+        setData={setUserRetypePassword}
+        secureTextEntry={true}
+      />
+      <AuthInputField title="Phone" setData={setUserPhone} />
+      <AuthInputField title="Address" setData={setUserAddress} />
+      <AuthInputField title="Birthday" setData={setUserBirthday} />
+      <AuthInputField title="Gender" setData={setUserGender} />
+      <AuthInputField title="First Name" setData={setUserFirstName} />
+      <AuthInputField title="Last Name" setData={setUserLastName} />
       <TouchableOpacity activeOpacity={0.5} onPress={handleSubmitButton}>
         <Text>Sign up</Text>
       </TouchableOpacity>
