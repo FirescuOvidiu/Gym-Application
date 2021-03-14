@@ -98,28 +98,34 @@ const RegisterScreen = ({navigation}) => {
       <ImageBackground
         source={require('../images/authBackground.jpg')}
         style={styles.backgroundImage}>
-        <ScrollView>
-          <Text>Welcome to the Gym Application</Text>
-          <AuthInputField title="Email" setData={setUserEmail} />
-          <AuthInputField title="Username" setData={setUserName} />
-          <AuthInputField
-            title="Password"
-            setData={setUserPassword}
-            secureTextEntry={true}
-          />
-          <AuthInputField
-            title="Re-type Password"
-            setData={setUserRetypePassword}
-            secureTextEntry={true}
-          />
-          <AuthInputField title="Phone" setData={setUserPhone} />
-          <AuthInputField title="Address" setData={setUserAddress} />
-          <AuthInputField title="Birthday" setData={setUserBirthday} />
-          <AuthInputField title="Gender" setData={setUserGender} />
-          <AuthInputField title="First Name" setData={setUserFirstName} />
-          <AuthInputField title="Last Name" setData={setUserLastName} />
-          <TouchableOpacity activeOpacity={0.5} onPress={handleSubmitButton}>
-            <Text>Sign up</Text>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>Welcome to the Gym Application</Text>
+        </View>
+        <View style={styles.body}>
+          <ScrollView>
+            <AuthInputField title="Email" setData={setUserEmail} />
+            <AuthInputField title="Username" setData={setUserName} />
+            <AuthInputField
+              title="Password"
+              setData={setUserPassword}
+              secureTextEntry={true}
+            />
+            <AuthInputField
+              title="Re-type Password"
+              setData={setUserRetypePassword}
+              secureTextEntry={true}
+            />
+            <AuthInputField title="Phone" setData={setUserPhone} />
+            <AuthInputField title="Address" setData={setUserAddress} />
+            <AuthInputField title="Birthday" setData={setUserBirthday} />
+            <AuthInputField title="Gender" setData={setUserGender} />
+            <AuthInputField title="First Name" setData={setUserFirstName} />
+            <AuthInputField title="Last Name" setData={setUserLastName} />
+          </ScrollView>
+          <TouchableOpacity
+            style={styles.signUpButton}
+            onPress={handleSubmitButton}>
+            <Text style={styles.signUpText}>Sign Up</Text>
           </TouchableOpacity>
           <View style={{flexDirection: 'row'}}>
             <Text> Already have an account? </Text>
@@ -127,7 +133,7 @@ const RegisterScreen = ({navigation}) => {
               Sign In
             </Text>
           </View>
-        </ScrollView>
+        </View>
       </ImageBackground>
     </View>
   );
@@ -141,6 +147,35 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: 'cover',
     justifyContent: 'center',
+  },
+  header: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  body: {
+    flex: 1.5,
+    marginLeft: '10%',
+    marginRight: '10%',
+    marginTop: '10%',
+  },
+  headerText: {
+    color: '#6da7f2',
+    textAlign: 'center',
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+  signUpButton: {
+    padding: 10,
+    alignItems: 'center',
+    backgroundColor: '#6da7f2',
+    borderRadius: 10,
+    marginTop: '5%',
+    marginBottom: '5%',
+  },
+  signUpText: {
+    color: 'white',
+    fontSize: 15,
+    fontWeight: 'bold',
   },
 });
 
