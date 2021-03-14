@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {
-  TextInput,
+  ImageBackground,
+  StyleSheet,
   View,
   ScrollView,
   Text,
@@ -93,35 +94,54 @@ const RegisterScreen = ({navigation}) => {
   };
 
   return (
-    <ScrollView>
-      <Text>Welcome to the Gym Application</Text>
-      <AuthInputField title="Email" setData={setUserEmail} />
-      <AuthInputField title="Username" setData={setUserName} />
-      <AuthInputField
-        title="Password"
-        setData={setUserPassword}
-        secureTextEntry={true}
-      />
-      <AuthInputField
-        title="Re-type Password"
-        setData={setUserRetypePassword}
-        secureTextEntry={true}
-      />
-      <AuthInputField title="Phone" setData={setUserPhone} />
-      <AuthInputField title="Address" setData={setUserAddress} />
-      <AuthInputField title="Birthday" setData={setUserBirthday} />
-      <AuthInputField title="Gender" setData={setUserGender} />
-      <AuthInputField title="First Name" setData={setUserFirstName} />
-      <AuthInputField title="Last Name" setData={setUserLastName} />
-      <TouchableOpacity activeOpacity={0.5} onPress={handleSubmitButton}>
-        <Text>Sign up</Text>
-      </TouchableOpacity>
-      <View style={{flexDirection: 'row'}}>
-        <Text> Already have an account? </Text>
-        <Text onPress={() => navigation.navigate('LoginScreen')}>Sign In</Text>
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      <ImageBackground
+        source={require('../images/authBackground.jpg')}
+        style={styles.backgroundImage}>
+        <ScrollView>
+          <Text>Welcome to the Gym Application</Text>
+          <AuthInputField title="Email" setData={setUserEmail} />
+          <AuthInputField title="Username" setData={setUserName} />
+          <AuthInputField
+            title="Password"
+            setData={setUserPassword}
+            secureTextEntry={true}
+          />
+          <AuthInputField
+            title="Re-type Password"
+            setData={setUserRetypePassword}
+            secureTextEntry={true}
+          />
+          <AuthInputField title="Phone" setData={setUserPhone} />
+          <AuthInputField title="Address" setData={setUserAddress} />
+          <AuthInputField title="Birthday" setData={setUserBirthday} />
+          <AuthInputField title="Gender" setData={setUserGender} />
+          <AuthInputField title="First Name" setData={setUserFirstName} />
+          <AuthInputField title="Last Name" setData={setUserLastName} />
+          <TouchableOpacity activeOpacity={0.5} onPress={handleSubmitButton}>
+            <Text>Sign up</Text>
+          </TouchableOpacity>
+          <View style={{flexDirection: 'row'}}>
+            <Text> Already have an account? </Text>
+            <Text onPress={() => navigation.navigate('LoginScreen')}>
+              Sign In
+            </Text>
+          </View>
+        </ScrollView>
+      </ImageBackground>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+  },
+});
 
 export default RegisterScreen;
