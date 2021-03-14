@@ -183,6 +183,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: '5%',
   },
   signInText: {
     color: '#6da7f2',
