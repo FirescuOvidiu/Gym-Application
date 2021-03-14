@@ -1,10 +1,10 @@
 import * as React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
-const SignButton = ({submit}) => {
+const SignButton = ({submit, text}) => {
   return (
     <TouchableOpacity style={styles.signButton} onPress={submit}>
-      <Text style={styles.signText}>Sign Up</Text>
+      <Text style={styles.signText}>{text}</Text>
     </TouchableOpacity>
   );
 };

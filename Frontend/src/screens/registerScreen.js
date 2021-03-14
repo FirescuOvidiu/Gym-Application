@@ -108,7 +108,7 @@ const RegisterScreen = ({navigation}) => {
             setUserLastName={setUserLastName}
           />
           <SignButton submit={handleSubmitButton} />
-          <View style={styles.signIn}>
+          <View style={styles.signIn} text="Sign">
             <Text style={{fontSize: 15}}> Already have an account ? </Text>
             <Text
               style={styles.signInText}
@@ -131,21 +131,11 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     justifyContent: 'center',
   },
-  header: {
-    flex: 1,
-    justifyContent: 'flex-end',
-  },
   body: {
     flex: 1.5,
     marginLeft: '10%',
     marginRight: '10%',
     marginTop: '10%',
-  },
-  headerText: {
-    color: '#6da7f2',
-    textAlign: 'center',
-    fontSize: 30,
-    fontWeight: 'bold',
   },
   signIn: {
     flexDirection: 'row',
