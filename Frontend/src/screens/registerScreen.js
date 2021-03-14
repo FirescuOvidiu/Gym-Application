@@ -3,12 +3,11 @@ import {
   ImageBackground,
   StyleSheet,
   View,
-  ScrollView,
   Text,
   TouchableOpacity,
 } from 'react-native';
 
-import AuthInputField from '../components/authInputField';
+import ListAuthInputFields from '../components/listAuthInputFields';
 
 const axios = require('axios').default;
 
@@ -102,26 +101,18 @@ const RegisterScreen = ({navigation}) => {
           <Text style={styles.headerText}>Welcome to the Gym Application</Text>
         </View>
         <View style={styles.body}>
-          <ScrollView>
-            <AuthInputField title="Email" setData={setUserEmail} />
-            <AuthInputField title="Username" setData={setUserName} />
-            <AuthInputField
-              title="Password"
-              setData={setUserPassword}
-              secureTextEntry={true}
-            />
-            <AuthInputField
-              title="Re-type Password"
-              setData={setUserRetypePassword}
-              secureTextEntry={true}
-            />
-            <AuthInputField title="Phone" setData={setUserPhone} />
-            <AuthInputField title="Address" setData={setUserAddress} />
-            <AuthInputField title="Birthday" setData={setUserBirthday} />
-            <AuthInputField title="Gender" setData={setUserGender} />
-            <AuthInputField title="First Name" setData={setUserFirstName} />
-            <AuthInputField title="Last Name" setData={setUserLastName} />
-          </ScrollView>
+          <ListAuthInputFields
+            setUserEmail={setUserEmail}
+            setUserName={setUserName}
+            setUserPassword={setUserPassword}
+            setUserRetypePassword={setUserRetypePassword}
+            setUserPhone={setUserPhone}
+            setUserAddress={setUserAddress}
+            setUserBirthday={setUserBirthday}
+            setUserGender={setUserGender}
+            setUserFirstName={setUserFirstName}
+            setUserLastName={setUserLastName}
+          />
           <TouchableOpacity
             style={styles.signUpButton}
             onPress={handleSubmitButton}>
