@@ -1,13 +1,17 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 
 const ProfileScreen = ({navigation}) => {
   const userReducer = useSelector((state) => state.userReducer);
 
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>email: {userReducer.email} </Text>
+    <View style={styles.container}>
+      <Text style={styles.headerText}>
+        {userReducer.name.first} {userReducer.name.last}
+        {'\n'}
+        {userReducer.email}
+      </Text>
       <Text>username: {userReducer.username} </Text>
       <Text>role: {userReducer.role} </Text>
       <Text>phone: {userReducer.phone} </Text>
@@ -23,4 +27,15 @@ const ProfileScreen = ({navigation}) => {
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  headerText: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+});
 export default ProfileScreen;
