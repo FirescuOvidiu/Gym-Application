@@ -1,14 +1,9 @@
 import React, {useState} from 'react';
-import {
-  ImageBackground,
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import {ImageBackground, StyleSheet, View, Text} from 'react-native';
 
 import ListAuthInputFields from '../components/listAuthInputFields';
 import SignButton from '../components/signButton';
+import AuthHeader from '../components/authHeader';
 
 const axios = require('axios').default;
 
@@ -98,9 +93,7 @@ const RegisterScreen = ({navigation}) => {
       <ImageBackground
         source={require('../images/authBackground.jpg')}
         style={styles.backgroundImage}>
-        <View style={styles.header}>
-          <Text style={styles.headerText}>Welcome to the Gym Application</Text>
-        </View>
+        <AuthHeader title="Welcome to the Gym Application" />
         <View style={styles.body}>
           <ListAuthInputFields
             setUserEmail={setUserEmail}
