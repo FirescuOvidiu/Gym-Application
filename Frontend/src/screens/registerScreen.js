@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 
 import ListAuthInputFields from '../components/listAuthInputFields';
+import SignButton from '../components/signButton';
 
 const axios = require('axios').default;
 
@@ -113,11 +114,7 @@ const RegisterScreen = ({navigation}) => {
             setUserFirstName={setUserFirstName}
             setUserLastName={setUserLastName}
           />
-          <TouchableOpacity
-            style={styles.signUpButton}
-            onPress={handleSubmitButton}>
-            <Text style={styles.signUpText}>Sign Up</Text>
-          </TouchableOpacity>
+          <SignButton submit={handleSubmitButton} />
           <View style={styles.signIn}>
             <Text style={{fontSize: 15}}> Already have an account ? </Text>
             <Text
@@ -155,19 +152,6 @@ const styles = StyleSheet.create({
     color: '#6da7f2',
     textAlign: 'center',
     fontSize: 30,
-    fontWeight: 'bold',
-  },
-  signUpButton: {
-    padding: 10,
-    alignItems: 'center',
-    backgroundColor: '#6da7f2',
-    borderRadius: 10,
-    marginTop: '5%',
-    marginBottom: '5%',
-  },
-  signUpText: {
-    color: 'white',
-    fontSize: 15,
     fontWeight: 'bold',
   },
   signIn: {
