@@ -127,9 +127,11 @@ const RegisterScreen = ({navigation}) => {
             onPress={handleSubmitButton}>
             <Text style={styles.signUpText}>Sign Up</Text>
           </TouchableOpacity>
-          <View style={{flexDirection: 'row'}}>
-            <Text> Already have an account? </Text>
-            <Text onPress={() => navigation.navigate('LoginScreen')}>
+          <View style={styles.signIn}>
+            <Text style={{fontSize: 15}}> Already have an account ? </Text>
+            <Text
+              style={styles.signInText}
+              onPress={() => navigation.navigate('LoginScreen')}>
               Sign In
             </Text>
           </View>
@@ -174,6 +176,16 @@ const styles = StyleSheet.create({
   },
   signUpText: {
     color: 'white',
+    fontSize: 15,
+    fontWeight: 'bold',
+  },
+  signIn: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  signInText: {
+    color: '#6da7f2',
     fontSize: 15,
     fontWeight: 'bold',
   },
