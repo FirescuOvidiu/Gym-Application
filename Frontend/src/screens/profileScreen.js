@@ -25,9 +25,8 @@ const ProfileScreen = ({navigation}) => {
           <Text style={styles.headerTextEmail}>{userReducer.email}</Text>
         </ImageBackground>
       </View>
-
       <View style={styles.body}>
-        <View style={{margin: 10}}>
+        <View style={{margin: '5%'}}>
           <Text style={styles.title}> Account Informations</Text>
           <ProfileField text={'Username'} data={userReducer.username} />
           <ProfileField text={'Role'} data={userReducer.role} />
@@ -52,6 +51,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     alignSelf: 'center',
     paddingBottom: 20,
+    paddingTop: 10,
   },
   container: {
     flex: 1,
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#6da7f2',
     borderRadius: 10,
-    marginTop: '5%',
+    marginTop: '7%',
     marginBottom: '5%',
   },
   updateButtonText: {
