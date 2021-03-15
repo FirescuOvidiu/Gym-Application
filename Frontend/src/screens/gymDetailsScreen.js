@@ -64,18 +64,17 @@ const GymDetailsScreen = ({navigation}) => {
   }, []);
 
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+    <View style={styles.container}>
       <Image
         source={require('../images/gymDetailsImage.jpg')}
         style={styles.gymImage}
         resizeMode="cover"
       />
-      <View style={{flex: 3}}>
-        <Text>Gym Details!</Text>
-        <Text>name: {gymReducer.name} </Text>
-        <Text>email: {gymReducer.email} </Text>
-        <Text>phone: {gymReducer.phone} </Text>
-        <Text>address: {gymReducer.address} </Text>
+      <View style={styles.body}>
+        <Text style={styles.title}>{gymReducer.name}</Text>
+        <Text>Address: {gymReducer.address} </Text>
+        <Text>Phone: {gymReducer.phone} </Text>
+        <Text>Email: {gymReducer.email} </Text>
         <Text>openingTime: {gymReducer.openingTime} </Text>
         <Text>closingTime: {gymReducer.closingTime} </Text>
         <Text>date: {gymReducer.date.substring(0, 10)} </Text>
@@ -118,6 +117,16 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     height: '100%',
     width: '100%',
+  },
+  body: {
+    flex: 3,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    paddingBottom: 20,
+    paddingTop: 20,
   },
 });
 
