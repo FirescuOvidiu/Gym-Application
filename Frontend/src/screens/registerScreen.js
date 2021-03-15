@@ -107,8 +107,8 @@ const RegisterScreen = ({navigation}) => {
             setUserFirstName={setUserFirstName}
             setUserLastName={setUserLastName}
           />
-          <SignButton submit={handleSubmitButton} />
-          <View style={styles.signIn} text="Sign">
+          <SignButton submit={handleSubmitButton} text="Sign Up" />
+          <View style={styles.signIn}>
             <Text style={{fontSize: 15}}> Already have an account ? </Text>
             <Text
               style={styles.signInText}
