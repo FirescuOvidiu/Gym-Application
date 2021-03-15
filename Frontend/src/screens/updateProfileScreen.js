@@ -1,13 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-  StyleSheet,
-} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -74,7 +67,7 @@ const UpdateProfileScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <View style={{flex: 1, margin: '2%'}}>
+      <View style={styles.body}>
         <ListUpdateProfileField
           userReducer={userReducer}
           setUserEmail={setUserEmail}
@@ -92,7 +85,6 @@ const UpdateProfileScreen = ({navigation}) => {
           activeOpacity={0.5}
           onPress={() => {
             _updateUser();
-            //navigation.navigate('Profile');
           }}>
           <Text style={styles.updateButtonText}>Update Profile</Text>
         </TouchableOpacity>
@@ -106,17 +98,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
-  fieldName: {
-    color: 'gray',
-    paddingBottom: 5,
-    paddingTop: 10,
-    fontSize: 15,
-  },
-  fieldText: {
-    borderWidth: 2,
-    borderColor: '#6da7f2',
-    marginBottom: 10,
-    borderRadius: 10,
+  body: {
+    flex: 1,
+    margin: '2%',
   },
   updateButton: {
     flex: 0.075,
