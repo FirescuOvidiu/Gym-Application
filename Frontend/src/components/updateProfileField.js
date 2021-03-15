@@ -10,8 +10,9 @@ const UpdateProfileField = ({
 }) => {
   return (
     <View>
-      <Text>{text}</Text>
+      <Text style={styles.fieldName}>{text}</Text>
       <TextInput
+        style={styles.fieldText}
         defaultValue={defaultValue}
         onChangeText={(UserData) => setData(UserData)}
         secureTextEntry={secureTextEntry}
@@ -24,20 +25,15 @@ const UpdateProfileField = ({
 const styles = StyleSheet.create({
   fieldName: {
     color: 'gray',
-    flex: 1,
-    paddingBottom: 10,
+    paddingBottom: 5,
     paddingTop: 10,
-    marginBottom: 5,
     fontSize: 15,
   },
   fieldText: {
-    flex: 1,
-    textAlign: 'right',
-    paddingBottom: 10,
-    paddingTop: 10,
-    paddingRight: 5,
-    marginBottom: 5,
-    fontSize: 15,
+    borderWidth: 1,
+    borderColor: 'blue',
+    marginBottom: 10,
+    borderRadius: 10,
   },
 });
 

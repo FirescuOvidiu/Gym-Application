@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
   updateButton: {
     padding: 10,
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: '#6da7f2',
     borderRadius: 10,
     marginTop: '7%',

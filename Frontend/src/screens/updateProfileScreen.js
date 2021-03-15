@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  StyleSheet,
 } from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
@@ -72,7 +73,7 @@ const UpdateProfileScreen = ({navigation}) => {
   }, [userModified]);
 
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.container}>
       <View style={{flex: 1, margin: '2%'}}>
         <ScrollView persistentScrollbar={true}>
           <UpdateProfileField
@@ -113,8 +114,9 @@ const UpdateProfileScreen = ({navigation}) => {
             setData={setUserGender}
           />
           <View>
-            <Text>First Name</Text>
+            <Text style={styles.fieldName}>First Name</Text>
             <TextInput
+              style={styles.fieldText}
               defaultValue={userReducer.name.first}
               onChangeText={(UserFirstName) =>
                 setUserName((prevState) => ({
@@ -125,8 +127,9 @@ const UpdateProfileScreen = ({navigation}) => {
             />
           </View>
           <View>
-            <Text>Last Name</Text>
+            <Text style={styles.fieldName}>Last Name</Text>
             <TextInput
+              style={styles.fieldText}
               defaultValue={userReducer.name.last}
               onChangeText={(UserLastName) =>
                 setUserName((prevState) => ({
@@ -138,18 +141,49 @@ const UpdateProfileScreen = ({navigation}) => {
           </View>
         </ScrollView>
       </View>
-      <View style={{flex: 0.1, alignItems: 'center', justifyContent: 'center'}}>
+      <View style={styles.updateButton}>
         <TouchableOpacity
           activeOpacity={0.5}
           onPress={() => {
             _updateUser();
             navigation.navigate('Profile');
           }}>
-          <Text>Update</Text>
+          <Text style={styles.updateButtonText}>Update Profile</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  fieldName: {
+    color: 'gray',
+    paddingBottom: 5,
+    paddingTop: 10,
+    fontSize: 15,
+  },
+  fieldText: {
+    borderWidth: 1,
+    borderColor: 'blue',
+    marginBottom: 10,
+    borderRadius: 10,
+  },
+  updateButton: {
+    flex: 0.075,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#6da7f2',
+    borderRadius: 10,
+  },
+  updateButtonText: {
+    color: 'white',
+    fontSize: 15,
+    fontWeight: 'bold',
+  },
+});
 
 export default UpdateProfileScreen;
