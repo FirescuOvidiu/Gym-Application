@@ -10,6 +10,8 @@ import {
 
 import AsyncStorage from '@react-native-community/async-storage';
 
+import UpdateProfileField from '../components/updateProfileField';
+
 const axios = require('axios').default;
 
 import {updateUser} from '../redux/actions/userActions';
@@ -70,82 +72,73 @@ const UpdateProfileScreen = ({navigation}) => {
   }, [userModified]);
 
   return (
-    <ScrollView>
-      <View>
-        <Text>Email</Text>
-        <TextInput
-          defaultValue={userReducer.email}
-          onChangeText={(UserEmail) => setUserEmail(UserEmail)}
-        />
+    <View style={{flex: 1}}>
+      <View style={{flex: 1, margin: '2%'}}>
+        <ScrollView persistentScrollbar={true}>
+          <UpdateProfileField
+            text="Email"
+            defaultValue={userReducer.email}
+            setData={setUserEmail}
+          />
+          <UpdateProfileField
+            text="Username"
+            defaultValue={userReducer.username}
+            setData={setUserUsername}
+          />
+          <UpdateProfileField
+            text="Password"
+            defaultValue={userReducer.password}
+            setData={setUserPassword}
+            secureTextEntry={true}
+            placeholder="Enter Password"
+          />
+          <UpdateProfileField
+            text="Phone"
+            defaultValue={userReducer.phone}
+            setData={setUserPhone}
+          />
+          <UpdateProfileField
+            text="Address"
+            defaultValue={userReducer.address}
+            setData={setUserAddress}
+          />
+          <UpdateProfileField
+            text="Birthday"
+            defaultValue={userReducer.birthday}
+            setData={setUserBirthday}
+          />
+          <UpdateProfileField
+            text="Gender"
+            defaultValue={userReducer.gender}
+            setData={setUserGender}
+          />
+          <View>
+            <Text>First Name</Text>
+            <TextInput
+              defaultValue={userReducer.name.first}
+              onChangeText={(UserFirstName) =>
+                setUserName((prevState) => ({
+                  ...prevState,
+                  first: UserFirstName,
+                }))
+              }
+            />
+          </View>
+          <View>
+            <Text>Last Name</Text>
+            <TextInput
+              defaultValue={userReducer.name.last}
+              onChangeText={(UserLastName) =>
+                setUserName((prevState) => ({
+                  ...prevState,
+                  last: UserLastName,
+                }))
+              }
+            />
+          </View>
+        </ScrollView>
       </View>
-      <View>
-        <Text>Username</Text>
-        <TextInput
-          defaultValue={userReducer.username}
-          onChangeText={(UserName) => setUserUsername(UserName)}
-        />
-      </View>
-      <View>
-        <Text>Password</Text>
-        <TextInput
-          onChangeText={(UserPassword) => setUserPassword(UserPassword)}
-          placeholder="Enter Password"
-          secureTextEntry={true}
-        />
-      </View>
-      <View>
-        <Text>Phone</Text>
-        <TextInput
-          defaultValue={userReducer.phone}
-          onChangeText={(UserPhone) => setUserPhone(UserPhone)}
-        />
-      </View>
-      <View>
-        <Text>Address</Text>
-        <TextInput
-          defaultValue={userReducer.address}
-          onChangeText={(UserAddress) => setUserAddress(UserAddress)}
-        />
-      </View>
-      <View>
-        <Text>Birthday</Text>
-        <TextInput
-          defaultValue={userReducer.birthday}
-          onChangeText={(UserBirthday) => setUserBirthday(UserBirthday)}
-        />
-      </View>
-      <View>
-        <Text>Gender</Text>
-        <TextInput
-          defaultValue={userReducer.gender}
-          onChangeText={(UserGender) => setUserGender(UserGender)}
-        />
-      </View>
-      <View>
-        <Text>First Name</Text>
-        <TextInput
-          defaultValue={userReducer.name.first}
-          onChangeText={(UserFirstName) =>
-            setUserName((prevState) => ({
-              ...prevState,
-              first: UserFirstName,
-            }))
-          }
-        />
-      </View>
-      <View>
-        <Text>Last Name</Text>
-        <TextInput
-          defaultValue={userReducer.name.last}
-          onChangeText={(UserLastName) =>
-            setUserName((prevState) => ({
-              ...prevState,
-              last: UserLastName,
-            }))
-          }
-        />
-      </View>
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <View style={{flex: 0.1, alignItems: 'center', justifyContent: 'center'}}>
         <TouchableOpacity
           activeOpacity={0.5}
           onPress={() => {
@@ -155,7 +148,7 @@ const UpdateProfileScreen = ({navigation}) => {
           <Text>Update</Text>
         </TouchableOpacity>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
