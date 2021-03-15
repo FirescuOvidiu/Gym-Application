@@ -1,5 +1,12 @@
 import * as React from 'react';
-import {Text, View, Alert, TouchableOpacity} from 'react-native';
+import {
+  Text,
+  View,
+  Alert,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {useEffect} from 'react';
 
@@ -58,41 +65,60 @@ const GymDetailsScreen = ({navigation}) => {
 
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Gym Details!</Text>
-      <Text>name: {gymReducer.name} </Text>
-      <Text>email: {gymReducer.email} </Text>
-      <Text>phone: {gymReducer.phone} </Text>
-      <Text>address: {gymReducer.address} </Text>
-      <Text>openingTime: {gymReducer.openingTime} </Text>
-      <Text>closingTime: {gymReducer.closingTime} </Text>
-      <Text>date: {gymReducer.date.substring(0, 10)} </Text>
-      <TouchableOpacity
-        onPress={() => {
-          Alert.alert(
-            'Logout',
-            'Are you sure? You want to logout?',
-            [
-              {
-                text: 'Cancel',
-                onPress: () => {
-                  return null;
+      <Image
+        source={require('../images/gymDetailsImage.jpg')}
+        style={styles.gymImage}
+        resizeMode="cover"
+      />
+      <View style={{flex: 3}}>
+        <Text>Gym Details!</Text>
+        <Text>name: {gymReducer.name} </Text>
+        <Text>email: {gymReducer.email} </Text>
+        <Text>phone: {gymReducer.phone} </Text>
+        <Text>address: {gymReducer.address} </Text>
+        <Text>openingTime: {gymReducer.openingTime} </Text>
+        <Text>closingTime: {gymReducer.closingTime} </Text>
+        <Text>date: {gymReducer.date.substring(0, 10)} </Text>
+        <TouchableOpacity
+          onPress={() => {
+            Alert.alert(
+              'Logout',
+              'Are you sure? You want to logout?',
+              [
+                {
+                  text: 'Cancel',
+                  onPress: () => {
+                    return null;
+                  },
                 },
-              },
-              {
-                text: 'Confirm',
-                onPress: () => {
-                  AsyncStorage.clear();
-                  navigation.replace('Auth');
+                {
+                  text: 'Confirm',
+                  onPress: () => {
+                    AsyncStorage.clear();
+                    navigation.replace('Auth');
+                  },
                 },
-              },
-            ],
-            {cancelable: false},
-          );
-        }}>
-        <Text>Logout</Text>
-      </TouchableOpacity>
+              ],
+              {cancelable: false},
+            );
+          }}>
+          <Text>Logout</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  gymImage: {
+    flex: 1,
+    alignSelf: 'center',
+    height: '100%',
+    width: '100%',
+  },
+});
 
 export default GymDetailsScreen;
