@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   fieldText: {
-    borderWidth: 1,
-    borderColor: 'blue',
+    borderWidth: 2,
+    borderColor: '#6da7f2',
     marginBottom: 10,
     borderRadius: 10,
   },
