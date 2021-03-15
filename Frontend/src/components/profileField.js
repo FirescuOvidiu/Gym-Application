@@ -13,8 +13,11 @@ const ProfileField = ({text, data}) => {
 const styles = StyleSheet.create({
   field: {
     flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderColor: 'gray',
   },
   fieldName: {
+    color: 'gray',
     flex: 1,
     paddingBottom: 10,
     paddingTop: 10,
@@ -23,14 +26,12 @@ const styles = StyleSheet.create({
   },
   fieldText: {
     flex: 1,
-    alignItems: 'flex-end',
+    textAlign: 'right',
     paddingBottom: 10,
     paddingTop: 10,
-    paddingLeft: 5,
+    paddingRight: 5,
     marginBottom: 5,
     fontSize: 15,
-    borderWidth: 1,
-    borderColor: 'gray',
   },
 });
 

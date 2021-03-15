@@ -25,19 +25,22 @@ const ProfileScreen = ({navigation}) => {
           <Text style={styles.headerTextEmail}>{userReducer.email}</Text>
         </ImageBackground>
       </View>
+
       <View style={styles.body}>
-        <Text style={styles.title}> Account Informations</Text>
-        <ProfileField text={'Username'} data={userReducer.username} />
-        <ProfileField text={'Role'} data={userReducer.role} />
-        <ProfileField text={'Phone'} data={userReducer.phone} />
-        <ProfileField text={'Address'} data={userReducer.address} />
-        <ProfileField text={'Birthday'} data={userReducer.birthday} />
-        <ProfileField text={'Gender'} data={userReducer.gender} />
-        <TouchableOpacity
-          style={styles.updateButton}
-          onPress={() => navigation.navigate('UpdateProfile')}>
-          <Text style={styles.updateButtonText}>Update Profile</Text>
-        </TouchableOpacity>
+        <View style={{margin: 10}}>
+          <Text style={styles.title}> Account Informations</Text>
+          <ProfileField text={'Username'} data={userReducer.username} />
+          <ProfileField text={'Role'} data={userReducer.role} />
+          <ProfileField text={'Phone'} data={userReducer.phone} />
+          <ProfileField text={'Address'} data={userReducer.address} />
+          <ProfileField text={'Birthday'} data={userReducer.birthday} />
+          <ProfileField text={'Gender'} data={userReducer.gender} />
+          <TouchableOpacity
+            style={styles.updateButton}
+            onPress={() => navigation.navigate('UpdateProfile')}>
+            <Text style={styles.updateButtonText}>Update Profile</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -69,8 +72,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   body: {
+    backgroundColor: 'white',
     flex: 2,
-    margin: '10%',
   },
   backgroundImage: {
     flex: 1,
