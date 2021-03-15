@@ -11,7 +11,7 @@ import {
 
 import AsyncStorage from '@react-native-community/async-storage';
 
-import UpdateProfileField from '../components/updateProfileField';
+import ListUpdateProfileField from '../components/listUpdateProfileFields';
 
 const axios = require('axios').default;
 
@@ -75,78 +75,24 @@ const UpdateProfileScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={{flex: 1, margin: '2%'}}>
-        <ScrollView persistentScrollbar={true}>
-          <UpdateProfileField
-            text="Email"
-            defaultValue={userReducer.email}
-            setData={setUserEmail}
-          />
-          <UpdateProfileField
-            text="Username"
-            defaultValue={userReducer.username}
-            setData={setUserUsername}
-          />
-          <UpdateProfileField
-            text="Password"
-            defaultValue={userReducer.password}
-            setData={setUserPassword}
-            secureTextEntry={true}
-            placeholder="Enter Password"
-          />
-          <UpdateProfileField
-            text="Phone"
-            defaultValue={userReducer.phone}
-            setData={setUserPhone}
-          />
-          <UpdateProfileField
-            text="Address"
-            defaultValue={userReducer.address}
-            setData={setUserAddress}
-          />
-          <UpdateProfileField
-            text="Birthday"
-            defaultValue={userReducer.birthday}
-            setData={setUserBirthday}
-          />
-          <UpdateProfileField
-            text="Gender"
-            defaultValue={userReducer.gender}
-            setData={setUserGender}
-          />
-          <View>
-            <Text style={styles.fieldName}>First Name</Text>
-            <TextInput
-              style={styles.fieldText}
-              defaultValue={userReducer.name.first}
-              onChangeText={(UserFirstName) =>
-                setUserName((prevState) => ({
-                  ...prevState,
-                  first: UserFirstName,
-                }))
-              }
-            />
-          </View>
-          <View>
-            <Text style={styles.fieldName}>Last Name</Text>
-            <TextInput
-              style={styles.fieldText}
-              defaultValue={userReducer.name.last}
-              onChangeText={(UserLastName) =>
-                setUserName((prevState) => ({
-                  ...prevState,
-                  last: UserLastName,
-                }))
-              }
-            />
-          </View>
-        </ScrollView>
+        <ListUpdateProfileField
+          userReducer={userReducer}
+          setUserEmail={setUserEmail}
+          setUserUsername={setUserUsername}
+          setUserPassword={setUserPassword}
+          setUserPhone={setUserPhone}
+          setUserAddress={setUserAddress}
+          setUserBirthday={setUserBirthday}
+          setUserGender={setUserGender}
+          setUserName={setUserName}
+        />
       </View>
       <View style={styles.updateButton}>
         <TouchableOpacity
           activeOpacity={0.5}
           onPress={() => {
             _updateUser();
-            navigation.navigate('Profile');
+            //navigation.navigate('Profile');
           }}>
           <Text style={styles.updateButtonText}>Update Profile</Text>
         </TouchableOpacity>
