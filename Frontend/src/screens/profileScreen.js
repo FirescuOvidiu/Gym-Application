@@ -33,8 +33,10 @@ const ProfileScreen = ({navigation}) => {
         <ProfileField text={'Address'} data={userReducer.address} />
         <ProfileField text={'Birthday'} data={userReducer.birthday} />
         <ProfileField text={'Gender'} data={userReducer.gender} />
-        <TouchableOpacity onPress={() => navigation.navigate('UpdateProfile')}>
-          <Text>Update Profile</Text>
+        <TouchableOpacity
+          style={styles.updateButton}
+          onPress={() => navigation.navigate('UpdateProfile')}>
+          <Text style={styles.updateButtonText}>Update Profile</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -74,6 +76,19 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: 'cover',
     justifyContent: 'center',
+  },
+  updateButton: {
+    padding: 10,
+    alignItems: 'center',
+    backgroundColor: '#6da7f2',
+    borderRadius: 10,
+    marginTop: '5%',
+    marginBottom: '5%',
+  },
+  updateButtonText: {
+    color: 'white',
+    fontSize: 15,
+    fontWeight: 'bold',
   },
 });
 export default ProfileScreen;
