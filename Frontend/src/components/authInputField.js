@@ -14,7 +14,7 @@ const AuthInputField = ({
       <Text style={styles.textBeforeTextInput}>{title}</Text>
       <TextInput
         style={styles.textInput}
-        onChangeText={(UserData) => setData(UserData)}
+        onChangeText={setData}
         placeholder={'Enter ' + title}
         placeholderTextColor={placeholderTextColor}
         returnKeyType={returnKeyType}
