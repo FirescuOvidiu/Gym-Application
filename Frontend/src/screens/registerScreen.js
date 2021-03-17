@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
-import {
-  TextInput,
-  View,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import {ImageBackground, StyleSheet, View, Text} from 'react-native';
+
+import ListAuthInputFields from '../components/listAuthInputFields';
+import SignButton from '../components/signButton';
+import AuthHeader from '../components/authHeader';
 
 const axios = require('axios').default;
 
@@ -84,7 +82,6 @@ const RegisterScreen = ({navigation}) => {
 
       alert('Registration successful.');
     } catch (error) {
-      console.log('TEST4');
       error.response.data.errors.forEach((element) => {
         alert(element.msg);
       });
@@ -92,121 +89,65 @@ const RegisterScreen = ({navigation}) => {
   };
 
   return (
-    <ScrollView>
-      <Text>Welcome to the Gym Application</Text>
-      <View>
-        <Text>Email</Text>
-        <TextInput
-          onChangeText={(UserEmail) => setUserEmail(UserEmail)}
-          placeholder="Enter Email"
-          placeholderTextColor="#8b9cb5"
-          returnKeyType="next"
-          blurOnSubmit={false}
-        />
-      </View>
-      <View>
-        <Text>Username</Text>
-        <TextInput
-          onChangeText={(UserName) => setUserName(UserName)}
-          placeholder="Enter Name"
-          placeholderTextColor="#8b9cb5"
-          returnKeyType="next"
-          blurOnSubmit={false}
-        />
-      </View>
-      <View>
-        <Text>Password</Text>
-        <TextInput
-          onChangeText={(UserPassword) => setUserPassword(UserPassword)}
-          placeholder="Enter Password"
-          placeholderTextColor="#8b9cb5"
-          returnKeyType="next"
-          blurOnSubmit={false}
-          secureTextEntry={true}
-        />
-      </View>
-      <View>
-        <Text>Re-type Password</Text>
-        <TextInput
-          onChangeText={(UserRetypePassword) =>
-            setUserRetypePassword(UserRetypePassword)
-          }
-          placeholder="Enter Password"
-          placeholderTextColor="#8b9cb5"
-          returnKeyType="next"
-          blurOnSubmit={false}
-          secureTextEntry={true}
-        />
-      </View>
-      <View>
-        <Text>Phone</Text>
-        <TextInput
-          onChangeText={(UserPhone) => setUserPhone(UserPhone)}
-          placeholder="Enter Phone"
-          placeholderTextColor="#8b9cb5"
-          returnKeyType="next"
-          blurOnSubmit={false}
-        />
-      </View>
-      <View>
-        <Text>Address</Text>
-        <TextInput
-          onChangeText={(UserAddress) => setUserAddress(UserAddress)}
-          placeholder="Enter Address"
-          placeholderTextColor="#8b9cb5"
-          returnKeyType="next"
-          blurOnSubmit={false}
-        />
-      </View>
-      <View>
-        <Text>Birthday</Text>
-        <TextInput
-          onChangeText={(UserBirthday) => setUserBirthday(UserBirthday)}
-          placeholder="Enter Birthday"
-          placeholderTextColor="#8b9cb5"
-          returnKeyType="next"
-          blurOnSubmit={false}
-        />
-      </View>
-      <View>
-        <Text>Gender</Text>
-        <TextInput
-          onChangeText={(UserGender) => setUserGender(UserGender)}
-          placeholder="Enter Gender"
-          placeholderTextColor="#8b9cb5"
-          returnKeyType="next"
-          blurOnSubmit={false}
-        />
-      </View>
-      <View>
-        <Text>First Name</Text>
-        <TextInput
-          onChangeText={(UserFirstName) => setUserFirstName(UserFirstName)}
-          placeholder="Enter First Name"
-          placeholderTextColor="#8b9cb5"
-          returnKeyType="next"
-          blurOnSubmit={false}
-        />
-      </View>
-      <View>
-        <Text>Last Name</Text>
-        <TextInput
-          onChangeText={(UserLastName) => setUserLastName(UserLastName)}
-          placeholder="Enter Last Name"
-          placeholderTextColor="#8b9cb5"
-          returnKeyType="next"
-          blurOnSubmit={false}
-        />
-      </View>
-      <TouchableOpacity activeOpacity={0.5} onPress={handleSubmitButton}>
-        <Text>Sign up</Text>
-      </TouchableOpacity>
-      <View style={{flexDirection: 'row'}}>
-        <Text> Already have an account? </Text>
-        <Text onPress={() => navigation.navigate('LoginScreen')}>Sign In</Text>
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      <ImageBackground
+        source={require('../images/authBackground.jpg')}
+        style={styles.backgroundImage}>
+        <AuthHeader title="Welcome to the Gym Application" />
+        <View style={styles.body}>
+          <ListAuthInputFields
+            setUserEmail={setUserEmail}
+            setUserName={setUserName}
+            setUserPassword={setUserPassword}
+            setUserRetypePassword={setUserRetypePassword}
+            setUserPhone={setUserPhone}
+            setUserAddress={setUserAddress}
+            setUserBirthday={setUserBirthday}
+            setUserGender={setUserGender}
+            setUserFirstName={setUserFirstName}
+            setUserLastName={setUserLastName}
+          />
+          <SignButton submit={handleSubmitButton} text="Sign Up" />
+          <View style={styles.signIn}>
+            <Text style={{fontSize: 15}}> Already have an account ? </Text>
+            <Text
+              style={styles.signInText}
+              onPress={() => navigation.navigate('LoginScreen')}>
+              Sign In
+            </Text>
+          </View>
+        </View>
+      </ImageBackground>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+  },
+  body: {
+    flex: 1.5,
+    marginLeft: '10%',
+    marginRight: '10%',
+    marginTop: '10%',
+  },
+  signIn: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: '5%',
+  },
+  signInText: {
+    color: '#6da7f2',
+    fontSize: 15,
+    fontWeight: 'bold',
+  },
+});
 
 export default RegisterScreen;
