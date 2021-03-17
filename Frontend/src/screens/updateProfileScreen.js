@@ -69,7 +69,7 @@ const UpdateProfileScreen = ({navigation}) => {
     <View style={styles.container}>
       <View style={styles.body}>
         <ListUpdateProfileField
-          userReducer={userReducer}
+          userData={userReducer}
           setUserEmail={setUserEmail}
           setUserUsername={setUserUsername}
           setUserPassword={setUserPassword}

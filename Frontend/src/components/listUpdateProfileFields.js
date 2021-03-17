@@ -4,7 +4,7 @@ import {ScrollView, View, Text, TextInput, StyleSheet} from 'react-native';
 import UpdateProfileField from '../components/updateProfileField';
 
 const ListUpdateProfileField = ({
-  userReducer,
+  userData,
   setUserEmail,
   setUserUsername,
   setUserPassword,
@@ -18,46 +18,46 @@ const ListUpdateProfileField = ({
     <ScrollView persistentScrollbar={true}>
       <UpdateProfileField
         text="Email"
-        defaultValue={userReducer.email}
+        defaultValue={userData.email}
         setData={setUserEmail}
       />
       <UpdateProfileField
         text="Username"
-        defaultValue={userReducer.username}
+        defaultValue={userData.username}
         setData={setUserUsername}
       />
       <UpdateProfileField
         text="Password"
-        defaultValue={userReducer.password}
+        defaultValue={userData.password}
         setData={setUserPassword}
         secureTextEntry={true}
         placeholder="Enter Password"
       />
       <UpdateProfileField
         text="Phone"
-        defaultValue={userReducer.phone}
+        defaultValue={userData.phone}
         setData={setUserPhone}
       />
       <UpdateProfileField
         text="Address"
-        defaultValue={userReducer.address}
+        defaultValue={userData.address}
         setData={setUserAddress}
       />
       <UpdateProfileField
         text="Birthday"
-        defaultValue={userReducer.birthday}
+        defaultValue={userData.birthday}
         setData={setUserBirthday}
       />
       <UpdateProfileField
         text="Gender"
-        defaultValue={userReducer.gender}
+        defaultValue={userData.gender}
         setData={setUserGender}
       />
       <View>
         <Text style={styles.fieldName}>First Name</Text>
         <TextInput
           style={styles.fieldText}
-          defaultValue={userReducer.name.first}
+          defaultValue={userData.name.first}
           onChangeText={(UserFirstName) =>
             setUserName((prevState) => ({
               ...prevState,
@@ -70,7 +70,7 @@ const ListUpdateProfileField = ({
         <Text style={styles.fieldName}>Last Name</Text>
         <TextInput
           style={styles.fieldText}
-          defaultValue={userReducer.name.last}
+          defaultValue={userData.name.last}
           onChangeText={(UserLastName) =>
             setUserName((prevState) => ({
               ...prevState,
