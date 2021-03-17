@@ -12,7 +12,8 @@ const ListUpdateProfileField = ({
   setUserAddress,
   setUserBirthday,
   setUserGender,
-  setUserName,
+  setUserFirstName,
+  setUserLastName,
 }) => {
   return (
     <ScrollView persistentScrollbar={true}>
@@ -53,32 +54,16 @@ const ListUpdateProfileField = ({
         defaultValue={userData.gender}
         setData={setUserGender}
       />
-      <View>
-        <Text style={styles.fieldName}>First Name</Text>
-        <TextInput
-          style={styles.fieldText}
-          defaultValue={userData.name.first}
-          onChangeText={(UserFirstName) =>
-            setUserName((prevState) => ({
-              ...prevState,
-              first: UserFirstName,
-            }))
-          }
-        />
-      </View>
-      <View>
-        <Text style={styles.fieldName}>Last Name</Text>
-        <TextInput
-          style={styles.fieldText}
-          defaultValue={userData.name.last}
-          onChangeText={(UserLastName) =>
-            setUserName((prevState) => ({
-              ...prevState,
-              last: UserLastName,
-            }))
-          }
-        />
-      </View>
+      <UpdateProfileField
+        text="First Name"
+        defaultValue={userData.name.first}
+        setData={setUserFirstName}
+      />
+      <UpdateProfileField
+        text="Last Name"
+        defaultValue={userData.name.last}
+        setData={setUserLastName}
+      />
     </ScrollView>
   );
 };

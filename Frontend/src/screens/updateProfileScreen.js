@@ -19,7 +19,8 @@ const UpdateProfileScreen = ({navigation}) => {
   const [address, setUserAddress] = useState(userReducer.address);
   const [birthday, setUserBirthday] = useState(userReducer.birthday);
   const [gender, setUserGender] = useState(userReducer.gender);
-  const [name, setUserName] = useState(userReducer.name);
+  const [firstName, setUserFirstName] = useState(userReducer.name.first);
+  const [lastName, setUserLastName] = useState(userReducer.name.last);
   const [password, setUserPassword] = useState('');
   const [userModified, setUserModified] = useState(false);
 
@@ -36,7 +37,10 @@ const UpdateProfileScreen = ({navigation}) => {
           address: address,
           birthday: birthday,
           gender: gender,
-          name: name,
+          name: {
+            first: firstName,
+            last: lastName,
+          },
         },
         {
           headers: {
@@ -60,7 +64,10 @@ const UpdateProfileScreen = ({navigation}) => {
         address: address,
         birthday: birthday,
         gender: gender,
-        name: name,
+        name: {
+          first: firstName,
+          last: lastName,
+        },
       }),
     );
   }, [userModified]);
@@ -77,7 +84,8 @@ const UpdateProfileScreen = ({navigation}) => {
           setUserAddress={setUserAddress}
           setUserBirthday={setUserBirthday}
           setUserGender={setUserGender}
-          setUserName={setUserName}
+          setUserFirstName={setUserFirstName}
+          setUserLastName={setUserLastName}
         />
       </View>
       <View style={styles.updateButton}>
