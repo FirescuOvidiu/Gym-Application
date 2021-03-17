@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ScrollView, View, Text, TextInput, StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet} from 'react-native';
 
 import UpdateProfileField from '../components/updateProfileField';
 
