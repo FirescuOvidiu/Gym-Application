@@ -14,7 +14,7 @@ const UpdateProfileField = ({
       <TextInput
         style={styles.fieldText}
         defaultValue={defaultValue}
-        onChangeText={(UserData) => setData(UserData)}
+        onChangeText={setData}
         secureTextEntry={secureTextEntry}
         placeholder={placeholder}
       />
