@@ -2,6 +2,8 @@ import * as React from 'react';
 import {Provider} from 'react-redux';
 import 'react-native-gesture-handler';
 
+import {SafeAreaView} from 'react-native';
+
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
@@ -33,25 +35,27 @@ const Auth = () => {
 const App = () => {
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="SplashScreen">
-          <Stack.Screen
-            name="SplashScreen"
-            component={SplashScreen}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="Auth"
-            component={Auth}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="TabNavigatorRoutes"
-            component={TabNavigatorRoutes}
-            options={{headerShown: false}}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <SafeAreaView style={{flex: 1}}>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="SplashScreen">
+            <Stack.Screen
+              name="SplashScreen"
+              component={SplashScreen}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="Auth"
+              component={Auth}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="TabNavigatorRoutes"
+              component={TabNavigatorRoutes}
+              options={{headerShown: false}}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaView>
     </Provider>
   );
 };
