@@ -3,9 +3,9 @@ import * as React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import ProfileScreen from './profileScreen';
-import GymDetailsScreen from './gymDetailsScreen';
-import UpdateProfileScreen from './updateProfileScreen';
+import ProfileScreen from '../screens/profileScreen';
+import GymDetailsScreen from '../screens/gymDetailsScreen';
+import UpdateProfileScreen from '../screens/updateProfileScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
