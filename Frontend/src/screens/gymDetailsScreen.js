@@ -74,7 +74,7 @@ const GymDetailsScreen = ({navigation}) => {
       />
       <View style={styles.body}>
         <View style={styles.gymInformations}>
-          <Text style={styles.title}>{gymReducer.name}</Text>
+          <Text style={styles.title}>{gymReducer.name} Details</Text>
           <ProfileField text={'Address'} data={gymReducer.address} />
           <ProfileField text={'Phone'} data={gymReducer.phone} />
           <ProfileField text={'Email'} data={gymReducer.email} />
@@ -84,8 +84,15 @@ const GymDetailsScreen = ({navigation}) => {
           />
         </View>
         <View style={styles.gymInformations}>
-          <Text>openingTime: {gymReducer.openingTime} </Text>
-          <Text>closingTime: {gymReducer.closingTime} </Text>
+          <Text style={styles.title}>Opening Hours</Text>
+          <ProfileField
+            text={'Opening'}
+            data={'Monday - Friday ' + gymReducer.openingTime}
+          />
+          <ProfileField
+            text={'Closing'}
+            data={'Monday - Friday ' + gymReducer.closingTime}
+          />
         </View>
         <TouchableOpacity
           onPress={() => {
