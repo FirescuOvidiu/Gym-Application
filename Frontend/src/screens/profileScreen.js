@@ -1,26 +1,98 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  ImageBackground,
+  View,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
+
+import ProfileField from '../components/profileField';
 
 const ProfileScreen = ({navigation}) => {
   const userReducer = useSelector((state) => state.userReducer);
 
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>email: {userReducer.email} </Text>
-      <Text>username: {userReducer.username} </Text>
-      <Text>role: {userReducer.role} </Text>
-      <Text>phone: {userReducer.phone} </Text>
-      <Text>address: {userReducer.address} </Text>
-      <Text>birthday: {userReducer.birthday} </Text>
-      <Text>gender: {userReducer.gender} </Text>
-      <Text>first name: {userReducer.name.first} </Text>
-      <Text>last name: {userReducer.name.last} </Text>
-      <TouchableOpacity onPress={() => navigation.navigate('UpdateProfile')}>
-        <Text>Update Profile</Text>
-      </TouchableOpacity>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <ImageBackground
+          source={require('../images/profileBackground.jpg')}
+          style={styles.backgroundImage}>
+          <Text style={styles.headerTextName}>
+            Welcome {userReducer.name.first} {userReducer.name.last}
+          </Text>
+          <Text style={styles.headerTextEmail}>{userReducer.email}</Text>
+        </ImageBackground>
+      </View>
+      <View style={styles.body}>
+        <View style={{margin: '5%'}}>
+          <Text style={styles.title}> Account Informations</Text>
+          <ProfileField text={'Username'} data={userReducer.username} />
+          <ProfileField text={'Role'} data={userReducer.role} />
+          <ProfileField text={'Phone'} data={userReducer.phone} />
+          <ProfileField text={'Address'} data={userReducer.address} />
+          <ProfileField text={'Birthday'} data={userReducer.birthday} />
+          <ProfileField text={'Gender'} data={userReducer.gender} />
+          <TouchableOpacity
+            style={styles.updateButton}
+            onPress={() => navigation.navigate('UpdateProfile')}>
+            <Text style={styles.updateButtonText}>Update Profile</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 };
 
+const styles = StyleSheet.create({
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    paddingBottom: 20,
+    paddingTop: 10,
+  },
+  container: {
+    flex: 1,
+  },
+  header: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  headerTextName: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+  headerTextEmail: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 20,
+  },
+  body: {
+    backgroundColor: 'white',
+    flex: 2,
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+  },
+  updateButton: {
+    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#6da7f2',
+    borderRadius: 10,
+    marginTop: '7%',
+    marginBottom: '5%',
+  },
+  updateButtonText: {
+    color: 'white',
+    fontSize: 15,
+    fontWeight: 'bold',
+  },
+});
 export default ProfileScreen;

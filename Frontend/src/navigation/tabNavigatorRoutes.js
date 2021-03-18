@@ -16,7 +16,7 @@ function ProfileStack() {
       <Stack.Screen
         name="Profile"
         component={ProfileScreen}
-        options={{title: 'Profile'}}
+        options={{title: 'Profile', headerShown: false}}
       />
       <Stack.Screen
         name="UpdateProfile"
