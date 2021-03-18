@@ -12,6 +12,8 @@ import {useEffect} from 'react';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
+import ProfileField from '../components/profileField';
+
 import {addUser} from '../redux/actions/userActions';
 import {addGym} from '../redux/actions/gymActions';
 
@@ -73,10 +75,13 @@ const GymDetailsScreen = ({navigation}) => {
       <View style={styles.body}>
         <View style={styles.gymInformations}>
           <Text style={styles.title}>{gymReducer.name}</Text>
-          <Text>Address: {gymReducer.address} </Text>
-          <Text>Phone: {gymReducer.phone} </Text>
-          <Text>Email: {gymReducer.email} </Text>
-          <Text>Creation date: {gymReducer.date.substring(0, 10)} </Text>
+          <ProfileField text={'Address'} data={gymReducer.address} />
+          <ProfileField text={'Phone'} data={gymReducer.phone} />
+          <ProfileField text={'Email'} data={gymReducer.email} />
+          <ProfileField
+            text={'Creation date'}
+            data={gymReducer.date.substring(0, 10)}
+          />
         </View>
         <View style={styles.gymInformations}>
           <Text>openingTime: {gymReducer.openingTime} </Text>
@@ -133,8 +138,8 @@ const styles = StyleSheet.create({
   },
   gymInformations: {
     backgroundColor: 'white',
-    padding: '5%',
-    paddingLeft: '10%',
+    paddingVertical: '5%',
+    paddingHorizontal: '10%',
     marginBottom: '5%',
   },
 });
