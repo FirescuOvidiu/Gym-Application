@@ -83,7 +83,7 @@ const GymDetailsScreen = ({navigation}) => {
             data={gymReducer.date.substring(0, 10)}
           />
         </View>
-        <View style={styles.gymInformations}>
+        <View style={styles.gymOpeningHours}>
           <Text style={styles.title}>Opening Hours</Text>
           <ProfileField
             text={'Opening'}
@@ -94,31 +94,34 @@ const GymDetailsScreen = ({navigation}) => {
             data={'Monday - Friday ' + gymReducer.closingTime}
           />
         </View>
-        <TouchableOpacity
-          onPress={() => {
-            Alert.alert(
-              'Logout',
-              'Are you sure? You want to logout?',
-              [
-                {
-                  text: 'Cancel',
-                  onPress: () => {
-                    return null;
+        <View style={{flex: 0.4}}>
+          <TouchableOpacity
+            style={styles.signButton}
+            onPress={() => {
+              Alert.alert(
+                'Logout',
+                'Are you sure? You want to logout?',
+                [
+                  {
+                    text: 'Cancel',
+                    onPress: () => {
+                      return null;
+                    },
                   },
-                },
-                {
-                  text: 'Confirm',
-                  onPress: () => {
-                    AsyncStorage.clear();
-                    navigation.replace('Auth');
+                  {
+                    text: 'Confirm',
+                    onPress: () => {
+                      AsyncStorage.clear();
+                      navigation.replace('Auth');
+                    },
                   },
-                },
-              ],
-              {cancelable: false},
-            );
-          }}>
-          <Text>Logout</Text>
-        </TouchableOpacity>
+                ],
+                {cancelable: false},
+              );
+            }}>
+            <Text style={styles.signText}>Logout</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -144,10 +147,32 @@ const styles = StyleSheet.create({
     paddingBottom: '5%',
   },
   gymInformations: {
+    flex: 2,
     backgroundColor: 'white',
-    paddingVertical: '5%',
-    paddingHorizontal: '10%',
+    paddingHorizontal: '5%',
+    paddingBottom: '5%',
+    paddingTop: '3%',
     marginBottom: '5%',
+  },
+  gymOpeningHours: {
+    flex: 1,
+    backgroundColor: 'white',
+    paddingHorizontal: '5%',
+    paddingTop: '3%',
+    paddingBottom: '10%',
+    marginBottom: '5%',
+  },
+
+  signButton: {
+    padding: 10,
+    alignItems: 'center',
+    backgroundColor: '#6da7f2',
+    borderRadius: 10,
+  },
+  signText: {
+    color: 'white',
+    fontSize: 15,
+    fontWeight: 'bold',
   },
 });
 
