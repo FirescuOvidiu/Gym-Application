@@ -76,7 +76,7 @@ const GymDetailsScreen = ({navigation}) => {
           <Text>Address: {gymReducer.address} </Text>
           <Text>Phone: {gymReducer.phone} </Text>
           <Text>Email: {gymReducer.email} </Text>
-          <Text>date: {gymReducer.date.substring(0, 10)} </Text>
+          <Text>Creation date: {gymReducer.date.substring(0, 10)} </Text>
         </View>
         <View style={styles.gymInformations}>
           <Text>openingTime: {gymReducer.openingTime} </Text>
