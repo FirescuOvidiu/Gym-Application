@@ -94,9 +94,9 @@ const GymDetailsScreen = ({navigation}) => {
             data={'Monday - Friday ' + gymReducer.closingTime}
           />
         </View>
-        <View style={{flex: 0.4}}>
+        <View style={styles.logout}>
           <TouchableOpacity
-            style={styles.signButton}
+            style={styles.logoutButton}
             onPress={() => {
               Alert.alert(
                 'Logout',
@@ -119,7 +119,7 @@ const GymDetailsScreen = ({navigation}) => {
                 {cancelable: false},
               );
             }}>
-            <Text style={styles.signText}>Logout</Text>
+            <Text style={styles.logoutText}>Logout</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -162,14 +162,16 @@ const styles = StyleSheet.create({
     paddingBottom: '10%',
     marginBottom: '5%',
   },
-
-  signButton: {
+  logout: {
+    flex: 0.4,
+  },
+  logoutButton: {
     padding: 10,
     alignItems: 'center',
     backgroundColor: '#6da7f2',
     borderRadius: 10,
   },
-  signText: {
+  logoutText: {
     color: 'white',
     fontSize: 15,
     fontWeight: 'bold',
