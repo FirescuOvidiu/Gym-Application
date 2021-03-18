@@ -71,13 +71,17 @@ const GymDetailsScreen = ({navigation}) => {
         resizeMode="cover"
       />
       <View style={styles.body}>
-        <Text style={styles.title}>{gymReducer.name}</Text>
-        <Text>Address: {gymReducer.address} </Text>
-        <Text>Phone: {gymReducer.phone} </Text>
-        <Text>Email: {gymReducer.email} </Text>
-        <Text>openingTime: {gymReducer.openingTime} </Text>
-        <Text>closingTime: {gymReducer.closingTime} </Text>
-        <Text>date: {gymReducer.date.substring(0, 10)} </Text>
+        <View style={styles.gymInformations}>
+          <Text style={styles.title}>{gymReducer.name}</Text>
+          <Text>Address: {gymReducer.address} </Text>
+          <Text>Phone: {gymReducer.phone} </Text>
+          <Text>Email: {gymReducer.email} </Text>
+          <Text>date: {gymReducer.date.substring(0, 10)} </Text>
+        </View>
+        <View style={styles.gymInformations}>
+          <Text>openingTime: {gymReducer.openingTime} </Text>
+          <Text>closingTime: {gymReducer.closingTime} </Text>
+        </View>
         <TouchableOpacity
           onPress={() => {
             Alert.alert(
@@ -125,8 +129,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     alignSelf: 'center',
-    paddingBottom: 20,
-    paddingTop: 20,
+    paddingBottom: '5%',
+  },
+  gymInformations: {
+    backgroundColor: 'white',
+    padding: '5%',
+    paddingLeft: '10%',
+    marginBottom: '5%',
   },
 });
 
