@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-  ImageBackground,
-  StyleSheet,
-  TextInput,
-  View,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import {ImageBackground, StyleSheet, View, Text} from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
