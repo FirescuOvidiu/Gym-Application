@@ -82,9 +82,7 @@ const RegisterScreen = ({navigation}) => {
 
       alert('Registration successful.');
     } catch (error) {
-      error.response.data.errors.forEach((element) => {
-        alert(element.msg);
-      });
+      alert(error.response.data.message);
     }
   };
 
