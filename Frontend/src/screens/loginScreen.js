@@ -59,7 +59,7 @@ const LoginScreen = ({navigation}) => {
           </Text>
           <SignButton submit={handleSubmitButton} text="Sign In" />
           <View style={styles.signUp}>
-            <Text style={{fontSize: 15}}> Don't have an account ? </Text>
+            <Text style={styles.accountText}> Don't have an account ? </Text>
             <Text
               style={styles.signUpText}
               onPress={() => navigation.navigate('RegisterScreen')}>
@@ -101,6 +101,9 @@ const styles = StyleSheet.create({
     color: '#6da7f2',
     fontSize: 15,
     fontWeight: 'bold',
+  },
+  accountText: {
+    fontSize: 15,
   },
 });
 
