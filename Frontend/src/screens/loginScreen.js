@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {ImageBackground, StyleSheet, View, Text} from 'react-native';
+import {useDispatch} from 'react-redux';
 
-import AsyncStorage from '@react-native-community/async-storage';
+import {LoginAsync} from '../redux/thunks/authThunks';
 
 import AuthInputField from '../components/authInputField';
 import SignButton from '../components/signButton';
@@ -12,6 +13,7 @@ const axios = require('axios').default;
 const LoginScreen = ({navigation}) => {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
+  const dispatch = useDispatch();
 
   const handleSubmitButton = async () => {
     if (!userEmail) {
@@ -23,20 +25,7 @@ const LoginScreen = ({navigation}) => {
       return;
     }
 
-    try {
-      const response = await axios.post(
-        `http://192.168.100.2:3000/api/user/login`,
-        {
-          email: userEmail,
-          password: userPassword,
-        },
-      );
-
-      await AsyncStorage.setItem('accessToken', response.data.accessToken);
-      navigation.replace('TabNavigatorRoutes');
-    } catch (error) {
-      alert(error.response.data.message);
-    }
+    dispatch(LoginAsync({userEmail, userPassword, navigation}));
   };
 
   return (
