@@ -2,13 +2,10 @@ import React, {useState} from 'react';
 import {ImageBackground, StyleSheet, View, Text} from 'react-native';
 import {useDispatch} from 'react-redux';
 
-import {LoginAsync} from '../redux/thunks/authThunks';
-
+import {UserLogin} from '../redux/thunks/authThunks';
 import AuthInputField from '../components/authInputField';
 import SignButton from '../components/signButton';
 import AuthHeader from '../components/authHeader';
-
-const axios = require('axios').default;
 
 const LoginScreen = ({navigation}) => {
   const [userEmail, setUserEmail] = useState('');
@@ -25,7 +22,7 @@ const LoginScreen = ({navigation}) => {
       return;
     }
 
-    dispatch(LoginAsync({userEmail, userPassword, navigation}));
+    dispatch(UserLogin({userEmail, userPassword, navigation}));
   };
 
   return (
