@@ -43,13 +43,10 @@ export const saveUser = () => {
         },
       });
 
-      if (user.data.user) {
-        delete user.data.user.__v;
-        delete user.data.user.password;
-      }
-      user.data.user.birthday = user.data.user.birthday.substring(0, 10);
-      user.data.user.date = user.data.user.date.substring(0, 10);
-      dispatch(addUser(user.data.user));
+      user = user.data.user;
+      user.birthday = user.birthday.substring(0, 10);
+      user.date = user.date.substring(0, 10);
+      dispatch(addUser(user));
     } catch (error) {
       alert(error.response.data.message);
     }
