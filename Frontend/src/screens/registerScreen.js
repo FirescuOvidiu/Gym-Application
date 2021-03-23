@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
 import {ImageBackground, StyleSheet, View, Text} from 'react-native';
+import {useDispatch} from 'react-redux';
+
+import {registerUser} from '../redux/thunks/authThunks';
 
 import ListAuthInputFields from '../components/listAuthInputFields';
 import SignButton from '../components/signButton';
@@ -18,6 +21,7 @@ const RegisterScreen = ({navigation}) => {
   const [userGender, setUserGender] = useState('');
   const [userFirstName, setUserFirstName] = useState('');
   const [userLastName, setUserLastName] = useState('');
+  const dispatch = useDispatch();
 
   const handleSubmitButton = async () => {
     if (!userEmail) {
@@ -65,25 +69,19 @@ const RegisterScreen = ({navigation}) => {
       return;
     }
 
-    try {
-      await axios.post(`http://192.168.100.2:3000/api/user/register`, {
-        username: userName,
-        email: userEmail,
-        password: userPassword,
-        phone: userPhone,
-        address: userAddress,
-        birthday: userBirthday,
-        gender: userGender,
-        name: {
-          first: userFirstName,
-          last: userLastName,
-        },
-      });
-
-      alert('Registration successful.');
-    } catch (error) {
-      alert(error.response.data.message);
-    }
+    dispatch(
+      registerUser({
+        userName,
+        userEmail,
+        userPassword,
+        userPhone,
+        userAddress,
+        userBirthday,
+        userGender,
+        userFirstName,
+        userLastName,
+      }),
+    );
   };
 
   return (

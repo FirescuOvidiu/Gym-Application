@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import {ImageBackground, StyleSheet, View, Text} from 'react-native';
 import {useDispatch} from 'react-redux';
 
-import {UserLogin} from '../redux/thunks/authThunks';
+import {loginUser} from '../redux/thunks/authThunks';
+
 import AuthInputField from '../components/authInputField';
 import SignButton from '../components/signButton';
 import AuthHeader from '../components/authHeader';
@@ -22,7 +23,7 @@ const LoginScreen = ({navigation}) => {
       return;
     }
 
-    dispatch(UserLogin({userEmail, userPassword, navigation}));
+    dispatch(loginUser({userEmail, userPassword, navigation}));
   };
 
   return (
