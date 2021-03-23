@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {ImageBackground, StyleSheet, View, Text} from 'react-native';
 import {useDispatch} from 'react-redux';
 
-import {loginUser} from '../redux/thunks/authThunks';
+import {loginUser} from '../redux/thunks/userThunks';
 
 import AuthInputField from '../components/authInputField';
 import SignButton from '../components/signButton';
