@@ -69,15 +69,19 @@ const RegisterScreen = ({navigation}) => {
 
     dispatch(
       registerUser({
-        userName,
-        userEmail,
-        userPassword,
-        userPhone,
-        userAddress,
-        userBirthday,
-        userGender,
-        userFirstName,
-        userLastName,
+        user: {
+          username: userName,
+          email: userEmail,
+          password: userPassword,
+          phone: userPhone,
+          address: userAddress,
+          birthday: userBirthday,
+          gender: userGender,
+          name: {
+            first: userFirstName,
+            last: userLastName,
+          },
+        },
       }),
     );
   };

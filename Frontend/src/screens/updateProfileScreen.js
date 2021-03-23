@@ -26,15 +26,19 @@ const UpdateProfileScreen = () => {
     dispatch(
       _updateUser({
         userReducer,
-        email,
-        username,
-        password,
-        phone,
-        address,
-        birthday,
-        gender,
-        firstName,
-        lastName,
+        user: {
+          email,
+          username,
+          password,
+          phone,
+          address,
+          birthday,
+          gender,
+          name: {
+            first: firstName,
+            last: lastName,
+          },
+        },
         setUserModified,
         userModified,
       }),

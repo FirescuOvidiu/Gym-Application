@@ -23,7 +23,15 @@ const LoginScreen = ({navigation}) => {
       return;
     }
 
-    dispatch(loginUser({userEmail, userPassword, navigation}));
+    dispatch(
+      loginUser({
+        user: {
+          email: userEmail,
+          password: userPassword,
+        },
+        navigation,
+      }),
+    );
   };
 
   return (
