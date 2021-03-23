@@ -35,6 +35,7 @@ export const registerUser = ({user}) => {
 export const saveUser = () => {
   return async (dispatch) => {
     const token = await AsyncStorage.getItem('accessToken');
+
     try {
       let user = await axios.get('http://192.168.100.2:3000/api/user', {
         headers: {
@@ -73,6 +74,7 @@ export const _updateUser = ({
           },
         },
       );
+
       alert(`${response.data.status}`);
       setUserModified(!userModified);
     } catch (error) {
