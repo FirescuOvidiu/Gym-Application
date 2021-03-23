@@ -8,8 +8,6 @@ import ListAuthInputFields from '../components/listAuthInputFields';
 import SignButton from '../components/signButton';
 import AuthHeader from '../components/authHeader';
 
-const axios = require('axios').default;
-
 const RegisterScreen = ({navigation}) => {
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
