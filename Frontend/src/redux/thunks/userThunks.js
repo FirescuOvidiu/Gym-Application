@@ -78,3 +78,49 @@ export const saveUser = () => {
     }
   };
 };
+
+export const _updateUser = ({
+  userReducer,
+  email,
+  username,
+  password,
+  phone,
+  address,
+  birthday,
+  gender,
+  firstName,
+  lastName,
+  setUserModified,
+  userModified,
+}) => {
+  return async () => {
+    try {
+      const token = await AsyncStorage.getItem('accessToken');
+      const response = await axios.put(
+        `http://192.168.100.2:3000/api/user/${userReducer._id}`,
+        {
+          email,
+          username,
+          password,
+          phone,
+          address,
+          birthday,
+          gender,
+          name: {
+            first: firstName,
+            last: lastName,
+          },
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        },
+      );
+      alert(`${response.data.status}`);
+      setUserModified(!userModified);
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  };
+};
