@@ -15,11 +15,7 @@ export const saveGym = () => {
         },
       });
 
-      if (gym.data.gym) {
-        delete gym.data.gym[0].__v;
-      }
-
-      dispatch(addGym(gym.data.gym[0]));
+      dispatch(addGym(gym.data.gym));
     } catch (error) {
       alert(error.response.data.message);
     }
