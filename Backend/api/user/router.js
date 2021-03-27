@@ -5,9 +5,11 @@ const {
   checkAdminAuth,
 } = require("../middleware/auth-validation");
 const {
+  validationResults,
   isUserValid,
-  valdiationResults,
+  isWorkoutValid,
 } = require("../middleware/body-validation");
+const { validationResult } = require("express-validator");
 
 const router = require("express").Router();
 
@@ -16,7 +18,7 @@ router.get("/:id?", checkUserAuth, userController.getUser);
 router.post(
   "/register",
   isUserValid,
-  valdiationResults,
+  validationResults,
   userController.register
 );
 
@@ -26,13 +28,19 @@ router.put(
   "/update/:_id?",
   checkUserAuth,
   isUserValid,
-  valdiationResults,
+  validationResults,
   userController.updateUser
 );
 
 router.delete("/:_id", checkAdminAuth, userController.deleteUser);
 
-router.put("/createWorkout", checkUserAuth, userController.createWorkout);
+router.put(
+  "/createWorkout",
+  checkUserAuth,
+  isWorkoutValid,
+  validationResults,
+  userController.createWorkout
+);
 
 router.put(
   "/deleteWorkout/:_workoutId",
