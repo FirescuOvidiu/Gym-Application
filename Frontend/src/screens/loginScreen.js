@@ -1,24 +1,17 @@
 import React, {useState} from 'react';
-import {
-  ImageBackground,
-  StyleSheet,
-  TextInput,
-  View,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import {ImageBackground, StyleSheet, View, Text} from 'react-native';
+import {useDispatch} from 'react-redux';
 
-import AsyncStorage from '@react-native-community/async-storage';
+import {loginUser} from '../redux/thunks/userThunks';
 
 import AuthInputField from '../components/authInputField';
 import SignButton from '../components/signButton';
 import AuthHeader from '../components/authHeader';
 
-const axios = require('axios').default;
-
 const LoginScreen = ({navigation}) => {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
+  const dispatch = useDispatch();
 
   const handleSubmitButton = async () => {
     if (!userEmail) {
@@ -30,20 +23,15 @@ const LoginScreen = ({navigation}) => {
       return;
     }
 
-    try {
-      const response = await axios.post(
-        `http://192.168.100.2:3000/api/user/login`,
-        {
+    dispatch(
+      loginUser({
+        user: {
           email: userEmail,
           password: userPassword,
         },
-      );
-
-      await AsyncStorage.setItem('accessToken', response.data.accessToken);
-      navigation.replace('TabNavigatorRoutes');
-    } catch (error) {
-      alert(error.response.data.message);
-    }
+        navigation,
+      }),
+    );
   };
 
   return (
@@ -66,7 +54,7 @@ const LoginScreen = ({navigation}) => {
           </Text>
           <SignButton submit={handleSubmitButton} text="Sign In" />
           <View style={styles.signUp}>
-            <Text style={{fontSize: 15}}> Don't have an account ? </Text>
+            <Text style={styles.accountText}> Don't have an account ? </Text>
             <Text
               style={styles.signUpText}
               onPress={() => navigation.navigate('RegisterScreen')}>
@@ -108,6 +96,9 @@ const styles = StyleSheet.create({
     color: '#6da7f2',
     fontSize: 15,
     fontWeight: 'bold',
+  },
+  accountText: {
+    fontSize: 15,
   },
 });
 

@@ -14,55 +14,16 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import ProfileField from '../components/profileField';
 
-import {addUser} from '../redux/actions/userActions';
-import {addGym} from '../redux/actions/gymActions';
-
-import axios from 'axios';
+import {saveUser} from '../redux/thunks/userThunks';
+import {saveGym} from '../redux/thunks/gymThunks';
 
 const GymDetailsScreen = ({navigation}) => {
   const gymReducer = useSelector((state) => state.gymReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const saveUser = async () => {
-      const token = await AsyncStorage.getItem('accessToken');
-      try {
-        let user = await axios.get('http://192.168.100.2:3000/api/user', {
-          headers: {
-            authorization: token,
-          },
-        });
-
-        if (user.data.user) {
-          delete user.data.user.__v;
-          delete user.data.user.password;
-        }
-        user.data.user.birthday = user.data.user.birthday.substring(0, 10);
-        user.data.user.date = user.data.user.date.substring(0, 10);
-        dispatch(addUser(user.data.user));
-      } catch (error) {
-        alert(error.response.data.message);
-      }
-    };
-    const saveGym = async () => {
-      const token = await AsyncStorage.getItem('accessToken');
-      try {
-        let gym = await axios.get('http://192.168.100.2:3000/api/gym', {
-          headers: {
-            authorization: token,
-          },
-        });
-
-        if (gym.data.gym) {
-          delete gym.data.gym[0].__v;
-        }
-        dispatch(addGym(gym.data.gym[0]));
-      } catch (error) {
-        alert(error.response.data.message);
-      }
-    };
-    saveUser();
-    saveGym();
+    dispatch(saveUser());
+    dispatch(saveGym());
   }, []);
 
   return (
