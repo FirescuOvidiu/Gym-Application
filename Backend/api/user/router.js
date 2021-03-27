@@ -34,6 +34,10 @@ router.delete("/:_id", checkAdminAuth, userController.deleteUser);
 
 router.put("/createWorkout", checkUserAuth, userController.createWorkout);
 
-router.put("/deleteWorkout", checkUserAuth, userController.deleteWorkout);
+router.put(
+  "/deleteWorkout/:_workoutId",
+  checkUserAuth,
+  userController.deleteWorkout
+);
 
 module.exports = router;

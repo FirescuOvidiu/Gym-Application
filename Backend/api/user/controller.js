@@ -141,7 +141,34 @@ const createWorkout = async (req, res, next) => {
   }
 };
 
-const deleteWorkout = async (req, res, next) => {};
+const deleteWorkout = async (req, res, next) => {
+  try {
+    let user = await User.findById(req.user.payload._id);
+
+    if (!user) {
+      return next({ message: "The user was not found." });
+    }
+
+    let workout = user.workouts.find(
+      (workout) => workout._id == req.params._workoutId
+    );
+
+    if (!workout) {
+      return next({ message: "The workout was not found." });
+    }
+
+    const sess = await mongoose.startSession();
+    sess.startTransaction();
+    user.workouts.pull(workout);
+    await Workout.deleteOne({ _id: req.params._workoutId }, { session: sess });
+    await user.save({ session: sess });
+    await sess.commitTransaction();
+
+    res.status(200).json({ status: "The workout was deleted." });
+  } catch (error) {
+    return next(error);
+  }
+};
 
 module.exports = {
   getUser,
