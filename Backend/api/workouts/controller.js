@@ -15,7 +15,19 @@ const createWorkout = async (req, res, next) => {
 };
 
 // Method used to delete workouts
-const deleteWorkout = async (req, res, next) => {};
+const deleteWorkout = async (req, res, next) => {
+  try {
+    const workout = await Workout.findByIdAndDelete(req.params._id);
+
+    if (!workout) {
+      return next({ message: "The workout was not found." });
+    }
+
+    res.status(200).json({ status: "The workout was deleted." });
+  } catch (error) {
+    return next(error);
+  }
+};
 
 module.exports = {
   getWorkout,
