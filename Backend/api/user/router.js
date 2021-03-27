@@ -23,7 +23,7 @@ router.post(
 router.post("/login", userController.login);
 
 router.put(
-  "/:_id?",
+  "/update/:_id?",
   checkUserAuth,
   isUserValid,
   valdiationResults,

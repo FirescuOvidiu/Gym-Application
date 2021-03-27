@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -120,7 +121,7 @@ const deleteUser = async (req, res, next) => {
 // Method used to create a workout
 const createWorkout = async (req, res, next) => {
   try {
-    let user = await User.findById(req.params._id);
+    let user = await User.findById(req.user.payload._id);
     let workout = new Workout(req.body);
 
     if (!user) {
