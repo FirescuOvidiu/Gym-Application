@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const User = require("./model");
+const Workout = require("../workout/model");
 
 // Method used to get user informations
 const getUser = async (req, res, next) => {
