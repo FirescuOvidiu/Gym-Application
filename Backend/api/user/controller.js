@@ -117,7 +117,29 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
-const createWorkout = async (req, res, next) => {};
+// Method used to create a workout
+const createWorkout = async (req, res, next) => {
+  try {
+    let user = await User.findById(req.params._id);
+    let workout = new Workout(req.body);
+
+    if (!user) {
+      return next({ message: "The user was not found." });
+    }
+
+    const sess = await mongoose.startSession();
+    sess.startTransaction();
+    await workout.save({ session: sess });
+    user.workouts.push(workout);
+    await user.save({ session: sess });
+    await sess.commitTransaction();
+
+    res.status(200).json({ status: "The workout was created." });
+  } catch (error) {
+    return next(error);
+  }
+};
+
 const deleteWorkout = async (req, res, next) => {};
 
 module.exports = {
