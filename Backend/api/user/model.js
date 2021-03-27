@@ -50,7 +50,7 @@ const userSchema = new mongoose.Schema({
     },
   },
   date: { type: Date, default: Date.now },
-  workouts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Workouts" }],
+  workouts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Workout" }],
   role: {
     type: String,
     required: true,

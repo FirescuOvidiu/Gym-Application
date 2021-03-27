@@ -9,11 +9,10 @@ const {
   isUserValid,
   isWorkoutValid,
 } = require("../middleware/body-validation");
-const { validationResult } = require("express-validator");
 
 const router = require("express").Router();
 
-router.get("/:id?", checkUserAuth, userController.getUser);
+router.get("/get/:_id?", checkUserAuth, userController.getUser);
 
 router.post(
   "/register",
@@ -33,6 +32,8 @@ router.put(
 );
 
 router.delete("/:_id", checkAdminAuth, userController.deleteUser);
+
+router.get("/getWorkouts", checkUserAuth, userController.getWorkouts);
 
 router.put(
   "/createWorkout",

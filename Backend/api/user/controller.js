@@ -118,6 +118,22 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
+// Method used to get all workouts
+const getWorkouts = async (req, res, next) => {
+  try {
+    let user = await User.findById(req.user.payload._id).populate("workouts");
+
+    if (!user) {
+      return next({ message: "The user was not found." });
+    }
+
+    workouts = user.workouts;
+    res.status(200).json({ workouts });
+  } catch (error) {
+    return next(error);
+  }
+};
+
 // Method used to create a workout
 const createWorkout = async (req, res, next) => {
   try {
@@ -141,6 +157,7 @@ const createWorkout = async (req, res, next) => {
   }
 };
 
+// Method used to delete a workout
 const deleteWorkout = async (req, res, next) => {
   try {
     let user = await User.findById(req.user.payload._id);
@@ -159,12 +176,12 @@ const deleteWorkout = async (req, res, next) => {
 
     const sess = await mongoose.startSession();
     sess.startTransaction();
-    user.workouts.pull(workout);
-    await Workout.deleteOne({ _id: req.params._workoutId }, { session: sess });
+    await book.findByIdAndDelete({ session: sess });
+    user.workout.pull(workout);
     await user.save({ session: sess });
     await sess.commitTransaction();
 
-    res.status(200).json({ status: "The workout was deleted." });
+    res.status(200).json({ status: "The workout was created." });
   } catch (error) {
     return next(error);
   }
@@ -176,6 +193,7 @@ module.exports = {
   login,
   updateUser,
   deleteUser,
+  getWorkouts,
   createWorkout,
   deleteWorkout,
 };
