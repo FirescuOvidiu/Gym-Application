@@ -20,7 +20,6 @@ const getUser = async (req, res, next) => {
     }
 
     user["password"] = undefined;
-    user["__v"] = undefined;
 
     res.status(200).json({ user });
   } catch (error) {
@@ -69,6 +68,8 @@ const login = async (req, res, next) => {
 
 // Method used to update a user
 const updateUser = async (req, res, next) => {
+  req.params._id = req.params._id || req.user.payload._id;
+
   try {
     let user = await User.findById(req.params._id);
 
@@ -116,10 +117,15 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
+const createWorkout = async (req, res, next) => {};
+const deleteWorkout = async (req, res, next) => {};
+
 module.exports = {
   getUser,
   register,
   login,
   updateUser,
   deleteUser,
+  createWorkout,
+  deleteWorkout,
 };

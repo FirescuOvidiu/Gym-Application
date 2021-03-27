@@ -23,7 +23,7 @@ router.post(
 router.post("/login", userController.login);
 
 router.put(
-  "/:_id",
+  "/:_id?",
   checkUserAuth,
   isUserValid,
   valdiationResults,
@@ -31,5 +31,9 @@ router.put(
 );
 
 router.delete("/:_id", checkAdminAuth, userController.deleteUser);
+
+router.put("/createWorkout", checkUserAuth, usersControllers.createWorkout);
+
+router.put("/deleteWorkout", checkUserAuth, usersControllers.deleteWorkout);
 
 module.exports = router;
