@@ -1,4 +1,4 @@
-const workoutsController = require("./controller");
+const workoutController = require("./controller");
 
 const {
   checkUserAuth,
@@ -7,10 +7,10 @@ const {
 
 const router = require("express").Router();
 
-router.get("/:id?", checkUserAuth, workoutsController.getWorkouts);
+router.get("/", checkUserAuth, workoutController.getWorkout);
 
-router.post("/", checkUserAuth, workoutsController.createWorkouts);
+router.post("/", checkUserAuth, workoutController.createWorkout);
 
-router.delete("/:_id", checkUserAuth, workoutsController.deleteWorkouts);
+router.delete("/:_id", checkUserAuth, workoutController.deleteWorkout);
 
 module.exports = router;
