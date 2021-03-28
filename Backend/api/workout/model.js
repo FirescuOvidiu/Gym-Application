@@ -37,7 +37,7 @@ const workoutSchema = new mongoose.Schema({
         },
         weight: {
           type: Number,
-          default: 0,
+          default: "",
         },
       },
     ],
