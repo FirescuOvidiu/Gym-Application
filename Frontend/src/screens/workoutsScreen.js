@@ -4,6 +4,8 @@ import {View, Text, TouchableOpacity, FlatList} from 'react-native';
 
 import {getWorkouts} from '../redux/thunks/userThunks';
 
+import ListWorkouts from '../components/listWorkouts';
+
 const WorkoutsScreen = () => {
   const userReducer = useSelector((state) => state.userReducer);
   const [workouts, setWorkouts] = useState([]);
@@ -16,18 +18,7 @@ const WorkoutsScreen = () => {
   return (
     <View>
       <Text>WorkoutsScreen</Text>
-      <FlatList
-        data={workouts}
-        keyExtractor={(item) => item._id}
-        renderItem={({item}) => {
-          return (
-            <TouchableOpacity>
-              <Text>Test</Text>
-            </TouchableOpacity>
-          );
-        }}
-      />
-      <Text>Test1</Text>
+      <ListWorkouts workouts={workouts} />
     </View>
   );
 };
