@@ -20,8 +20,6 @@ const getUser = async (req, res, next) => {
       return next({ message: "A user can't search for another user." });
     }
 
-    user["password"] = undefined;
-
     res.status(200).json({ user });
   } catch (error) {
     return next(error);
