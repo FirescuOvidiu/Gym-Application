@@ -12,7 +12,7 @@ const {
 
 const router = require("express").Router();
 
-router.get("/users/:_id?", checkUserAuth, userController.getUser);
+router.get("/:_id?", checkUserAuth, userController.getUser);
 
 router.post(
   "/register",
@@ -24,14 +24,14 @@ router.post(
 router.post("/login", userController.login);
 
 router.put(
-  "/users/:_id?",
+  "/:_id?",
   checkUserAuth,
   isUserValid,
   validationResults,
   userController.updateUser
 );
 
-router.delete("/users/:_id", checkAdminAuth, userController.deleteUser);
+router.delete("/:_id", checkAdminAuth, userController.deleteUser);
 
 router.get("/:_userId/workouts", checkUserAuth, userController.getWorkouts);
 
