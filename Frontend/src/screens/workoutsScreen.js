@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {View, Text, TouchableOpacity, FlatList} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 import {getWorkouts} from '../redux/thunks/userThunks';
 
 import ListWorkouts from '../components/listWorkouts';
 
-const WorkoutsScreen = () => {
+const WorkoutsScreen = ({navigation}) => {
   const userReducer = useSelector((state) => state.userReducer);
   const [workouts, setWorkouts] = useState([]);
   const dispatch = useDispatch();
@@ -16,11 +16,53 @@ const WorkoutsScreen = () => {
   }, [workouts]);
 
   return (
-    <View>
-      <Text>WorkoutsScreen</Text>
-      <ListWorkouts workouts={workouts} />
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Workouts</Text>
+      </View>
+      <View style={styles.body}>
+        <ListWorkouts workouts={workouts} />
+        <TouchableOpacity
+          style={styles.updateButton}
+          onPress={() => navigation.navigate('CreateWorkout')}>
+          <Text style={styles.updateButtonText}>Create Workout</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  header: {
+    flex: 1,
+  },
+  headerText: {
+    color: 'black',
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: '5%',
+  },
+  body: {
+    flex: 1,
+  },
+  updateButton: {
+    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#6da7f2',
+    borderRadius: 10,
+    marginTop: '7%',
+    marginBottom: '5%',
+  },
+  updateButtonText: {
+    color: 'white',
+    fontSize: 15,
+    fontWeight: 'bold',
+  },
+});
 
 export default WorkoutsScreen;

@@ -4,7 +4,7 @@ import {Text, TouchableOpacity} from 'react-native';
 const WorkoutButton = ({workout}) => {
   return (
     <TouchableOpacity>
-      <Text>Test</Text>
+      <Text>{workout.name + ' ' + workout.date + ' ' + workout.type}</Text>
     </TouchableOpacity>
   );
 };
