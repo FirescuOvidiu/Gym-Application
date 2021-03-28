@@ -27,7 +27,7 @@ const GymDetailsScreen = ({navigation}) => {
     const saveUser = async () => {
       const token = await AsyncStorage.getItem('accessToken');
       try {
-        let user = await axios.get('http://192.168.100.2:3000/api/user', {
+        let user = await axios.get('http://192.168.100.2:3000/api/user/users', {
           headers: {
             authorization: token,
           },
