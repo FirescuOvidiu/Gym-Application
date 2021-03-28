@@ -166,9 +166,7 @@ const deleteWorkout = async (req, res, next) => {
       return next({ message: "The user was not found." });
     }
 
-    let workout = user.workouts.find(
-      (workout) => workout._id == req.params._workoutId
-    );
+    let workout = await Workout.findById(req.params._workoutId);
 
     if (!workout) {
       return next({ message: "The workout was not found." });
@@ -176,8 +174,8 @@ const deleteWorkout = async (req, res, next) => {
 
     const sess = await mongoose.startSession();
     sess.startTransaction();
-    await Workout.findByIdAndRemove(workout, { session: sess });
-    user.workouts.pull(workout);
+    user.workouts.pull(workout._id);
+    await workout.remove({ session: sess });
     await user.save({ session: sess });
     await sess.commitTransaction();
 
