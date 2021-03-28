@@ -79,3 +79,50 @@ export const _updateUser = ({
     }
   };
 };
+
+export const getWorkouts = ({userReducer, setWorkouts}) => {
+  return async () => {
+    const token = await AsyncStorage.getItem('accessToken');
+
+    try {
+      //let workouts = await axios.get(
+      //  `http://192.168.100.2:3000/api/${userReducer._id}/workouts`,
+      //   {
+      //     headers: {
+      //        authorization: token,
+      //      },
+      //    },
+      //);
+      let workouts = [
+        {
+          _id: 1,
+          name: 'NameTest',
+          date: '2002-10-12',
+          type: 'cardio',
+          exercises: [
+            {
+              name: 'FirstEx',
+              sets: 3,
+              reps: 4,
+              rest: 5,
+              weight: 6,
+            },
+            {
+              name: 'SecondEx',
+              sets: 0,
+              reps: 1,
+              rest: 2,
+              weight: 3,
+            },
+          ],
+          notes: 'TestNotes',
+        },
+      ];
+
+      //alert(`${response.data.status}`);
+      setWorkouts(workouts);
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  };
+};
