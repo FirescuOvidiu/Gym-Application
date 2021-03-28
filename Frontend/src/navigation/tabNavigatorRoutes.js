@@ -6,6 +6,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import ProfileScreen from '../screens/profileScreen';
 import GymDetailsScreen from '../screens/gymDetailsScreen';
 import UpdateProfileScreen from '../screens/updateProfileScreen';
+import WorkoutsScreen from '../screens/workoutsScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -34,6 +35,11 @@ const TabNavigatorRoutes = () => {
         name="GymDetails"
         component={GymDetailsScreen}
         options={{title: 'Gym Details'}}
+      />
+      <Tab.Screen
+        name="Workouts"
+        component={WorkoutsScreen}
+        options={{title: 'Workouts'}}
       />
       <Tab.Screen
         name="Profile"
