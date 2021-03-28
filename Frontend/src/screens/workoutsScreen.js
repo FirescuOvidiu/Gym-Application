@@ -21,7 +21,7 @@ const WorkoutsScreen = ({navigation}) => {
         <Text style={styles.headerText}>Workouts</Text>
       </View>
       <View style={styles.body}>
-        <ListWorkouts workouts={workouts} />
+        <ListWorkouts workouts={workouts} navigation={navigation} />
         <TouchableOpacity
           style={styles.updateButton}
           onPress={() => navigation.navigate('CreateWorkout')}>

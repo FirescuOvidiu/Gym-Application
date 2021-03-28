@@ -8,6 +8,7 @@ import GymDetailsScreen from '../screens/gymDetailsScreen';
 import UpdateProfileScreen from '../screens/updateProfileScreen';
 import WorkoutsScreen from '../screens/workoutsScreen';
 import CreateWorkoutScreen from '../screens/createWorkoutScreen';
+import WorkoutDetailsScreen from '../screens/workoutDetailsScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -25,6 +26,7 @@ const ProfileStack = () => {
         component={UpdateProfileScreen}
         options={{title: 'Update Profile'}}
       />
+      <Stack.Screen />
     </Stack.Navigator>
   );
 };
@@ -36,6 +38,11 @@ const WorkoutsStack = () => {
         name="Workout"
         component={WorkoutsScreen}
         options={{title: 'Workout', headerShown: false}}
+      />
+      <Stack.Screen
+        name="WorkoutDetails"
+        component={WorkoutDetailsScreen}
+        options={{title: 'Workout Details'}}
       />
       <Stack.Screen
         name="CreateWorkout"
