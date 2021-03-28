@@ -28,7 +28,7 @@ const UpdateProfileScreen = () => {
     try {
       const token = await AsyncStorage.getItem('accessToken');
       const response = await axios.put(
-        `http://192.168.100.2:3000/api/user/users`,
+        `http://192.168.100.2:3000/api/user`,
         {
           email: email,
           username: username,
