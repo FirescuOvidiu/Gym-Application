@@ -31,7 +31,7 @@ router.put(
   userController.updateUser
 );
 
-router.delete("/:_id", checkAdminAuth, userController.deleteUser);
+router.delete("/delete/:_id", checkAdminAuth, userController.deleteUser);
 
 router.get("/:_userId/workouts", checkUserAuth, userController.getWorkouts);
 
