@@ -37,14 +37,14 @@ const workoutSchema = new mongoose.Schema({
         },
         weight: {
           type: Number,
-          default: "No specific weight.",
+          default: 0,
         },
       },
     ],
   },
   notes: {
     type: String,
-    default: "There are no notes.",
+    default: 0,
   },
 });
 

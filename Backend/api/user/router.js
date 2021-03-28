@@ -33,18 +33,18 @@ router.put(
 
 router.delete("/:_id", checkAdminAuth, userController.deleteUser);
 
-router.get("/getWorkouts", checkUserAuth, userController.getWorkouts);
+router.get("/:_userId/workouts", checkUserAuth, userController.getWorkouts);
 
-router.put(
-  "/createWorkout",
+router.post(
+  "/:_userId/workouts",
   checkUserAuth,
   isWorkoutValid,
   validationResults,
   userController.createWorkout
 );
 
-router.put(
-  "/deleteWorkout/:_workoutId",
+router.delete(
+  "/:_userId/workouts/:_workoutId",
   checkUserAuth,
   userController.deleteWorkout
 );
