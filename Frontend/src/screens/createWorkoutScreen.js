@@ -9,24 +9,29 @@ import AuthInputField from '../components/authInputField';
 
 const CreateWorkoutScreen = () => {
   const userReducer = useSelector((state) => state.userReducer);
-  const [name, setName] = useState('');
-  const [date, setDate] = useState(Date.now());
-  const [type, setType] = useState('');
+  const [workoutName, setWorkoutName] = useState('');
+  const [workoutDate, setWorkoutDate] = useState(Date.now());
+  const [workoutType, setWorkoutType] = useState('');
+  const [workoutNotes, setWorkoutNotes] = useState('');
+  const [exerciseName, setExerciseName] = useState('');
+  const [exerciseReps, setExerciseReps] = useState(0);
+  const [exerciseSets, setExerciseSets] = useState(0);
+  const [exerciseRest, setExerciseRest] = useState(0);
+  const [exerciseWeight, setExerciseWeight] = useState(0);
   const [exercises, setExercises] = useState([]);
-  const [notes, setNotes] = useState('');
   const dispatch = useDispatch();
 
   const handleSubmitButton = async () => {
-    if (!name) {
-      alert('Please fill Name');
+    if (!workoutName) {
+      alert('Please fill Workout Name');
       return;
     }
-    if (!date) {
-      alert('Please fill Date');
+    if (!workoutDate) {
+      alert('Please fill Workout Date');
       return;
     }
-    if (!type) {
-      alert('Please fill Type');
+    if (!workoutType) {
+      alert('Please fill Workout Type');
       return;
     }
     if (!exercises) {
@@ -38,11 +43,11 @@ const CreateWorkoutScreen = () => {
       createWorkout({
         userReducer,
         workout: {
-          name: name,
-          date: date,
-          type: type,
+          name: workoutName,
+          date: workoutDate,
+          type: workoutType,
           exercises: exercises,
-          notes: notes,
+          workoutNotes: setWorkoutNotes,
         },
       }),
     );
@@ -51,10 +56,15 @@ const CreateWorkoutScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.body}>
-        <AuthInputField title="Workout Name" setData={setName} />
-        <AuthInputField title="Workout Date" setData={setDate} />
-        <AuthInputField title="Workout Type" setData={setType} />
-        <AuthInputField title="Workout Notes" setData={setNotes} />
+        <AuthInputField title="Workout Name" setData={setWorkoutName} />
+        <AuthInputField title="Workout Date" setData={setWorkoutDate} />
+        <AuthInputField title="Workout Type" setData={setWorkoutType} />
+        <AuthInputField title="Workout Notes" setData={setWorkoutNotes} />
+        <AuthInputField title="Exercise Name" setData={setExerciseName} />
+        <AuthInputField title="Exercise Sets" setData={setExerciseSets} />
+        <AuthInputField title="Exercise Reps" setData={setExerciseReps} />
+        <AuthInputField title="Exercise Rest" setData={setExerciseRest} />
+        <AuthInputField title="Exercise Weight" setData={setExerciseWeight} />
         <SignButton submit={handleSubmitButton} text="Create Workout" />
       </View>
     </View>

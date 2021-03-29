@@ -37,6 +37,7 @@ const WorkoutDetailsScreen = ({route, navigation}) => {
                   <ProfileField text={'Exercise Name'} data={item.name} />
                   <ProfileField text={'Exercise Reps'} data={item.reps} />
                   <ProfileField text={'Exercise Sets'} data={item.sets} />
+                  <ProfileField text={'Exercise Rest'} data={item.rest} />
                   <ProfileField text={'Exercise Weight'} data={item.weight} />
                 </View>
               );
