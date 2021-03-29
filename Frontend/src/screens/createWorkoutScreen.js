@@ -81,6 +81,8 @@ const CreateWorkoutScreen = () => {
         weight: exerciseWeight,
       },
     ]);
+
+    alert('Exercise created');
   };
 
   return (
