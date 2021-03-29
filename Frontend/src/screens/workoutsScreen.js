@@ -21,12 +21,14 @@ const WorkoutsScreen = ({navigation}) => {
         <Text style={styles.headerText}>Workouts</Text>
       </View>
       <View style={styles.body}>
-        <ListWorkouts workouts={workouts} navigation={navigation} />
-        <TouchableOpacity
-          style={styles.createWorkoutButton}
-          onPress={() => navigation.navigate('CreateWorkout')}>
-          <Text style={styles.createWorkoutButtonText}>Create Workout</Text>
-        </TouchableOpacity>
+        <View style={{margin: '5%'}}>
+          <ListWorkouts workouts={workouts} navigation={navigation} />
+          <TouchableOpacity
+            style={styles.createWorkoutButton}
+            onPress={() => navigation.navigate('CreateWorkout')}>
+            <Text style={styles.createWorkoutButtonText}>Create Workout</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -47,7 +49,8 @@ const styles = StyleSheet.create({
     marginTop: '5%',
   },
   body: {
-    flex: 1,
+    backgroundColor: 'white',
+    flex: 10,
   },
   createWorkoutButton: {
     padding: 10,

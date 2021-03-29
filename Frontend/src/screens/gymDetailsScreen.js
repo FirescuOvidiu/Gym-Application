@@ -111,19 +111,18 @@ const styles = StyleSheet.create({
     flex: 2,
     backgroundColor: 'white',
     paddingHorizontal: '5%',
-    paddingBottom: '5%',
-    paddingTop: '3%',
+    paddingBottom: '10%',
+    paddingTop: '5%',
     marginBottom: '5%',
   },
   gymOpeningHours: {
     flex: 1,
     backgroundColor: 'white',
     paddingHorizontal: '5%',
-    paddingTop: '3%',
-    paddingBottom: '10%',
-    marginBottom: '5%',
+    paddingBottom: '12%',
   },
   logout: {
+    margin: '5%',
     flex: 0.4,
   },
   logoutButton: {
