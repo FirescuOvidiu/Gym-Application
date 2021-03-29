@@ -6,6 +6,7 @@ import WorkoutButton from './workoutButton';
 const ListWorkouts = ({workouts, navigation}) => {
   return (
     <FlatList
+      showsVerticalScrollIndicator={false}
       data={workouts}
       keyExtractor={(item) => item._id}
       renderItem={({item}) => {

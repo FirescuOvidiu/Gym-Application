@@ -16,7 +16,7 @@ const ListUpdateProfileField = ({
   setUserLastName,
 }) => {
   return (
-    <ScrollView showsHorizontalScrollIndicator={false}>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <UpdateProfileField
         text="Email"
         defaultValue={userData.email}

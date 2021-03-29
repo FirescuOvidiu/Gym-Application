@@ -28,6 +28,7 @@ const WorkoutDetailsScreen = ({route, navigation}) => {
           <ProfileField text={'Workout Notes'} data={workout.notes} />
           <Text style={styles.headerText}>Workout Exercises</Text>
           <FlatList
+            showsVerticalScrollIndicator={false}
             data={workout.exercises}
             keyExtractor={(item) => item.name}
             renderItem={({item}) => {
