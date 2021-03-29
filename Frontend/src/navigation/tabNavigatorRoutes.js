@@ -26,7 +26,6 @@ const ProfileStack = () => {
         component={UpdateProfileScreen}
         options={{title: 'Update Profile'}}
       />
-      <Stack.Screen />
     </Stack.Navigator>
   );
 };
