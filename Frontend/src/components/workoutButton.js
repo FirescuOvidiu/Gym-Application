@@ -23,7 +23,7 @@ const styles = ({workout}) =>
       backgroundColor: workout.type === 'cardio' ? 'green' : 'red',
       alignItems: 'center',
       borderRadius: 10,
-      marginTop: '5%',
+      marginBottom: '5%',
       padding: '3%',
     },
     workoutDetailsButtonText: {
