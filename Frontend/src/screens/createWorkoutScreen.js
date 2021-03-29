@@ -1,12 +1,6 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
+import {View, Text, StyleSheet, ScrollView} from 'react-native';
 
 import {createWorkout} from '../redux/thunks/userThunks';
 
@@ -93,17 +87,19 @@ const CreateWorkoutScreen = () => {
     <View style={styles.container}>
       <View style={styles.body}>
         <ScrollView>
+          <Text style={styles.title}>Workout</Text>
           <AuthInputField title="Workout Name" setData={setWorkoutName} />
           <AuthInputField title="Workout Date" setData={setWorkoutDate} />
           <AuthInputField title="Workout Type" setData={setWorkoutType} />
           <AuthInputField title="Workout Notes" setData={setWorkoutNotes} />
+          <Text style={styles.title}>Exercise</Text>
           <AuthInputField title="Exercise Name" setData={setExerciseName} />
           <AuthInputField title="Exercise Sets" setData={setExerciseSets} />
           <AuthInputField title="Exercise Reps" setData={setExerciseReps} />
           <AuthInputField title="Exercise Rest" setData={setExerciseRest} />
           <AuthInputField title="Exercise Weight" setData={setExerciseWeight} />
+          <SignButton submit={createExercise} text="Create Exercise" />
         </ScrollView>
-        <SignButton submit={createExercise} text="Create Exercise" />
         <SignButton submit={handleSubmitButton} text="Create Workout" />
       </View>
     </View>
@@ -118,6 +114,13 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: '10%',
     marginRight: '10%',
+    marginTop: '5%',
+  },
+  title: {
+    color: 'black',
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
     marginTop: '5%',
   },
 });
