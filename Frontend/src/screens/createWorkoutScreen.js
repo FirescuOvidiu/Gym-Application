@@ -52,7 +52,7 @@ const CreateWorkoutScreen = () => {
           name: workoutName,
           date: workoutDate,
           type: workoutType,
-          workoutNotes: workoutNotes,
+          notes: workoutNotes,
           exercises: exercises,
         },
       }),
