@@ -76,6 +76,17 @@ const CreateWorkoutScreen = () => {
       alert('Please fill Exercise Rest');
       return;
     }
+
+    setExercises((exercises) => [
+      ...Object.values(exercises),
+      {
+        name: exerciseName,
+        sets: exerciseSets,
+        reps: exerciseReps,
+        rest: exerciseRest,
+        weight: exerciseWeight,
+      },
+    ]);
   };
 
   return (
