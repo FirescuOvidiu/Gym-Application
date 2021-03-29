@@ -23,9 +23,9 @@ const WorkoutsScreen = ({navigation}) => {
       <View style={styles.body}>
         <ListWorkouts workouts={workouts} navigation={navigation} />
         <TouchableOpacity
-          style={styles.updateButton}
+          style={styles.createWorkoutButton}
           onPress={() => navigation.navigate('CreateWorkout')}>
-          <Text style={styles.updateButtonText}>Create Workout</Text>
+          <Text style={styles.createWorkoutButtonText}>Create Workout</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
   },
-  updateButton: {
+  createWorkoutButton: {
     padding: 10,
     alignItems: 'center',
     justifyContent: 'center',
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     marginTop: '7%',
     marginBottom: '5%',
   },
-  updateButtonText: {
+  createWorkoutButtonText: {
     color: 'white',
     fontSize: 15,
     fontWeight: 'bold',

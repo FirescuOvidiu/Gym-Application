@@ -25,7 +25,7 @@ export const registerUser = ({user}) => {
     try {
       await axios.post(`http://192.168.100.2:3000/api/user/register`, user);
 
-      alert('Registration successful.');
+      alert(`${response.data.status}`);
     } catch (error) {
       alert(error.response.data.message);
     }
@@ -143,6 +143,29 @@ export const getWorkouts = ({userReducer, setWorkouts}) => {
       ];
 
       setWorkouts(workouts);
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  };
+};
+
+export const deleteWorkout = ({userReducer, workout}) => {
+  return async () => {
+    const token = await AsyncStorage.getItem('accessToken');
+
+    try {
+      // await axios.delete(
+      //   `http://192.168.100.2:3000/api/user/${userReducer._id}/workouts/${workout._id}`,
+      //  {
+      //    data: workout._id,
+      //  },
+      //  {
+      //    headers: {
+      //      authorization: token,
+      //    },
+      //  },
+      // );
+      // alert(`${response.data.status}`);
     } catch (error) {
       alert(error.response.data.message);
     }
