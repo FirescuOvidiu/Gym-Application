@@ -121,7 +121,7 @@ export const getWorkouts = ({userReducer, setWorkouts}) => {
           _id: 2,
           name: 'NameTest2',
           date: '2002-10-12',
-          type: 'cardio',
+          type: 'strength',
           exercises: [
             {
               name: 'FirstEx',
