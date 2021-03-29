@@ -154,7 +154,7 @@ export const deleteWorkout = ({userReducer, workout}) => {
     const token = await AsyncStorage.getItem('accessToken');
 
     try {
-      // await axios.delete(
+      // const response = await axios.delete(
       //   `http://192.168.100.2:3000/api/user/${userReducer._id}/workouts/${workout._id}`,
       //  {
       //    data: workout._id,
@@ -166,6 +166,27 @@ export const deleteWorkout = ({userReducer, workout}) => {
       //  },
       // );
       // alert(`${response.data.status}`);
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  };
+};
+
+export const createWorkout = ({userReducer, workout}) => {
+  return async () => {
+    const token = await AsyncStorage.getItem('accessToken');
+
+    try {
+      //  const response = await axios.post(
+      //    `http://192.168.100.2:3000/api/user/${userReducer._id}/workouts`,
+      //    workout,
+      //    {
+      //      headers: {
+      //        authorization: token,
+      //      },
+      //    },
+      //  );
+      //  alert(`${response.data.status}`);
     } catch (error) {
       alert(error.response.data.message);
     }
