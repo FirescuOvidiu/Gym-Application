@@ -1,6 +1,13 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {View, Text, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 
 import {deleteWorkout} from '../redux/thunks/userThunks';
 
@@ -32,8 +39,26 @@ const WorkoutDetailsScreen = ({route, navigation}) => {
       <TouchableOpacity
         style={styles.deleteWorkoutButton}
         onPress={() => {
-          dispatch(deleteWorkout({userReducer, workout}));
-          navigation.goBack();
+          Alert.alert(
+            'Delete Workout',
+            'Are you sure? You want to delete this workout?',
+            [
+              {
+                text: 'Cancel',
+                onPress: () => {
+                  return null;
+                },
+              },
+              {
+                text: 'Confirm',
+                onPress: () => {
+                  dispatch(deleteWorkout({userReducer, workout}));
+                  navigation.goBack();
+                },
+              },
+            ],
+            {cancelable: false},
+          );
         }}>
         <Text style={styles.deleteWorkoutButtonText}>Delete Workout</Text>
       </TouchableOpacity>
