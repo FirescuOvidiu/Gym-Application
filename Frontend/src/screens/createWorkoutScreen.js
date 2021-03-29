@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 
 import {createWorkout} from '../redux/thunks/userThunks';
 
 import SignButton from '../components/signButton';
+import AuthInputField from '../components/authInputField';
 
 const CreateWorkoutScreen = () => {
   const userReducer = useSelector((state) => state.userReducer);
@@ -28,7 +29,7 @@ const CreateWorkoutScreen = () => {
       alert('Please fill Type');
       return;
     }
-    if (!Exercises) {
+    if (!exercises) {
       alert('Please fill Exercises');
       return;
     }
@@ -48,11 +49,28 @@ const CreateWorkoutScreen = () => {
   };
 
   return (
-    <View>
-      <Text>Test</Text>
-      <SignButton submit={handleSubmitButton} text="Create Workout" />
+    <View style={styles.container}>
+      <View style={styles.body}>
+        <AuthInputField title="Workout Name" setData={setName} />
+        <AuthInputField title="Workout Date" setData={setDate} />
+        <AuthInputField title="Workout Type" setData={setType} />
+        <AuthInputField title="Workout Notes" setData={setNotes} />
+        <SignButton submit={handleSubmitButton} text="Create Workout" />
+      </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  body: {
+    flex: 1.5,
+    marginLeft: '10%',
+    marginRight: '10%',
+    marginTop: '5%',
+  },
+});
 
 export default CreateWorkoutScreen;
