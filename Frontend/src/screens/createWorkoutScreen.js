@@ -1,6 +1,12 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {View, Text, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 
 import {createWorkout} from '../redux/thunks/userThunks';
 
@@ -46,25 +52,47 @@ const CreateWorkoutScreen = () => {
           name: workoutName,
           date: workoutDate,
           type: workoutType,
+          workoutNotes: workoutNotes,
           exercises: exercises,
-          workoutNotes: setWorkoutNotes,
         },
       }),
     );
   };
 
+  const createExercise = async () => {
+    if (!exerciseName) {
+      alert('Please fill Exercise Name');
+      return;
+    }
+    if (!exerciseSets) {
+      alert('Please fill Exercise Sets');
+      return;
+    }
+    if (!exerciseReps) {
+      alert('Please fill Exercise Reps');
+      return;
+    }
+    if (!exerciseRest) {
+      alert('Please fill Exercise Rest');
+      return;
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.body}>
-        <AuthInputField title="Workout Name" setData={setWorkoutName} />
-        <AuthInputField title="Workout Date" setData={setWorkoutDate} />
-        <AuthInputField title="Workout Type" setData={setWorkoutType} />
-        <AuthInputField title="Workout Notes" setData={setWorkoutNotes} />
-        <AuthInputField title="Exercise Name" setData={setExerciseName} />
-        <AuthInputField title="Exercise Sets" setData={setExerciseSets} />
-        <AuthInputField title="Exercise Reps" setData={setExerciseReps} />
-        <AuthInputField title="Exercise Rest" setData={setExerciseRest} />
-        <AuthInputField title="Exercise Weight" setData={setExerciseWeight} />
+        <ScrollView>
+          <AuthInputField title="Workout Name" setData={setWorkoutName} />
+          <AuthInputField title="Workout Date" setData={setWorkoutDate} />
+          <AuthInputField title="Workout Type" setData={setWorkoutType} />
+          <AuthInputField title="Workout Notes" setData={setWorkoutNotes} />
+          <AuthInputField title="Exercise Name" setData={setExerciseName} />
+          <AuthInputField title="Exercise Sets" setData={setExerciseSets} />
+          <AuthInputField title="Exercise Reps" setData={setExerciseReps} />
+          <AuthInputField title="Exercise Rest" setData={setExerciseRest} />
+          <AuthInputField title="Exercise Weight" setData={setExerciseWeight} />
+        </ScrollView>
+        <SignButton submit={createExercise} text="Create Exercise" />
         <SignButton submit={handleSubmitButton} text="Create Workout" />
       </View>
     </View>
@@ -76,7 +104,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   body: {
-    flex: 1.5,
+    flex: 1,
     marginLeft: '10%',
     marginRight: '10%',
     marginTop: '5%',
