@@ -11,6 +11,8 @@ import {
 
 import {deleteWorkout} from '../redux/thunks/userThunks';
 
+import ProfileField from '../components/profileField';
+
 const WorkoutDetailsScreen = ({route, navigation}) => {
   const userReducer = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
@@ -18,50 +20,55 @@ const WorkoutDetailsScreen = ({route, navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text>name: {workout.name}</Text>
-      <Text>date: {workout.date}</Text>
-      <Text>type: {workout.type}</Text>
-      <FlatList
-        data={workout.exercises}
-        keyExtractor={(item) => item.name}
-        renderItem={({item}) => {
-          return (
-            <View>
-              <Text>Exercise name: {item.name}</Text>
-              <Text>Exercise reps: {item.reps}</Text>
-              <Text>Exercise sets: {item.sets}</Text>
-              <Text>Exercise weight: {item.weight}</Text>
-            </View>
-          );
-        }}
-      />
-      <Text>notes: {workout.notes}</Text>
-      <TouchableOpacity
-        style={styles.deleteWorkoutButton}
-        onPress={() => {
-          Alert.alert(
-            'Delete Workout',
-            'Are you sure? You want to delete this workout?',
-            [
-              {
-                text: 'Cancel',
-                onPress: () => {
-                  return null;
-                },
-              },
-              {
-                text: 'Confirm',
-                onPress: () => {
-                  dispatch(deleteWorkout({userReducer, workout}));
-                  navigation.goBack();
-                },
-              },
-            ],
-            {cancelable: false},
-          );
-        }}>
-        <Text style={styles.deleteWorkoutButtonText}>Delete Workout</Text>
-      </TouchableOpacity>
+      <View style={styles.body}>
+        <View style={styles.insideBody}>
+          <ProfileField text={'Workout Name'} data={workout.name} />
+          <ProfileField text={'Workout Date'} data={workout.date} />
+          <ProfileField text={'Workout Type'} data={workout.type} />
+          <ProfileField text={'Workout Notes'} data={workout.notes} />
+          <Text style={styles.headerText}>Workout Exercises</Text>
+          <FlatList
+            data={workout.exercises}
+            keyExtractor={(item) => item.name}
+            renderItem={({item}) => {
+              return (
+                <View>
+                  <ProfileField text={'Exercise Name'} data={item.name} />
+                  <ProfileField text={'Exercise Reps'} data={item.reps} />
+                  <ProfileField text={'Exercise Sets'} data={item.sets} />
+                  <ProfileField text={'Exercise Weight'} data={item.weight} />
+                </View>
+              );
+            }}
+          />
+          <TouchableOpacity
+            style={styles.deleteWorkoutButton}
+            onPress={() => {
+              Alert.alert(
+                'Delete Workout',
+                'Are you sure? You want to delete this workout?',
+                [
+                  {
+                    text: 'Cancel',
+                    onPress: () => {
+                      return null;
+                    },
+                  },
+                  {
+                    text: 'Confirm',
+                    onPress: () => {
+                      dispatch(deleteWorkout({userReducer, workout}));
+                      navigation.goBack();
+                    },
+                  },
+                ],
+                {cancelable: false},
+              );
+            }}>
+            <Text style={styles.deleteWorkoutButtonText}>Delete Workout</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 };
@@ -70,9 +77,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  headerText: {
+    color: 'black',
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: '5%',
+    marginBottom: '5%',
+  },
   body: {
     flex: 1,
+    backgroundColor: 'white',
   },
+  insideBody: {flex: 1, margin: '5%'},
   deleteWorkoutButton: {
     padding: 10,
     alignItems: 'center',
@@ -80,7 +97,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#6da7f2',
     borderRadius: 10,
     marginTop: '7%',
-    marginBottom: '5%',
   },
   deleteWorkoutButtonText: {
     color: 'white',
