@@ -94,9 +94,6 @@ export const deleteWorkout = ({userReducer, workout}) => {
       const response = await api.delete(
         `/user/${userReducer._id}/workouts/${workout._id}`,
         {
-          data: workout._id,
-        },
-        {
           headers: {
             authorization: token,
           },
