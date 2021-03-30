@@ -6,7 +6,7 @@ const {
 } = require("../middleware/auth-validation");
 const {
   isGymValid,
-  valdiationResults,
+  validationResults,
 } = require("../middleware/body-validation");
 
 const router = require("express").Router();
@@ -17,7 +17,7 @@ router.post(
   "/",
   checkUserAuth,
   isGymValid,
-  valdiationResults,
+  validationResults,
   gymController.createGym
 );
 
@@ -25,7 +25,7 @@ router.put(
   "/:_id",
   checkUserAuth,
   isGymValid,
-  valdiationResults,
+  validationResults,
   gymController.updateGym
 );
 

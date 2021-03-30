@@ -50,12 +50,23 @@ const userSchema = new mongoose.Schema({
     },
   },
   date: { type: Date, default: Date.now },
+  workouts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Workout" }],
   role: {
     type: String,
     required: true,
     default: "user",
   },
 });
+
+userSchema.options.toJSON = {
+  getters: true,
+  virtuals: true,
+  minimize: false,
+  transform: function (doc, ret, options) {
+    delete ret.password;
+    return ret;
+  },
+};
 
 // Create a model for a user
 module.exports = mongoose.model("User", userSchema);
