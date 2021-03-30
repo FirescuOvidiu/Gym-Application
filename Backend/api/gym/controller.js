@@ -7,12 +7,14 @@ const getGym = async (req, res, next) => {
     if (req.params._id) {
       gym = await Gym.findById(req.params._id);
     } else {
-      gym = await Gym.find();
+      gym = await Gym.findOne();
     }
 
     if (!gym) {
-      return next({ message: "The user was not found." });
+      return next({ message: "The gym was not found." });
     }
+
+    gym["__v"] = undefined;
 
     res.status(200).json({ gym });
   } catch (error) {
