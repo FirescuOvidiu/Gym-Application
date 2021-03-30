@@ -1,16 +1,14 @@
 import AsyncStorage from '@react-native-community/async-storage';
 
 const axios = require('axios').default;
+const api = axios.create({baseURL: 'http://192.168.100.2:3000/api'});
 
 import {addUser} from '../actions/userActions';
 
 export const loginUser = ({user, navigation}) => {
   return async () => {
     try {
-      const response = await axios.post(
-        `http://192.168.100.2:3000/api/user/login`,
-        user,
-      );
+      const response = await api.post('/user/login', user);
 
       await AsyncStorage.setItem('accessToken', response.data.accessToken);
       navigation.replace('TabNavigatorRoutes');
@@ -23,7 +21,7 @@ export const loginUser = ({user, navigation}) => {
 export const registerUser = ({user}) => {
   return async () => {
     try {
-      await axios.post(`http://192.168.100.2:3000/api/user/register`, user);
+      await api.post(`/user/register`, user);
 
       alert(`${response.data.status}`);
     } catch (error) {
@@ -37,7 +35,7 @@ export const saveUser = () => {
     const token = await AsyncStorage.getItem('accessToken');
 
     try {
-      let user = await axios.get('http://192.168.100.2:3000/api/user', {
+      let user = await api.get('/user', {
         headers: {
           authorization: token,
         },
@@ -53,29 +51,19 @@ export const saveUser = () => {
   };
 };
 
-export const _updateUser = ({
-  userReducer,
-  user,
-  setUserModified,
-  userModified,
-}) => {
+export const _updateUser = ({userReducer, user, onFinish}) => {
   return async () => {
     try {
       const token = await AsyncStorage.getItem('accessToken');
-      const response = await axios.put(
-        `http://192.168.100.2:3000/api/user/${userReducer._id}`,
-        user,
-        {
-          headers: {
-            Authorization: token,
-          },
+      const response = await api.put(`/user/${userReducer._id}`, user, {
+        headers: {
+          Authorization: token,
         },
-      );
+      });
 
-      alert(`${response.data.status}`);
-      setUserModified(!userModified);
+      onFinish(null, response.data.status);
     } catch (error) {
-      alert(error.response.data.message);
+      onFinish(error.response.data.message, null);
     }
   };
 };
@@ -85,14 +73,11 @@ export const getWorkouts = ({userReducer, setWorkouts}) => {
     const token = await AsyncStorage.getItem('accessToken');
 
     try {
-      //let workouts = await axios.get(
-      //  `http://192.168.100.2:3000/api/${userReducer._id}/workouts`,
-      //   {
-      //     headers: {
-      //        authorization: token,
-      //      },
-      //    },
-      //);
+      let workouts = await api.get(`/${userReducer._id}/workouts`, {
+        headers: {
+          authorization: token,
+        },
+      });
       let workouts = [
         {
           _id: 1,
@@ -154,18 +139,18 @@ export const deleteWorkout = ({userReducer, workout}) => {
     const token = await AsyncStorage.getItem('accessToken');
 
     try {
-      // const response = await axios.delete(
-      //   `http://192.168.100.2:3000/api/user/${userReducer._id}/workouts/${workout._id}`,
-      //  {
-      //    data: workout._id,
-      //  },
-      //  {
-      //    headers: {
-      //      authorization: token,
-      //    },
-      //  },
-      // );
-      // alert(`${response.data.status}`);
+      const response = await api.delete(
+        `/user/${userReducer._id}/workouts/${workout._id}`,
+        {
+          data: workout._id,
+        },
+        {
+          headers: {
+            authorization: token,
+          },
+        },
+      );
+      alert(`${response.data.status}`);
     } catch (error) {
       alert(error.response.data.message);
     }
@@ -177,16 +162,16 @@ export const createWorkout = ({userReducer, workout}) => {
     const token = await AsyncStorage.getItem('accessToken');
 
     try {
-      //  const response = await axios.post(
-      //    `http://192.168.100.2:3000/api/user/${userReducer._id}/workouts`,
-      //    workout,
-      //    {
-      //      headers: {
-      //        authorization: token,
-      //      },
-      //    },
-      //  );
-      //  alert(`${response.data.status}`);
+      const response = await api.post(
+        `/user/${userReducer._id}/workouts`,
+        workout,
+        {
+          headers: {
+            authorization: token,
+          },
+        },
+      );
+      alert(`${response.data.status}`);
     } catch (error) {
       alert(error.response.data.message);
     }
