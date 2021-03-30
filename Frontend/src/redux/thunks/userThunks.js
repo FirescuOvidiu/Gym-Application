@@ -73,61 +73,13 @@ export const getWorkouts = ({userReducer, setWorkouts}) => {
     const token = await AsyncStorage.getItem('accessToken');
 
     try {
-      let workouts = await api.get(`/${userReducer._id}/workouts`, {
+      let workouts = await api.get(`/user/${userReducer._id}/workouts`, {
         headers: {
           authorization: token,
         },
       });
-      let workouts = [
-        {
-          _id: 1,
-          name: 'NameTest',
-          date: '2002-10-12',
-          type: 'cardio',
-          exercises: [
-            {
-              name: 'FirstEx',
-              sets: 3,
-              reps: 4,
-              rest: 5,
-              weight: 6,
-            },
-            {
-              name: 'SecondEx',
-              sets: 0,
-              reps: 1,
-              rest: 2,
-              weight: 3,
-            },
-          ],
-          notes: 'TestNotes',
-        },
-        {
-          _id: 2,
-          name: 'NameTest2',
-          date: '2002-10-12',
-          type: 'strength',
-          exercises: [
-            {
-              name: 'FirstEx',
-              sets: 3,
-              reps: 4,
-              rest: 5,
-              weight: 6,
-            },
-            {
-              name: 'SecondEx',
-              sets: 0,
-              reps: 1,
-              rest: 2,
-              weight: 3,
-            },
-          ],
-          notes: 'TestNotes',
-        },
-      ];
 
-      setWorkouts(workouts);
+      setWorkouts(workouts.data.workouts);
     } catch (error) {
       alert(error.response.data.message);
     }
@@ -150,6 +102,7 @@ export const deleteWorkout = ({userReducer, workout}) => {
           },
         },
       );
+
       alert(`${response.data.status}`);
     } catch (error) {
       alert(error.response.data.message);
@@ -171,6 +124,7 @@ export const createWorkout = ({userReducer, workout}) => {
           },
         },
       );
+
       alert(`${response.data.status}`);
     } catch (error) {
       alert(error.response.data.message);
