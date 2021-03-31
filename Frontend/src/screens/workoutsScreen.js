@@ -1,19 +1,19 @@
-import React, {useState, useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import React, {useEffect} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-
-import {getWorkouts} from '../redux/thunks/userThunks';
+import {useSelector, useDispatch} from 'react-redux';
 
 import ListWorkouts from '../components/listWorkouts';
 
+import {saveWorkouts} from '../redux/thunks/userThunks';
+
 const WorkoutsScreen = ({navigation}) => {
   const userReducer = useSelector((state) => state.userReducer);
-  const [workouts, setWorkouts] = useState([]);
+  const workoutReducer = useSelector((state) => state.workoutReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getWorkouts({userReducer, setWorkouts}));
-  }, [workouts]);
+    //dispatch(saveWorkouts({userReducer}));
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -22,7 +22,7 @@ const WorkoutsScreen = ({navigation}) => {
       </View>
       <View style={styles.body}>
         <View style={styles.insideBody}>
-          <ListWorkouts workouts={workouts} navigation={navigation} />
+          <ListWorkouts workouts={workoutReducer} navigation={navigation} />
           <TouchableOpacity
             style={styles.createWorkoutButton}
             onPress={() => navigation.navigate('CreateWorkout')}>

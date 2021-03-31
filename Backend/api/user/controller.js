@@ -125,9 +125,7 @@ const getWorkouts = async (req, res, next) => {
       return next({ message: "The user was not found." });
     }
 
-    let workouts = user.workouts;
-
-    res.status(200).json({ workouts });
+    res.status(200).json({ workouts: user.workouts });
   } catch (error) {
     return next(error);
   }

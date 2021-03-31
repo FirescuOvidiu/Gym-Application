@@ -1,4 +1,4 @@
-import {ADD_WORKOUT, DELETE_WORKOUT} from '../types';
+import {ADD_WORKOUT, DELETE_WORKOUT, ADD_ALLWORKOUTS} from '../types';
 
 export const addWorkout = (workout) => {
   return {
@@ -7,9 +7,16 @@ export const addWorkout = (workout) => {
   };
 };
 
-export const deleteWorkout = (workout) => {
+export const deleteWorkout = (workoutId) => {
   return {
     type: DELETE_WORKOUT,
-    payload: workout,
+    payload: workoutId,
+  };
+};
+
+export const addAllWorkouts = (workouts) => {
+  return {
+    type: ADD_ALLWORKOUTS,
+    payload: workouts,
   };
 };

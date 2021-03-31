@@ -7,10 +7,15 @@ const ListWorkouts = ({workouts, navigation}) => {
   return (
     <FlatList
       showsVerticalScrollIndicator={false}
-      data={workouts}
-      keyExtractor={(item) => item._id}
+      data={workouts.allWorkouts}
+      keyExtractor={(item) => item}
       renderItem={({item}) => {
-        return <WorkoutButton workout={item} navigation={navigation} />;
+        return (
+          <WorkoutButton
+            workout={workouts.workoutsById[item]}
+            navigation={navigation}
+          />
+        );
       }}
     />
   );

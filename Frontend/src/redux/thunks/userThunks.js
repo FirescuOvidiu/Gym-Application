@@ -4,7 +4,11 @@ const axios = require('axios').default;
 const api = axios.create({baseURL: 'http://192.168.100.2:3000/api'});
 
 import {addUser} from '../actions/userActions';
-import {addWorkout, deleteWorkout} from '../actions/workoutActions';
+import {
+  addWorkout,
+  deleteWorkout,
+  addAllWorkouts,
+} from '../actions/workoutActions';
 
 export const loginUser = ({user, navigation}) => {
   return async () => {
@@ -69,19 +73,20 @@ export const _updateUser = ({userReducer, user, onFinish}) => {
   };
 };
 
-export const getWorkouts = ({userReducer, setWorkouts}) => {
-  return async () => {
+export const saveWorkouts = ({userReducer}) => {
+  return async (dispatch) => {
     const token = await AsyncStorage.getItem('accessToken');
-
+    console.log(userReducer);
     try {
-      let workouts = await api.get(`/user/${userReducer._id}/workouts`, {
+      const workouts = await api.get(`/user/${userReducer._id}/workouts`, {
         headers: {
           authorization: token,
         },
       });
 
-      setWorkouts(workouts.data.workouts);
+      dispatch(addAllWorkouts(workouts.data.workouts));
     } catch (error) {
+      console.log(error);
       alert(error.response.data.message);
     }
   };

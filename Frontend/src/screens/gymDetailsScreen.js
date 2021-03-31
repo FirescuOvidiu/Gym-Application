@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useEffect} from 'react';
 import {
   Text,
   View,
@@ -8,7 +8,6 @@ import {
   StyleSheet,
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import {useEffect} from 'react';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -16,14 +15,17 @@ import ProfileField from '../components/profileField';
 
 import {saveUser} from '../redux/thunks/userThunks';
 import {saveGym} from '../redux/thunks/gymThunks';
+import {saveWorkouts} from '../redux/thunks/userThunks';
 
 const GymDetailsScreen = ({navigation}) => {
+  const userReducer = useSelector((state) => state.userReducer);
   const gymReducer = useSelector((state) => state.gymReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(saveUser());
     dispatch(saveGym());
+    dispatch(saveWorkouts({userReducer}));
   }, []);
 
   return (

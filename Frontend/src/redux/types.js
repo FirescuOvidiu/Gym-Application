@@ -5,3 +5,4 @@ export const ADD_GYM = 'ADD_GYM';
 
 export const ADD_WORKOUT = 'ADD_WORKOUT';
 export const DELETE_WORKOUT = 'DELETE_WORKOUT';
+export const ADD_ALLWORKOUTS = 'ADD_ALLWORKOUTS';
