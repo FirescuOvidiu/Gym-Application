@@ -10,7 +10,7 @@ const getUser = async (req, res, next) => {
   req.params._id = req.params._id || req.user.payload._id;
 
   try {
-    let user = await User.findById(req.params._id);
+    const user = await User.findById(req.params._id);
 
     if (!user) {
       return next({ message: "The user was not found." });
@@ -54,7 +54,7 @@ const login = async (req, res, next) => {
     payload["__v"] = undefined;
 
     // Create the access token
-    let accessToken = jwt.sign({ payload }, process.env.ACCESS_TOKEN_SECRET, {
+    const accessToken = jwt.sign({ payload }, process.env.ACCESS_TOKEN_SECRET, {
       algorithm: "HS256",
       expiresIn: process.env.ACCESS_TOKEN_LIFE,
     });
@@ -104,7 +104,7 @@ const updateUser = async (req, res, next) => {
 // Method used to delete a user
 const deleteUser = async (req, res, next) => {
   try {
-    let user = await User.findByIdAndDelete(req.params._id);
+    const user = await User.findByIdAndDelete(req.params._id);
 
     if (!user) {
       return next({ message: "The user was not found." });
@@ -119,7 +119,7 @@ const deleteUser = async (req, res, next) => {
 // Method used to get all workouts
 const getWorkouts = async (req, res, next) => {
   try {
-    let user = await User.findById(req.params._userId).populate("workouts");
+    const user = await User.findById(req.params._userId).populate("workouts");
 
     if (!user) {
       return next({ message: "The user was not found." });
