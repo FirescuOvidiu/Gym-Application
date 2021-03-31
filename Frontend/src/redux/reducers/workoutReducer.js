@@ -8,14 +8,19 @@ const INITIAL_STATE = {
 const workoutReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_WORKOUT:
-      let {allWorkouts, workoutsById} = state;
+      state.allWorkouts.push(action.payload._id);
+      state.workoutsById[action.payload._id] = action.payload;
 
-      allWorkouts.push(action.payload._id);
-      workoutsById[action.payload._id] = action.payload;
-
-      return {allWorkouts, workoutsById};
-    case DELETE_WORKOUT:
       return state;
+
+    case DELETE_WORKOUT:
+      const index = state.allWorkouts.indexOf(action.payload);
+
+      state.allWorkouts.splice(index, 1);
+      delete state.workoutsById[action.payload];
+
+      return state;
+
     default:
       return state;
   }

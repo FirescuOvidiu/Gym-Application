@@ -15,6 +15,7 @@ const gymReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_GYM:
       return {...state, ...action.payload};
+
     default:
       return state;
   }

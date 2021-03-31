@@ -9,7 +9,7 @@ import {
   Alert,
 } from 'react-native';
 
-import {deleteWorkout} from '../redux/thunks/userThunks';
+import {_deleteWorkout} from '../redux/thunks/userThunks';
 
 import ProfileField from '../components/profileField';
 
@@ -59,7 +59,7 @@ const WorkoutDetailsScreen = ({route, navigation}) => {
                   {
                     text: 'Confirm',
                     onPress: () => {
-                      dispatch(deleteWorkout({userReducer, workout}));
+                      dispatch(_deleteWorkout({userReducer, workout}));
                       navigation.goBack();
                     },
                   },
