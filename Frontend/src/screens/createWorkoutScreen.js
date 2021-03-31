@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {View, Text, StyleSheet, Alert, Modal} from 'react-native';
+import {View, StyleSheet, Modal} from 'react-native';
 
 import {createWorkout} from '../redux/thunks/userThunks';
 
