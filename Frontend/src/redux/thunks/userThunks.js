@@ -4,6 +4,7 @@ const axios = require('axios').default;
 const api = axios.create({baseURL: 'http://192.168.100.2:3000/api'});
 
 import {addUser} from '../actions/userActions';
+import {addWorkout} from '../actions/workoutActions';
 
 export const loginUser = ({user, navigation}) => {
   return async () => {
@@ -108,7 +109,7 @@ export const deleteWorkout = ({userReducer, workout}) => {
 };
 
 export const createWorkout = ({userReducer, workout}) => {
-  return async () => {
+  return async (dispatch) => {
     const token = await AsyncStorage.getItem('accessToken');
 
     try {
@@ -122,6 +123,7 @@ export const createWorkout = ({userReducer, workout}) => {
         },
       );
 
+      dispatch(addWorkout(response.data.workout));
       alert(`${response.data.status}`);
     } catch (error) {
       alert(error.response.data.message);

@@ -150,7 +150,7 @@ const createWorkout = async (req, res, next) => {
     await user.save({ session: sess });
     await sess.commitTransaction();
 
-    res.status(200).json({ status: "The workout was created." });
+    res.status(200).json({ status: "The workout was created.", workout });
   } catch (error) {
     return next(error);
   }
