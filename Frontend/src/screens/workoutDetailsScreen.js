@@ -15,8 +15,8 @@ import ProfileField from '../components/profileField';
 
 const WorkoutDetailsScreen = ({route, navigation}) => {
   const userReducer = useSelector((state) => state.userReducer);
-  const dispatch = useDispatch();
   const workout = route.params.workout;
+  const dispatch = useDispatch();
 
   return (
     <View style={styles.container}>
@@ -60,7 +60,6 @@ const WorkoutDetailsScreen = ({route, navigation}) => {
                     text: 'Confirm',
                     onPress: () => {
                       dispatch(_deleteWorkout({userReducer, workout}));
-                      navigation.goBack();
                     },
                   },
                 ],

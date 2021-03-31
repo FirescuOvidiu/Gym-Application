@@ -1,11 +1,16 @@
 import React, {useEffect} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
+
+import {useIsFocused} from '@react-navigation/native';
 
 import ListWorkouts from '../components/listWorkouts';
 
 const WorkoutsScreen = ({navigation}) => {
   const workoutReducer = useSelector((state) => state.workoutReducer);
+  const isFocused = useIsFocused();
+
+  useEffect(() => {}, [isFocused]);
 
   return (
     <View style={styles.container}>
