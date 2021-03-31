@@ -4,16 +4,8 @@ import {useSelector, useDispatch} from 'react-redux';
 
 import ListWorkouts from '../components/listWorkouts';
 
-import {saveWorkouts} from '../redux/thunks/userThunks';
-
 const WorkoutsScreen = ({navigation}) => {
-  const userReducer = useSelector((state) => state.userReducer);
   const workoutReducer = useSelector((state) => state.workoutReducer);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    //dispatch(saveWorkouts({userReducer}));
-  }, []);
 
   return (
     <View style={styles.container}>

@@ -73,12 +73,17 @@ export const _updateUser = ({userReducer, user, onFinish}) => {
   };
 };
 
-export const saveWorkouts = ({userReducer}) => {
+export const saveWorkouts = () => {
   return async (dispatch) => {
     const token = await AsyncStorage.getItem('accessToken');
-    console.log(userReducer);
+
     try {
-      const workouts = await api.get(`/user/${userReducer._id}/workouts`, {
+      const user = await api.get('/user', {
+        headers: {
+          authorization: token,
+        },
+      });
+      const workouts = await api.get(`/user/${user.data.user._id}/workouts`, {
         headers: {
           authorization: token,
         },
@@ -86,7 +91,6 @@ export const saveWorkouts = ({userReducer}) => {
 
       dispatch(addAllWorkouts(workouts.data.workouts));
     } catch (error) {
-      console.log(error);
       alert(error.response.data.message);
     }
   };
