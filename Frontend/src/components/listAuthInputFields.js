@@ -16,7 +16,7 @@ const ListAuthInputFields = ({
   setUserLastName,
 }) => {
   return (
-    <ScrollView showsHorizontalScrollIndicator={false}>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <AuthInputField title="Email" setData={setUserEmail} />
       <AuthInputField title="Username" setData={setUserName} />
       <AuthInputField

@@ -6,11 +6,14 @@ import {createStackNavigator} from '@react-navigation/stack';
 import ProfileScreen from '../screens/profileScreen';
 import GymDetailsScreen from '../screens/gymDetailsScreen';
 import UpdateProfileScreen from '../screens/updateProfileScreen';
+import WorkoutsScreen from '../screens/workoutsScreen';
+import CreateWorkoutScreen from '../screens/createWorkoutScreen';
+import WorkoutDetailsScreen from '../screens/workoutDetailsScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-function ProfileStack() {
+const ProfileStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -25,7 +28,29 @@ function ProfileStack() {
       />
     </Stack.Navigator>
   );
-}
+};
+
+const WorkoutsStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Workout"
+        component={WorkoutsScreen}
+        options={{title: 'Workout', headerShown: false}}
+      />
+      <Stack.Screen
+        name="WorkoutDetails"
+        component={WorkoutDetailsScreen}
+        options={{title: 'Workout Details'}}
+      />
+      <Stack.Screen
+        name="CreateWorkout"
+        component={CreateWorkoutScreen}
+        options={{title: 'Create Workout'}}
+      />
+    </Stack.Navigator>
+  );
+};
 
 const TabNavigatorRoutes = () => {
   return (
@@ -34,6 +59,13 @@ const TabNavigatorRoutes = () => {
         name="GymDetails"
         component={GymDetailsScreen}
         options={{title: 'Gym Details'}}
+      />
+      <Tab.Screen
+        name="Workouts"
+        component={WorkoutsStack}
+        options={{
+          unmountOnBlur: true,
+        }}
       />
       <Tab.Screen
         name="Profile"

@@ -14,8 +14,6 @@ const getGym = async (req, res, next) => {
       return next({ message: "The gym was not found." });
     }
 
-    gym["__v"] = undefined;
-
     res.status(200).json({ gym });
   } catch (error) {
     return next(error);
@@ -60,6 +58,7 @@ const updateGym = async (req, res, next) => {
 const deleteGym = async (req, res, next) => {
   try {
     const gym = await Gym.findByIdAndDelete(req.params._id);
+
     if (!gym) {
       return next({ message: "The gym was not found." });
     }

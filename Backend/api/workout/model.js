@@ -10,7 +10,7 @@ const workoutSchema = new mongoose.Schema({
   date: {
     type: Date,
     required: true,
-    min: Date.now,
+    min: Date.now(),
   },
   type: {
     type: String,
@@ -22,6 +22,7 @@ const workoutSchema = new mongoose.Schema({
         name: {
           type: String,
           required: true,
+          unique: true,
         },
         sets: {
           type: Number,

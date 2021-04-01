@@ -39,8 +39,14 @@ const UpdateProfileScreen = () => {
             last: lastName,
           },
         },
-        setUserModified,
-        userModified,
+        onFinish: (error, result) => {
+          if (error) {
+            alert(error);
+          } else {
+            alert(result);
+            setUserModified(!userModified);
+          }
+        },
       }),
     );
   };

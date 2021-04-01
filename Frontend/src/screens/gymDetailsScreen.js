@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useEffect} from 'react';
 import {
   Text,
   View,
@@ -8,7 +8,6 @@ import {
   StyleSheet,
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import {useEffect} from 'react';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -16,6 +15,7 @@ import ProfileField from '../components/profileField';
 
 import {saveUser} from '../redux/thunks/userThunks';
 import {saveGym} from '../redux/thunks/gymThunks';
+import {saveWorkouts} from '../redux/thunks/userThunks';
 
 const GymDetailsScreen = ({navigation}) => {
   const gymReducer = useSelector((state) => state.gymReducer);
@@ -24,6 +24,7 @@ const GymDetailsScreen = ({navigation}) => {
   useEffect(() => {
     dispatch(saveUser());
     dispatch(saveGym());
+    dispatch(saveWorkouts());
   }, []);
 
   return (
@@ -111,19 +112,18 @@ const styles = StyleSheet.create({
     flex: 2,
     backgroundColor: 'white',
     paddingHorizontal: '5%',
-    paddingBottom: '5%',
-    paddingTop: '3%',
+    paddingBottom: '10%',
+    paddingTop: '5%',
     marginBottom: '5%',
   },
   gymOpeningHours: {
     flex: 1,
     backgroundColor: 'white',
     paddingHorizontal: '5%',
-    paddingTop: '3%',
-    paddingBottom: '10%',
-    marginBottom: '5%',
+    paddingBottom: '12%',
   },
   logout: {
+    margin: '5%',
     flex: 0.4,
   },
   logoutButton: {

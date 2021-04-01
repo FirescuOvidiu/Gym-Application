@@ -26,7 +26,7 @@ const ProfileScreen = ({navigation}) => {
         </ImageBackground>
       </View>
       <View style={styles.body}>
-        <View style={{margin: '5%'}}>
+        <View style={styles.insideBody}>
           <Text style={styles.title}> Account Informations</Text>
           <ProfileField text={'Username'} data={userReducer.username} />
           <ProfileField text={'Role'} data={userReducer.role} />
@@ -74,6 +74,10 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: 'white',
     flex: 2,
+  },
+  insideBody: {
+    flex: 2,
+    margin: '5%',
   },
   backgroundImage: {
     flex: 1,

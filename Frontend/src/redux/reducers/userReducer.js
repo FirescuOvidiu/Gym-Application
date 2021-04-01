@@ -20,6 +20,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_USER:
       return {...state, ...action.payload};
+
     case UPDATE_USER:
       return {
         ...state,
@@ -31,6 +32,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         gender: action.payload.gender,
         name: action.payload.name,
       };
+
     default:
       return state;
   }
