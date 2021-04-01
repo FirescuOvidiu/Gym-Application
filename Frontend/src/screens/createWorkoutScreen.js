@@ -90,20 +90,17 @@ const CreateWorkoutScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.body}>
-        <AuthInputField title="Workout Name" setData={setWorkoutName} />
-        <AuthInputField title="Workout Date" setData={setWorkoutDate} />
-        <AuthInputField title="Workout Type" setData={setWorkoutType} />
-        <AuthInputField title="Workout Notes" setData={setWorkoutNotes} />
+        <AuthInputField title="Name" setData={setWorkoutName} />
+        <AuthInputField title="Date" setData={setWorkoutDate} />
+        <AuthInputField title="Type" setData={setWorkoutType} />
+        <AuthInputField title="Notes" setData={setWorkoutNotes} />
         <Modal animationType="slide" visible={modalVisible}>
           <View style={styles.modalView}>
-            <AuthInputField title="Exercise Name" setData={setExerciseName} />
-            <AuthInputField title="Exercise Sets" setData={setExerciseSets} />
-            <AuthInputField title="Exercise Reps" setData={setExerciseReps} />
-            <AuthInputField title="Exercise Rest" setData={setExerciseRest} />
-            <AuthInputField
-              title="Exercise Weight"
-              setData={setExerciseWeight}
-            />
+            <AuthInputField title="Name" setData={setExerciseName} />
+            <AuthInputField title="Sets" setData={setExerciseSets} />
+            <AuthInputField title="Reps" setData={setExerciseReps} />
+            <AuthInputField title="Rest" setData={setExerciseRest} />
+            <AuthInputField title="Weight" setData={setExerciseWeight} />
             <SignButton submit={createExercise} text="Create Exercise" />
             <SignButton
               submit={() => {
