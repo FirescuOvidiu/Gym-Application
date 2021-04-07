@@ -1,41 +1,70 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, SafeAreaView} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
+
+import SignButton from '../components/signButton';
+
 const QRCodeScreen = () => {
   const [scan, setScan] = useState(false);
   const [result, setResult] = useState();
 
   return (
-    <View>
+    <>
       {!scan && (
-        <View>
-          <TouchableOpacity
-            onPress={() => {
+        <View style={styles.body}>
+          <SignButton
+            submit={() => {
               setScan(true);
               setResult();
-            }}>
-            <Text>Start Scan</Text>
-          </TouchableOpacity>
+            }}
+            text=" Start Scan "
+          />
+          <Text>QR Code Result: {result}</Text>
         </View>
       )}
       {scan && (
-        <QRCodeScanner
-          reactivate={true}
-          showMarker={true}
-          topContent={<Text>Scan your QRCode!</Text>}
-          onRead={(e) => {
-            console.log(e.data);
-          }}
-          bottomContent={
-            <TouchableOpacity onPress={() => setScan(false)}>
-              <Text>Cancel Scan</Text>
-            </TouchableOpacity>
-          }
-        />
+        <View style={styles.container}>
+          <QRCodeScanner
+            showMarker={true}
+            topContent={
+              <View style={styles.body}>
+                <Text style={styles.title}>Scan the QR Code</Text>
+              </View>
+            }
+            onRead={(e) => {
+              setResult(e.data);
+              setScan(false);
+            }}
+            bottomContent={
+              <View>
+                <SignButton
+                  submit={() => setScan(false)}
+                  text=" Cancel Scan "
+                />
+              </View>
+            }
+          />
+        </View>
       )}
-    </View>
+    </>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  body: {
+    flex: 1,
+    margin: '5%',
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    paddingBottom: '5%',
+  },
+});
 
 export default QRCodeScreen;
