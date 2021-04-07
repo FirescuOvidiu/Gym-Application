@@ -9,7 +9,7 @@ const WorkoutButton = ({workout, navigation}) => {
       <Text style={styles({workout}).workoutDetailsButtonText}>
         {'Workout name: ' + workout.name}
       </Text>
-      <Text>{'Workout date: ' + workout.date}</Text>
+      <Text>{'Workout date: ' + workout.date.substring(0, 10)}</Text>
       <Text style={styles({workout}).workoutDetailsButtonText}>
         {'Workout type: ' + workout.type}
       </Text>
