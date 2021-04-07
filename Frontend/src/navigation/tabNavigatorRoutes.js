@@ -9,6 +9,7 @@ import UpdateProfileScreen from '../screens/updateProfileScreen';
 import WorkoutsScreen from '../screens/workoutsScreen';
 import CreateWorkoutScreen from '../screens/createWorkoutScreen';
 import WorkoutDetailsScreen from '../screens/workoutDetailsScreen';
+import QRCodeScreen from '../screens/qrCodeScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -66,6 +67,11 @@ const TabNavigatorRoutes = () => {
         options={{
           unmountOnBlur: true,
         }}
+      />
+      <Tab.Screen
+        name="QRCode"
+        component={QRCodeScreen}
+        options={{title: 'QR Code'}}
       />
       <Tab.Screen
         name="Profile"
