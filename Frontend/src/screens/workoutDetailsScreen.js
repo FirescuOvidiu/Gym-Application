@@ -23,7 +23,10 @@ const WorkoutDetailsScreen = ({route, navigation}) => {
       <View style={styles.body}>
         <View style={styles.insideBody}>
           <ProfileField text={'Workout Name'} data={workout.name} />
-          <ProfileField text={'Workout Date'} data={workout.date} />
+          <ProfileField
+            text={'Workout Date'}
+            data={workout.date.substring(0, 10)}
+          />
           <ProfileField text={'Workout Type'} data={workout.type} />
           <ProfileField text={'Workout Notes'} data={workout.notes} />
           <Text style={styles.headerText}>Workout Exercises</Text>

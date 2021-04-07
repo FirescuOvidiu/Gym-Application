@@ -10,7 +10,6 @@ const workoutSchema = new mongoose.Schema({
   date: {
     type: Date,
     required: true,
-    min: Date.now(),
   },
   type: {
     type: String,
@@ -48,6 +47,8 @@ const workoutSchema = new mongoose.Schema({
     default: "",
   },
 });
+
+workoutSchema.index({ date: 1 }, { expireAfterSeconds: 0 });
 
 // Create a model for a workouts
 module.exports = mongoose.model("Workout", workoutSchema);
