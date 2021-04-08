@@ -32,7 +32,8 @@ export const userPutRequest = async ({userReducer, user}) => {
   return await api.put(`/user/${userReducer._id}`, user);
 };
 
-export const userGetWorkoutsRequest = async ({user}) => {
+export const userGetWorkoutsRequest = async () => {
+  const user = await userGetRequest();
   return await api.get(`/user/${user.data.user._id}/workouts`);
 };
 
