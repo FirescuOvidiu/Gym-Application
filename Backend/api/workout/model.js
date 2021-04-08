@@ -48,7 +48,7 @@ const workoutSchema = new mongoose.Schema({
   },
 });
 
-workoutSchema.index({ date: 1 }, { expireAfterSeconds: 0 });
+workoutSchema.index({ date: 1 }, { expireAfterSeconds: 24 * 60 * 60 });
 
 // Create a model for a workouts
 module.exports = mongoose.model("Workout", workoutSchema);

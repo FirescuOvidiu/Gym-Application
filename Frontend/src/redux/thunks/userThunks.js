@@ -1,19 +1,25 @@
 import AsyncStorage from '@react-native-community/async-storage';
 
-const axios = require('axios').default;
-const api = axios.create({baseURL: 'http://192.168.100.2:3000/api'});
-
 import {addUser} from '../actions/userActions';
 import {
   addWorkout,
   deleteWorkout,
   addAllWorkouts,
 } from '../actions/workoutActions';
+import {
+  loginRequest,
+  registerRequest,
+  userGetRequest,
+  userPutRequest,
+  userGetWorkoutsRequest,
+  userDeleteWorkoutRequest,
+  userPostWorkoutRequest,
+} from './httpRequests';
 
 export const loginUser = ({user, navigation}) => {
   return async () => {
     try {
-      const response = await api.post('/user/login', user);
+      const response = await loginRequest({user});
 
       await AsyncStorage.setItem('accessToken', response.data.accessToken);
       navigation.replace('TabNavigatorRoutes');
@@ -26,7 +32,7 @@ export const loginUser = ({user, navigation}) => {
 export const registerUser = ({user}) => {
   return async () => {
     try {
-      await api.post(`/user/register`, user);
+      const response = await registerRequest({user});
 
       alert(`${response.data.status}`);
     } catch (error) {
@@ -37,14 +43,8 @@ export const registerUser = ({user}) => {
 
 export const saveUser = () => {
   return async (dispatch) => {
-    const token = await AsyncStorage.getItem('accessToken');
-
     try {
-      let user = await api.get('/user', {
-        headers: {
-          authorization: token,
-        },
-      });
+      let user = await userGetRequest();
 
       user = user.data.user;
       user.birthday = user.birthday.substring(0, 10);
@@ -59,12 +59,7 @@ export const saveUser = () => {
 export const _updateUser = ({userReducer, user, onFinish}) => {
   return async () => {
     try {
-      const token = await AsyncStorage.getItem('accessToken');
-      const response = await api.put(`/user/${userReducer._id}`, user, {
-        headers: {
-          Authorization: token,
-        },
-      });
+      const response = await userPutRequest({userReducer, user});
 
       onFinish(null, response.data.status);
     } catch (error) {
@@ -75,19 +70,8 @@ export const _updateUser = ({userReducer, user, onFinish}) => {
 
 export const saveWorkouts = () => {
   return async (dispatch) => {
-    const token = await AsyncStorage.getItem('accessToken');
-
     try {
-      const user = await api.get('/user', {
-        headers: {
-          authorization: token,
-        },
-      });
-      const workouts = await api.get(`/user/${user.data.user._id}/workouts`, {
-        headers: {
-          authorization: token,
-        },
-      });
+      const workouts = await userGetWorkoutsRequest();
 
       dispatch(addAllWorkouts(workouts.data.workouts));
     } catch (error) {
@@ -98,17 +82,8 @@ export const saveWorkouts = () => {
 
 export const _deleteWorkout = ({userReducer, workout}) => {
   return async (dispatch) => {
-    const token = await AsyncStorage.getItem('accessToken');
-
     try {
-      const response = await api.delete(
-        `/user/${userReducer._id}/workouts/${workout._id}`,
-        {
-          headers: {
-            authorization: token,
-          },
-        },
-      );
+      const response = await userDeleteWorkoutRequest({userReducer, workout});
 
       dispatch(deleteWorkout(workout._id));
       alert(`${response.data.status}`);
@@ -120,18 +95,8 @@ export const _deleteWorkout = ({userReducer, workout}) => {
 
 export const createWorkout = ({userReducer, workout}) => {
   return async (dispatch) => {
-    const token = await AsyncStorage.getItem('accessToken');
-
     try {
-      const response = await api.post(
-        `/user/${userReducer._id}/workouts`,
-        workout,
-        {
-          headers: {
-            authorization: token,
-          },
-        },
-      );
+      const response = await userPostWorkoutRequest({userReducer, workout});
 
       dispatch(addWorkout(response.data.workout));
       alert(`${response.data.status}`);
