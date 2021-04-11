@@ -65,9 +65,9 @@ const isUserValid = [
 const isGymValid = [
   check("name")
     .notEmpty()
-    .withMessage("First name is required.")
+    .withMessage("Name is required.")
     .matches(/^[a-zA-Z\s]+$/)
-    .withMessage("First name should contain only letters."),
+    .withMessage("Name should contain only letters."),
   check("email")
     .notEmpty()
     .withMessage("Email is required.")
