@@ -2,7 +2,11 @@ const mongoose = require("mongoose");
 
 // Create a schema (blueprint) for workouts
 const reservationSchema = new mongoose.Schema({
-  user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    rquired: true,
+    ref: "User",
+  },
   date: {
     type: Date,
     required: true,
@@ -10,7 +14,7 @@ const reservationSchema = new mongoose.Schema({
   },
 });
 
-workoutSchema.index({ date: 1 }, { expireAfterSeconds: 60 * 60 });
+reservationSchema.index({ date: 1 }, { expireAfterSeconds: 60 * 60 });
 
 // Create a model for a workouts
 module.exports = mongoose.model("Reservation", reservationSchema);

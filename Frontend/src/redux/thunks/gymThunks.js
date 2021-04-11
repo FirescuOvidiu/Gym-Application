@@ -1,5 +1,10 @@
 import {addGym, updateGym} from '../actions/gymActions';
-import {gymGetRequest, gymPutRequest} from './httpRequests';
+import {
+  gymGetRequest,
+  gymPutRequest,
+  gymPostReservationRequest,
+  gymDeleteReservationRequest,
+} from './httpRequests';
 
 export const saveGym = () => {
   return async (dispatch) => {
@@ -53,6 +58,7 @@ export const createReservation = ({gymReducer, reservation}) => {
       dispatch(updateGym(response.data.gym));
       alert(`${response.data.status}`);
     } catch (error) {
+      console.log(error);
       alert(error.response.data.message);
     }
   };

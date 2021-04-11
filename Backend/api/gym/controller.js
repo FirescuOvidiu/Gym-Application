@@ -1,4 +1,6 @@
+const mongoose = require("mongoose");
 const Gym = require("./model");
+const Reservation = require("../reservation/model");
 
 const getGym = async (req, res, next) => {
   try {

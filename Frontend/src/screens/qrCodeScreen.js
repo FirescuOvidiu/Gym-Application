@@ -5,10 +5,16 @@ import {useSelector, useDispatch} from 'react-redux';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
 import SignButton from '../components/signButton';
-import {saveGym, _updateGym} from '../redux/thunks/gymThunks';
+import {
+  saveGym,
+  _updateGym,
+  createReservation,
+  deleteReservation,
+} from '../redux/thunks/gymThunks';
 
 const QRCodeScreen = () => {
   const gymReducer = useSelector((state) => state.gymReducer);
+  const userReducer = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
   const [scan, setScan] = useState(false);
 
@@ -30,7 +36,18 @@ const QRCodeScreen = () => {
     setScan(false);
   };
 
-  const handleMakeReservation = async () => {};
+  const handleMakeReservation = async () => {
+    dispatch(
+      createReservation({
+        gymReducer,
+        reservation: {
+          user: userReducer._id,
+          date: Date.now(),
+        },
+      }),
+    );
+  };
+
   const handleCancelReservation = async () => {};
 
   return (
