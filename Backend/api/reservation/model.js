@@ -5,6 +5,7 @@ const reservationSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     rquired: true,
+    unique: true,
     ref: "User",
   },
   date: {

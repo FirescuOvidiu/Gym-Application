@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
@@ -17,6 +17,7 @@ const QRCodeScreen = () => {
   const userReducer = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
   const [scan, setScan] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
     dispatch(saveGym());
@@ -46,6 +47,7 @@ const QRCodeScreen = () => {
         },
       }),
     );
+    setDisabled(true);
   };
 
   const handleCancelReservation = async () => {
@@ -55,6 +57,7 @@ const QRCodeScreen = () => {
         userReducer,
       }),
     );
+    setDisabled(false);
   };
 
   return (
@@ -67,11 +70,25 @@ const QRCodeScreen = () => {
             }}
             text=" Start Scan "
           />
-          <SignButton submit={handleMakeReservation} text="Make Reservation" />
-          <SignButton
-            submit={handleCancelReservation}
-            text="Cancel Reservation"
-          />
+          <TouchableOpacity
+            disabled={
+              disabled ||
+              gymReducer.maxUsersInGym <=
+                gymReducer.usersInGym + gymReducer.reservations.length
+                ? true
+                : false
+            }
+            style={styles.signButton}
+            onPress={handleMakeReservation}>
+            <Text style={styles.signText}>Make Reservation</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            disabled={!disabled}
+            style={styles.signButton}
+            onPress={handleCancelReservation}>
+            <Text style={styles.signText}>Cancel Reservation</Text>
+          </TouchableOpacity>
 
           <Text>People in gym: {gymReducer.usersInGym}</Text>
           <Text>
@@ -118,6 +135,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     alignSelf: 'center',
     paddingBottom: '5%',
+  },
+  signButton: {
+    padding: 10,
+    alignItems: 'center',
+    backgroundColor: '#6da7f2',
+    borderRadius: 10,
+    marginTop: '5%',
+    marginBottom: '5%',
+  },
+  signText: {
+    color: 'white',
+    fontSize: 15,
+    fontWeight: 'bold',
   },
 });
 
