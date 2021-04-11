@@ -9,6 +9,8 @@ const INITIAL_STATE = {
   openingTime: '',
   closingTime: '',
   usersInGym: 0,
+  maxUsersInGym: 0,
+  reservations: [],
   date: '',
 };
 
@@ -27,6 +29,8 @@ const gymReducer = (state = INITIAL_STATE, action) => {
         openingTime: action.payload.openingTime,
         closingTime: action.payload.closingTime,
         usersInGym: action.payload.usersInGym,
+        maxUsersInGym: action.payload.maxUsersInGym,
+        reservations: action.payload.reservations,
         date: action.payload.date,
       };
 

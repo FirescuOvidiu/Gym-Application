@@ -25,6 +25,8 @@ const gymSchema = new mongoose.Schema({
   closingTime: { type: String, required: true },
   date: { type: Date, default: Date.now },
   usersInGym: { type: Number, required: true, default: 0 },
+  maxUsersInGym: { type: Number, required: true, default: 5 },
+  reservations: [{ type: mongoose.Schema.Types.ObjectId, ref: "Reservation" }],
 });
 
 module.exports = mongoose.model("Gym", gymSchema);

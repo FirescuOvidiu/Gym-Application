@@ -30,6 +30,9 @@ const QRCodeScreen = () => {
     setScan(false);
   };
 
+  const handleMakeReservation = async () => {};
+  const handleCancelReservation = async () => {};
+
   return (
     <>
       {!scan && (
@@ -40,7 +43,17 @@ const QRCodeScreen = () => {
             }}
             text=" Start Scan "
           />
+          <SignButton submit={handleMakeReservation} text="Make Reservation" />
+          <SignButton
+            submit={handleCancelReservation}
+            text="Cancel Reservation"
+          />
+
           <Text>People in gym: {gymReducer.usersInGym}</Text>
+          <Text>
+            Maximum number of people in gym: {gymReducer.maxUsersInGym}
+          </Text>
+          <Text>Reservations: {gymReducer.reservations.length}</Text>
         </View>
       )}
       {scan && (
