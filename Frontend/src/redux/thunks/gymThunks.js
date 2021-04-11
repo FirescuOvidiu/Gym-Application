@@ -13,7 +13,7 @@ export const saveGym = () => {
   };
 };
 
-export const updateGym = ({gym}) => {
+export const _updateGym = ({gym}) => {
   return async (dispatch) => {
     try {
       const response = await gymPutRequest(gym);

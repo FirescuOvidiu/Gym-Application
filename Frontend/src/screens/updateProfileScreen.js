@@ -25,7 +25,6 @@ const UpdateProfileScreen = () => {
   const UpdateUser = () => {
     dispatch(
       _updateUser({
-        userReducer,
         user: {
           email,
           username,

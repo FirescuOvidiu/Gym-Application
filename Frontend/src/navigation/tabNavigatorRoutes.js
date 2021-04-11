@@ -71,7 +71,7 @@ const TabNavigatorRoutes = () => {
       <Tab.Screen
         name="QRCode"
         component={QRCodeScreen}
-        options={{title: 'QR Code'}}
+        options={{title: 'QR Code', unmountOnBlur: true}}
       />
       <Tab.Screen
         name="Profile"
