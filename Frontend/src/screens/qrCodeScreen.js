@@ -9,6 +9,11 @@ const QRCodeScreen = () => {
   const [scan, setScan] = useState(false);
   const [result, setResult] = useState();
 
+  const handleSubmitButton = async (e) => {
+    setResult(e.data);
+    setScan(false);
+  };
+
   return (
     <>
       {!scan && (
@@ -32,10 +37,7 @@ const QRCodeScreen = () => {
                 <Text style={styles.title}>Scan the QR Code</Text>
               </View>
             }
-            onRead={(e) => {
-              setResult(e.data);
-              setScan(false);
-            }}
+            onRead={handleSubmitButton}
             bottomContent={
               <View>
                 <SignButton

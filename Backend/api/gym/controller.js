@@ -46,6 +46,7 @@ const updateGym = async (req, res, next) => {
     gym.birthday = req.body.birthday || gym.birthday;
     gym.openingTime = req.body.openingTime || gym.openingTime;
     gym.closingTime = req.body.closingTime || gym.closingTime;
+    gym.usersInGym = req.body.usersInGym || gym.usersInGym;
 
     gym = await gym.save();
 

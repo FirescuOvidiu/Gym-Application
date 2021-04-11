@@ -22,7 +22,7 @@ router.post(
 );
 
 router.put(
-  "/:_id",
+  "/:_id?",
   checkUserAuth,
   isGymValid,
   validationResults,

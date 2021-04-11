@@ -32,9 +32,8 @@ export const userPutRequest = async ({userReducer, user}) => {
   return await api.put(`/user/${userReducer._id}`, user);
 };
 
-export const userGetWorkoutsRequest = async () => {
-  const user = await userGetRequest();
-  return await api.get(`/user/${user.data.user._id}/workouts`);
+export const userGetWorkoutsRequest = async ({user}) => {
+  return await api.get(`/user/${user._id}/workouts`);
 };
 
 export const userDeleteWorkoutRequest = async ({userReducer, workout}) => {
@@ -47,4 +46,8 @@ export const userPostWorkoutRequest = async ({userReducer, workout}) => {
 
 export const gymGetRequest = async () => {
   return await api.get('/gym');
+};
+
+export const gymPutRequest = async (gym) => {
+  return await api.put(`/gym/${gym._id}`, gym);
 };

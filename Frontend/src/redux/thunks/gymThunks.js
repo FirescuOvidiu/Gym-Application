@@ -12,3 +12,13 @@ export const saveGym = () => {
     }
   };
 };
+
+export const updateGym = ({gym}) => {
+  return async (dispatch) => {
+    try {
+      const response = await gymPutRequest(gym);
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  };
+};

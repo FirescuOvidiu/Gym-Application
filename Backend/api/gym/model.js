@@ -24,6 +24,7 @@ const gymSchema = new mongoose.Schema({
   openingTime: { type: String, required: true },
   closingTime: { type: String, required: true },
   date: { type: Date, default: Date.now },
+  usersInGym: { type: Number, required: true, default: 0 },
 });
 
 module.exports = mongoose.model("Gym", gymSchema);

@@ -71,7 +71,9 @@ export const _updateUser = ({userReducer, user, onFinish}) => {
 export const saveWorkouts = () => {
   return async (dispatch) => {
     try {
-      const workouts = await userGetWorkoutsRequest();
+      const user = await userGetRequest();
+      user = user.data.user;
+      const workouts = await userGetWorkoutsRequest({user});
 
       dispatch(addAllWorkouts(workouts.data.workouts));
     } catch (error) {
