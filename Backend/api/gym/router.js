@@ -40,7 +40,7 @@ router.post(
 router.delete(
   "/:_gymId/reservations/:_userId",
   checkUserAuth,
-  userController.deleteWorkout
+  gymController.deleteReservation
 );
 
 module.exports = router;
