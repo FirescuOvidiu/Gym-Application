@@ -48,7 +48,14 @@ const QRCodeScreen = () => {
     );
   };
 
-  const handleCancelReservation = async () => {};
+  const handleCancelReservation = async () => {
+    dispatch(
+      deleteReservation({
+        gymReducer,
+        userReducer,
+      }),
+    );
+  };
 
   return (
     <>

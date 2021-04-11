@@ -104,7 +104,7 @@ const deleteReservation = async (req, res, next) => {
       return next({ message: "The user was not found." });
     }
 
-    let reservation = await Reservation.find({ user: req.params._userId });
+    let reservation = await Reservation.findOne({ user: req.params._userId });
 
     if (!reservation) {
       return next({ message: "The reservation was not found." });
