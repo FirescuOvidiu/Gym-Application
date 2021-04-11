@@ -31,4 +31,16 @@ router.put(
 
 router.delete("/:_id", checkUserAuth, gymController.deleteGym);
 
+router.post(
+  "/:_gymId/reservations",
+  checkUserAuth,
+  gymController.createReservation
+);
+
+router.delete(
+  "/:_gymId/reservations/:_userId",
+  checkUserAuth,
+  userController.deleteWorkout
+);
+
 module.exports = router;

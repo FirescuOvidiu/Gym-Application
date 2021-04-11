@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 // Create a schema (blueprint) for workouts
 const reservationSchema = new mongoose.Schema({
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   date: {
     type: Date,
     required: true,
