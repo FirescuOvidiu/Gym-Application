@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 
-import {addUser} from '../actions/userActions';
+import {addUser, updateUser} from '../actions/userActions';
 import {
   addWorkout,
   deleteWorkout,
@@ -15,8 +15,6 @@ import {
   userDeleteWorkoutRequest,
   userPostWorkoutRequest,
 } from './httpRequests';
-
-import {updateUser} from '../actions/userActions';
 
 export const loginUser = ({user, navigation}) => {
   return async () => {
