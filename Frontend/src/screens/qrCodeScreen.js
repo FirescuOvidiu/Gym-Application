@@ -5,7 +5,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
 import SignButton from '../components/signButton';
-import {saveGym} from '../redux/thunks/gymThunks';
+import {saveGym, _updateGym} from '../redux/thunks/gymThunks';
 
 const QRCodeScreen = () => {
   const gymReducer = useSelector((state) => state.gymReducer);
@@ -18,6 +18,7 @@ const QRCodeScreen = () => {
 
   const handleSubmitButton = async (e) => {
     let gym = gymReducer;
+
     if (e.data === 'Someone entered the gym.') {
       gym.usersInGym++;
     }
@@ -25,9 +26,7 @@ const QRCodeScreen = () => {
       gym.usersInGym--;
     }
 
-    dispatch(_updateUser({gym}));
-
-    console.log(gym.usersInGym);
+    dispatch(_updateGym({gym}));
     setScan(false);
   };
 
@@ -41,7 +40,6 @@ const QRCodeScreen = () => {
             }}
             text=" Start Scan "
           />
-          <Text>QR Code Result: </Text>
           <Text>People in gym: {gymReducer.usersInGym}</Text>
         </View>
       )}

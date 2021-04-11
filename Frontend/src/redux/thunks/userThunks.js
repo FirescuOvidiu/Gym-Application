@@ -66,7 +66,6 @@ export const _updateUser = ({user}) => {
       dispatch(updateUser(user));
       alert(`${response.data.status}`);
     } catch (error) {
-      console.log(error);
       alert(error.response.data.message);
     }
   };

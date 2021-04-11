@@ -1,4 +1,4 @@
-import {addGym} from '../actions/gymActions';
+import {addGym, updateGym} from '../actions/gymActions';
 import {gymGetRequest} from './httpRequests';
 
 export const saveGym = () => {
@@ -16,7 +16,10 @@ export const saveGym = () => {
 export const _updateGym = ({gym}) => {
   return async (dispatch) => {
     try {
-      const response = await gymPutRequest(gym);
+      const response = await gymPutRequest({gym});
+
+      dispatch(updateGym(gym));
+      alert(`${response.data.status}`);
     } catch (error) {
       alert(error.response.data.message);
     }
