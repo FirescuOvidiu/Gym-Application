@@ -31,7 +31,7 @@ export const _updateGym = ({gym}) => {
   };
 };
 
-export const deleteReservation = ({gymReducer, userReducer}) => {
+export const deleteReservation = ({gymReducer, userReducer, setDisabled}) => {
   return async (dispatch) => {
     try {
       const response = await gymDeleteReservationRequest({
@@ -40,6 +40,7 @@ export const deleteReservation = ({gymReducer, userReducer}) => {
       });
 
       dispatch(updateGym(response.data.gym));
+      setDisabled(false);
       alert(`${response.data.status}`);
     } catch (error) {
       alert(error.response.data.message);
@@ -47,7 +48,7 @@ export const deleteReservation = ({gymReducer, userReducer}) => {
   };
 };
 
-export const createReservation = ({gymReducer, reservation}) => {
+export const createReservation = ({gymReducer, reservation, setDisabled}) => {
   return async (dispatch) => {
     try {
       const response = await gymPostReservationRequest({
@@ -56,9 +57,9 @@ export const createReservation = ({gymReducer, reservation}) => {
       });
 
       dispatch(updateGym(response.data.gym));
+      setDisabled(true);
       alert(`${response.data.status}`);
     } catch (error) {
-      console.log(error);
       alert(error.response.data.message);
     }
   };

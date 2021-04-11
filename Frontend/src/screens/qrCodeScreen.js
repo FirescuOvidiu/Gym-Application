@@ -43,11 +43,10 @@ const QRCodeScreen = () => {
         gymReducer,
         reservation: {
           user: userReducer._id,
-          date: Date.now(),
         },
+        setDisabled,
       }),
     );
-    setDisabled(true);
   };
 
   const handleCancelReservation = async () => {
@@ -55,9 +54,9 @@ const QRCodeScreen = () => {
       deleteReservation({
         gymReducer,
         userReducer,
+        setDisabled,
       }),
     );
-    setDisabled(false);
   };
 
   return (
