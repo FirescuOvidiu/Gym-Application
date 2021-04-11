@@ -1,12 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 import ListUpdateProfileField from '../components/listUpdateProfileFields';
 
 import {_updateUser} from '../redux/thunks/userThunks';
-
-import {updateUser} from '../redux/actions/userActions';
 
 const UpdateProfileScreen = () => {
   const userReducer = useSelector((state) => state.userReducer);
@@ -19,13 +17,13 @@ const UpdateProfileScreen = () => {
   const [firstName, setUserFirstName] = useState(userReducer.name.first);
   const [lastName, setUserLastName] = useState(userReducer.name.last);
   const [password, setUserPassword] = useState('');
-  const [userModified, setUserModified] = useState(false);
   const dispatch = useDispatch();
 
   const UpdateUser = () => {
     dispatch(
       _updateUser({
         user: {
+          _id: userReducer._id,
           email,
           username,
           password,
@@ -38,34 +36,9 @@ const UpdateProfileScreen = () => {
             last: lastName,
           },
         },
-        onFinish: (error, result) => {
-          if (error) {
-            alert(error);
-          } else {
-            alert(result);
-            setUserModified(!userModified);
-          }
-        },
       }),
     );
   };
-
-  useEffect(() => {
-    dispatch(
-      updateUser({
-        email: email,
-        username: username,
-        phone: phone,
-        address: address,
-        birthday: birthday,
-        gender: gender,
-        name: {
-          first: firstName,
-          last: lastName,
-        },
-      }),
-    );
-  }, [userModified]);
 
   return (
     <View style={styles.container}>

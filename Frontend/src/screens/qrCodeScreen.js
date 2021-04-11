@@ -14,15 +14,19 @@ const QRCodeScreen = () => {
 
   useEffect(() => {
     dispatch(saveGym());
-    console.log('TESt');
   }, []);
 
   const handleSubmitButton = async (e) => {
     let gym = gymReducer;
     if (e.data === 'Someone entered the gym.') {
+      gym.usersInGym++;
     }
     if (e.data === 'Someone exited the gym.') {
+      gym.usersInGym--;
     }
+
+    dispatch(_updateUser({gym}));
+
     console.log(gym.usersInGym);
     setScan(false);
   };

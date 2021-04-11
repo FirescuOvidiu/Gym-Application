@@ -28,8 +28,8 @@ export const userGetRequest = async () => {
   return await api.get('/user');
 };
 
-export const userPutRequest = async ({userReducer, user}) => {
-  return await api.put(`/user/${userReducer._id}`, user);
+export const userPutRequest = async ({user}) => {
+  return await api.put(`/user/${user._id}`, user);
 };
 
 export const userGetWorkoutsRequest = async ({user}) => {

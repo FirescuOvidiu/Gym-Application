@@ -16,6 +16,8 @@ import {
   userPostWorkoutRequest,
 } from './httpRequests';
 
+import {updateUser} from '../actions/userActions';
+
 export const loginUser = ({user, navigation}) => {
   return async () => {
     try {
@@ -56,14 +58,16 @@ export const saveUser = () => {
   };
 };
 
-export const _updateUser = ({userReducer, user, onFinish}) => {
-  return async () => {
+export const _updateUser = ({user}) => {
+  return async (dispatch) => {
     try {
-      const response = await userPutRequest({userReducer, user});
+      const response = await userPutRequest({user});
 
-      onFinish(null, response.data.status);
+      dispatch(updateUser(user));
+      alert(`${response.data.status}`);
     } catch (error) {
-      onFinish(error.response.data.message, null);
+      console.log(error);
+      alert(error.response.data.message);
     }
   };
 };
