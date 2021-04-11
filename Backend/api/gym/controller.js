@@ -88,9 +88,7 @@ const createReservation = async (req, res, next) => {
     await gym.save({ session: sess });
     await sess.commitTransaction();
 
-    res
-      .status(200)
-      .json({ status: "The reservation was created.", reservation });
+    res.status(200).json({ status: "The reservation was created.", gym });
   } catch (error) {
     return next(error);
   }
@@ -117,7 +115,7 @@ const deleteReservation = async (req, res, next) => {
     await gym.save({ session: sess });
     await sess.commitTransaction();
 
-    res.status(200).json({ status: "The reservation was deleted." });
+    res.status(200).json({ status: "The reservation was deleted.", gym });
   } catch (error) {
     return next(error);
   }
