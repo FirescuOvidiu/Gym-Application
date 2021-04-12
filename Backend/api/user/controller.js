@@ -92,6 +92,8 @@ const updateUser = async (req, res, next) => {
     if (req.user.role === "admin") {
       user.role = req.body.role || user.role;
     }
+    user.date = req.body.date || user.date;
+    user.workouts = req.body.workouts || user.workouts;
 
     user = await user.save();
 
