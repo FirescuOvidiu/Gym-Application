@@ -49,6 +49,8 @@ const updateGym = async (req, res, next) => {
     gym.openingTime = req.body.openingTime || gym.openingTime;
     gym.closingTime = req.body.closingTime || gym.closingTime;
     gym.usersInGym = req.body.usersInGym || gym.usersInGym;
+    gym.maxUsersInGym = req.body.maxUsersInGym || gym.maxUsersInGym;
+    gym.reservations = req.body.reservations || gym.reservations;
 
     gym = await gym.save();
 
