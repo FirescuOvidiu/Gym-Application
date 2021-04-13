@@ -5,22 +5,30 @@ import {useSelector, useDispatch} from 'react-redux';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
 import SignButton from '../components/signButton';
+import {saveGym, _updateGym} from '../redux/thunks/gymThunks';
 import {
-  saveGym,
-  _updateGym,
   createReservation,
-  deleteReservation,
-} from '../redux/thunks/gymThunks';
+  _deleteReservation,
+  saveReservations,
+} from '../redux/thunks/reservationThunks';
 
 const QRCodeScreen = () => {
   const gymReducer = useSelector((state) => state.gymReducer);
   const userReducer = useSelector((state) => state.userReducer);
+  const reservationReducer = useSelector((state) => state.reservationReducer);
   const dispatch = useDispatch();
   const [scan, setScan] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
     dispatch(saveGym());
+    dispatch(saveReservations({gymReducer}));
+
+    if (reservationReducer.ReservationsById[userReducer._id] === undefined) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
   }, []);
 
   const handleSubmitButton = async (e) => {
@@ -40,9 +48,9 @@ const QRCodeScreen = () => {
   const handleMakeReservation = async () => {
     dispatch(
       createReservation({
-        gymReducer,
         reservation: {
           user: userReducer._id,
+          gymId: gymReducer._id,
         },
         setDisabled,
       }),
@@ -51,9 +59,8 @@ const QRCodeScreen = () => {
 
   const handleCancelReservation = async () => {
     dispatch(
-      deleteReservation({
-        gymReducer,
-        userReducer,
+      _deleteReservation({
+        reservation: reservationReducer.ReservationsById[userReducer._id],
         setDisabled,
       }),
     );
@@ -93,7 +100,7 @@ const QRCodeScreen = () => {
           <Text>
             Maximum number of people in gym: {gymReducer.maxUsersInGym}
           </Text>
-          <Text>Reservations: {gymReducer.reservations.length}</Text>
+          <Text>Reservations: {reservationReducer.allReservations.length}</Text>
         </View>
       )}
       {scan && (

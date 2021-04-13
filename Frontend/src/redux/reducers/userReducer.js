@@ -6,13 +6,13 @@ const INITIAL_STATE = {
   username: '',
   phone: '',
   address: '',
-  birthday: '',
+  birthday: Date.now(),
   gender: '',
   name: {
     first: '',
     last: '',
   },
-  date: '',
+  date: Date.now(),
   role: 'user',
 };
 
@@ -24,13 +24,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case UPDATE_USER:
       return {
         ...state,
-        email: action.payload.email,
-        username: action.payload.username,
-        phone: action.payload.phone,
-        address: action.payload.address,
-        birthday: action.payload.birthday,
-        gender: action.payload.gender,
-        name: action.payload.name,
+        ...action.payload,
       };
 
     default:

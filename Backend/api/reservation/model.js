@@ -13,6 +13,11 @@ const reservationSchema = new mongoose.Schema({
     required: true,
     default: Date.now(),
   },
+  gymId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "Gym",
+  },
 });
 
 reservationSchema.index({ date: 1 }, { expireAfterSeconds: 60 * 60 });
