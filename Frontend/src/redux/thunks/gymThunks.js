@@ -21,7 +21,7 @@ export const saveGym = () => {
 export const _updateGym = ({gym}) => {
   return async (dispatch) => {
     try {
-      const response = await gymPutRequest(gym);
+      const response = await gymPutRequest({gym});
 
       dispatch(updateGym(gym));
       alert(`${response.data.status}`);
