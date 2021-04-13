@@ -8,9 +8,8 @@ const INITIAL_STATE = {
   address: '',
   openingTime: '',
   closingTime: '',
-  usersInGym: 0,
+  usersInGym: [],
   maxUsersInGym: 0,
-  reservations: [],
   date: '',
 };
 
@@ -22,16 +21,7 @@ const gymReducer = (state = INITIAL_STATE, action) => {
     case UPDATE_GYM:
       return {
         ...state,
-        name: action.payload.name,
-        email: action.payload.email,
-        phone: action.payload.phone,
-        address: action.payload.address,
-        openingTime: action.payload.openingTime,
-        closingTime: action.payload.closingTime,
-        usersInGym: action.payload.usersInGym,
-        maxUsersInGym: action.payload.maxUsersInGym,
-        reservations: action.payload.reservations,
-        date: action.payload.date,
+        ...action.payload,
       };
 
     default:

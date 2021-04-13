@@ -22,7 +22,7 @@ router.post(
 );
 
 router.put(
-  "/:_id?",
+  "/:_id",
   checkUserAuth,
   isGymValid,
   validationResults,
@@ -30,5 +30,13 @@ router.put(
 );
 
 router.delete("/:_id", checkUserAuth, gymController.deleteGym);
+
+router.post("/:_gymId/user", checkUserAuth, gymController.addUserInGym);
+
+router.delete(
+  "/:_gymId/user/:_userId",
+  checkUserAuth,
+  gymController.deleteUserFromGym
+);
 
 module.exports = router;

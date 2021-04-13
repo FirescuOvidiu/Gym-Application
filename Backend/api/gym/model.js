@@ -24,7 +24,14 @@ const gymSchema = new mongoose.Schema({
   openingTime: { type: String, required: true },
   closingTime: { type: String, required: true },
   date: { type: Date, default: Date.now },
-  usersInGym: { type: Number, required: true, default: 0 },
+  usersInGym: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      unique: true,
+      ref: "User",
+    },
+  ],
   maxUsersInGym: { type: Number, required: true, default: 5 },
 });
 

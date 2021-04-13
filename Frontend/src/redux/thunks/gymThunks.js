@@ -1,9 +1,10 @@
 import {addGym, updateGym} from '../actions/gymActions';
 import {
   gymGetRequest,
-  gymPutRequest,
   gymPostReservationRequest,
   gymDeleteReservationRequest,
+  gymAddUserRequest,
+  gymDeleteUserReqeust,
 } from './httpRequests';
 
 export const saveGym = () => {
@@ -18,12 +19,20 @@ export const saveGym = () => {
   };
 };
 
-export const _updateGym = ({gym}) => {
+export const _updateGym = ({gym, user, data}) => {
   return async (dispatch) => {
     try {
-      const response = await gymPutRequest({gym});
+      let response;
 
-      dispatch(updateGym(gym));
+      if (data === 'Someone entered the gym.') {
+        response = await gymAddUserRequest({gym, user});
+      }
+
+      if (data === 'Someone exited the gym.') {
+        response = await gymDeleteUserReqeust({gym, user});
+      }
+
+      dispatch(updateGym(response.data.gym));
       alert(`${response.data.status}`);
     } catch (error) {
       alert(error.response.data.message);

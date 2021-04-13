@@ -6,13 +6,13 @@ const INITIAL_STATE = {
   username: '',
   phone: '',
   address: '',
-  birthday: Date.now(),
+  birthday: '',
   gender: '',
   name: {
     first: '',
     last: '',
   },
-  date: Date.now(),
+  date: '',
   role: 'user',
 };
 

@@ -23,25 +23,13 @@ const QRCodeScreen = () => {
   useEffect(() => {
     dispatch(saveGym());
     dispatch(saveReservations({gymReducer}));
-
-    if (reservationReducer.ReservationsById[userReducer._id] === undefined) {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-    }
+    setDisabled(
+      reservationReducer.ReservationsById[userReducer._id] !== undefined,
+    );
   }, []);
 
   const handleSubmitButton = async (e) => {
-    let gym = gymReducer;
-
-    if (e.data === 'Someone entered the gym.') {
-      gym.usersInGym++;
-    }
-    if (e.data === 'Someone exited the gym.') {
-      gym.usersInGym--;
-    }
-
-    dispatch(_updateGym({gym}));
+    dispatch(_updateGym({gym: gymReducer, user: userReducer, data: e.data}));
     setScan(false);
   };
 
@@ -80,7 +68,8 @@ const QRCodeScreen = () => {
             disabled={
               disabled ||
               gymReducer.maxUsersInGym <=
-                gymReducer.usersInGym + gymReducer.reservations.length
+                gymReducer.usersInGym +
+                  reservationReducer.allReservations.length
                 ? true
                 : false
             }
@@ -96,7 +85,7 @@ const QRCodeScreen = () => {
             <Text style={styles.signText}>Cancel Reservation</Text>
           </TouchableOpacity>
 
-          <Text>People in gym: {gymReducer.usersInGym}</Text>
+          <Text>People in gym: {gymReducer.usersInGym.length}</Text>
           <Text>
             Maximum number of people in gym: {gymReducer.maxUsersInGym}
           </Text>

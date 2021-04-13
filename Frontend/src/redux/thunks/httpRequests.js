@@ -52,6 +52,14 @@ export const gymPutRequest = async ({gym}) => {
   return await api.put(`/gym/${gym._id}`, gym);
 };
 
+export const gymAddUserRequest = async ({gym, user}) => {
+  return await api.post(`/gym/${gym._id}/user`, user);
+};
+
+export const gymDeleteUserReqeust = async ({gym, user}) => {
+  return await api.delete(`/gym/${gym._id}/user/${user._id}`);
+};
+
 export const reservationGetRequest = async ({gymReducer}) => {
   return await api.get(`/reservation/${gymReducer._id}`);
 };
