@@ -33,7 +33,7 @@ const WorkoutDetailsScreen = ({route, navigation}) => {
           <FlatList
             showsVerticalScrollIndicator={false}
             data={workout.exercises}
-            keyExtractor={(item) => item.name}
+            keyExtractor={(item) => item._id}
             renderItem={({item}) => {
               return (
                 <View>
