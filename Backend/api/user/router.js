@@ -7,7 +7,6 @@ const {
 const {
   validationResults,
   isUserValid,
-  isWorkoutValid,
 } = require("../middleware/body-validation");
 
 const router = require("express").Router();
@@ -32,21 +31,5 @@ router.put(
 );
 
 router.delete("/:_id", checkAdminAuth, userController.deleteUser);
-
-router.get("/:_userId/workouts", checkUserAuth, userController.getWorkouts);
-
-router.post(
-  "/:_userId/workouts",
-  checkUserAuth,
-  isWorkoutValid,
-  validationResults,
-  userController.createWorkout
-);
-
-router.delete(
-  "/:_userId/workouts/:_workoutId",
-  checkUserAuth,
-  userController.deleteWorkout
-);
 
 module.exports = router;

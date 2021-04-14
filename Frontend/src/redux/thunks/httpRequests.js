@@ -21,7 +21,7 @@ export const loginRequest = async ({user}) => {
 };
 
 export const registerRequest = async ({user}) => {
-  return await api.post(`/user/register`, user);
+  return await api.post('/user/register', user);
 };
 
 export const userGetRequest = async () => {
@@ -32,16 +32,16 @@ export const userPutRequest = async ({user}) => {
   return await api.put(`/user/${user._id}`, user);
 };
 
-export const userGetWorkoutsRequest = async ({user}) => {
-  return await api.get(`/user/${user._id}/workouts`);
+export const workoutGetRequest = async ({user}) => {
+  return await api.get(`/workout/${user._id}`);
 };
 
-export const userDeleteWorkoutRequest = async ({userReducer, workout}) => {
-  return await api.delete(`/user/${userReducer._id}/workouts/${workout._id}`);
+export const workoutPostRequest = async ({workout}) => {
+  return await api.post('/workout', workout);
 };
 
-export const userPostWorkoutRequest = async ({userReducer, workout}) => {
-  return await api.post(`/user/${userReducer._id}/workouts`, workout);
+export const workoutDeleteRequest = async ({workout}) => {
+  return await api.delete(`/workout/${workout._id}`);
 };
 
 export const gymGetRequest = async () => {
@@ -65,7 +65,7 @@ export const reservationGetRequest = async ({gymReducer}) => {
 };
 
 export const reservationPostRequest = async ({reservation}) => {
-  return await api.post(`/reservation`, reservation);
+  return await api.post('/reservation', reservation);
 };
 
 export const reservationDeleteRequest = async ({reservation}) => {

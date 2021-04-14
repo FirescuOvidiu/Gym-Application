@@ -45,6 +45,7 @@ const workoutSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  user: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
 });
 
 workoutSchema.index({ date: 1 }, { expireAfterSeconds: 24 * 60 * 60 });
