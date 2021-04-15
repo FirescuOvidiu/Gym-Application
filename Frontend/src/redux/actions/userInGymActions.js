@@ -1,4 +1,4 @@
-import {ADD_USERINGYM, DELETE_USERFROMGYM, ADD_ALLUSERSINGYM} from '../types';
+import {ADD_USERINGYM, REMOVE_USERFROMGYM, ADD_ALLUSERSINGYM} from '../types';
 
 export const addUserInGym = (userInGym) => {
   return {
@@ -7,9 +7,9 @@ export const addUserInGym = (userInGym) => {
   };
 };
 
-export const deleteUserFromGym = (userInGym) => {
+export const removeUserFromGym = (userInGym) => {
   return {
-    type: DELETE_USERFROMGYM,
+    type: REMOVE_USERFROMGYM,
     payload: userInGym,
   };
 };

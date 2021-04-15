@@ -1,6 +1,6 @@
 import {
   ADD_RESERVATION,
-  DELETE_RESERVATION,
+  REMOVE_RESERVATION,
   ADD_ALLRESERVATIONS,
 } from '../types';
 
@@ -11,9 +11,9 @@ export const addReservation = (reservation) => {
   };
 };
 
-export const deleteReservation = (userId) => {
+export const removeReservation = (userId) => {
   return {
-    type: DELETE_RESERVATION,
+    type: REMOVE_RESERVATION,
     payload: userId,
   };
 };

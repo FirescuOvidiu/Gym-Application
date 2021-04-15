@@ -127,8 +127,6 @@ const isWorkoutValid = [
     .matches(/^(\d)+$/)
     .withMessage("Exercise rest should be a number."),
   check("exercises.*.weight")
-    .notEmpty()
-    .withMessage("Exercise weight is required.")
     .matches(/^(\d)+$/)
     .withMessage("Exercise weight should be a number."),
 ];

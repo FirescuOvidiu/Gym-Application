@@ -1,4 +1,4 @@
-import {ADD_WORKOUT, DELETE_WORKOUT, ADD_ALLWORKOUTS} from '../types';
+import {ADD_WORKOUT, REMOVE_WORKOUT, ADD_ALLWORKOUTS} from '../types';
 
 const INITIAL_STATE = {
   allWorkouts: [],
@@ -12,7 +12,7 @@ const workoutReducer = (state = INITIAL_STATE, action) => {
       state.workoutsById[action.payload._id] = action.payload;
       return state;
 
-    case DELETE_WORKOUT:
+    case REMOVE_WORKOUT:
       const index = state.allWorkouts.indexOf(action.payload);
 
       state.allWorkouts.splice(index, 1);

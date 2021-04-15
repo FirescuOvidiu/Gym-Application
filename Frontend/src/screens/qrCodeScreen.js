@@ -8,11 +8,11 @@ import SignButton from '../components/signButton';
 import {
   saveUsersInGym,
   createUserInGym,
-  _deleteUserFromGym,
+  deleteUserFromGym,
 } from '../redux/thunks/userInGymThunks';
 import {
   createReservation,
-  _deleteReservation,
+  deleteReservation,
   saveReservations,
 } from '../redux/thunks/reservationThunks';
 
@@ -24,28 +24,44 @@ const QRCodeScreen = () => {
   const dispatch = useDispatch();
   const [scan, setScan] = useState(false);
   const [disabled, setDisabled] = useState(false);
+  const [userInGym, setUserInGym] = useState(false);
 
   useEffect(() => {
-    dispatch(saveReservations({gymReducer}));
+    dispatch(saveReservations({gym: gymReducer}));
     dispatch(saveUsersInGym({gym: gymReducer}));
     setDisabled(
       reservationReducer.ReservationsById[userReducer._id] !== undefined,
+    );
+    setUserInGym(
+      userInGymReducer.usersInGymById[userReducer._id] !== undefined,
     );
   }, []);
 
   const handleSubmitButton = async (e) => {
     if (e.data === 'Someone entered the gym.') {
+      if (userInGym) {
+        setScan(false);
+        alert('The user is already in gym');
+        return;
+      }
       dispatch(
         createUserInGym({
           userInGym: {user: userReducer, gym: gymReducer},
+          setUserInGym,
         }),
       );
     }
 
     if (e.data === 'Someone exited the gym.') {
+      if (!userInGym) {
+        setScan(false);
+        alert("The user isn't in gym");
+        return;
+      }
       dispatch(
-        _deleteUserFromGym({
+        deleteUserFromGym({
           userInGym: userInGymReducer.usersInGymById[userReducer._id],
+          setUserInGym,
         }),
       );
     }
@@ -57,8 +73,8 @@ const QRCodeScreen = () => {
     dispatch(
       createReservation({
         reservation: {
-          user: userReducer._id,
-          gymId: gymReducer._id,
+          user: userReducer,
+          gym: gymReducer,
         },
         setDisabled,
       }),
@@ -67,7 +83,7 @@ const QRCodeScreen = () => {
 
   const handleCancelReservation = async () => {
     dispatch(
-      _deleteReservation({
+      deleteReservation({
         reservation: reservationReducer.ReservationsById[userReducer._id],
         setDisabled,
       }),

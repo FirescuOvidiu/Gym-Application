@@ -1,6 +1,6 @@
 import {
   addWorkout,
-  deleteWorkout,
+  removeWorkout,
   addAllWorkouts,
 } from '../actions/workoutActions';
 import {
@@ -36,12 +36,12 @@ export const createWorkout = ({workout}) => {
   };
 };
 
-export const _deleteWorkout = ({workout}) => {
+export const deleteWorkout = ({workout}) => {
   return async (dispatch) => {
     try {
       const response = await workoutDeleteRequest({workout});
 
-      dispatch(deleteWorkout(workout._id));
+      dispatch(removeWorkout(workout._id));
       alert(`${response.data.status}`);
     } catch (error) {
       alert(error.response.data.message);

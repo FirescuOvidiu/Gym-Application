@@ -1,4 +1,4 @@
-import {ADD_USERINGYM, DELETE_USERFROMGYM, ADD_ALLUSERSINGYM} from '../types';
+import {ADD_USERINGYM, REMOVE_USERFROMGYM, ADD_ALLUSERSINGYM} from '../types';
 
 const INITIAL_STATE = {
   allUsersInGym: [],
@@ -12,10 +12,11 @@ const userInGymReducer = (state = INITIAL_STATE, action) => {
       state.usersInGymById[action.payload.user] = action.payload;
       return state;
 
-    case DELETE_USERFROMGYM:
+    case REMOVE_USERFROMGYM:
       const index = state.allUsersInGym.indexOf(action.payload);
+
       state.allUsersInGym.splice(index, 1);
-      delete state.usersInGymById[action.payload.user];
+      delete state.usersInGymById[action.payload];
       return state;
 
     case ADD_ALLUSERSINGYM:

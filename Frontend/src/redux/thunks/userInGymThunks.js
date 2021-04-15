@@ -1,7 +1,7 @@
 import {
   addAllUsersInGym,
   addUserInGym,
-  deleteUserFromGym,
+  removeUserFromGym,
 } from '../actions/userInGymActions';
 import {
   userInGymGetRequest,
@@ -21,7 +21,7 @@ export const saveUsersInGym = ({gym}) => {
   };
 };
 
-export const createUserInGym = ({userInGym}) => {
+export const createUserInGym = ({userInGym, setUserInGym}) => {
   return async (dispatch) => {
     try {
       const response = await userInGymPostRequest({
@@ -29,6 +29,7 @@ export const createUserInGym = ({userInGym}) => {
       });
 
       dispatch(addUserInGym(response.data.userInGym));
+      setUserInGym(true);
       alert(`${response.data.status}`);
     } catch (error) {
       alert(error.response.data.message);
@@ -36,18 +37,15 @@ export const createUserInGym = ({userInGym}) => {
   };
 };
 
-export const _deleteUserFromGym = ({userInGym}) => {
+export const deleteUserFromGym = ({userInGym, setUserInGym}) => {
   return async (dispatch) => {
     try {
-      if (userInGym === undefined) {
-        alert(`The user isn't in the gym.`);
-        return;
-      }
       const response = await userInGymDeleteRequest({
         userInGym,
       });
 
-      dispatch(deleteUserFromGym(response.data.userInGym));
+      dispatch(removeUserFromGym(userInGym.user));
+      setUserInGym(false);
       alert(`${response.data.status}`);
     } catch (error) {
       alert(error.response.data.message);

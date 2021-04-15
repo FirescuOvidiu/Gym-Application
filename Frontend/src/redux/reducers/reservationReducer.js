@@ -1,6 +1,6 @@
 import {
   ADD_RESERVATION,
-  DELETE_RESERVATION,
+  REMOVE_RESERVATION,
   ADD_ALLRESERVATIONS,
 } from '../types';
 
@@ -16,11 +16,11 @@ const reservationReducer = (state = INITIAL_STATE, action) => {
       state.ReservationsById[action.payload.user] = action.payload;
       return state;
 
-    case DELETE_RESERVATION:
+    case REMOVE_RESERVATION:
       const index = state.allReservations.indexOf(action.payload);
 
       state.allReservations.splice(index, 1);
-      delete state.ReservationsById[action.payload.user];
+      delete state.ReservationsById[action.payload];
       return state;
 
     case ADD_ALLRESERVATIONS:
