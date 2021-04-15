@@ -11,7 +11,7 @@ const {
 
 const router = require("express").Router();
 
-router.get("/:_id?", checkUserAuth, userController.getUser);
+router.get("/:_userId?", checkUserAuth, userController.getUser);
 
 router.post(
   "/register",
@@ -23,13 +23,13 @@ router.post(
 router.post("/login", userController.login);
 
 router.put(
-  "/:_id?",
+  "/:_userId?",
   checkUserAuth,
   isUserValid,
   validationResults,
   userController.updateUser
 );
 
-router.delete("/:_id", checkAdminAuth, userController.deleteUser);
+router.delete("/:_userId", checkAdminAuth, userController.deleteUser);
 
 module.exports = router;

@@ -5,7 +5,7 @@ const userRoutes = require("./user/router");
 const gymRoutes = require("./gym/router");
 const reservationRoutes = require("./reservation/router");
 const workoutRoutes = require("./workout/router");
-const usersInGymRoutes = require("./userInGym/router");
+const userInGymRoutes = require("./userInGym/router");
 
 apiRouter.use("/user", userRoutes);
 apiRouter.use("/gym", gymRoutes);

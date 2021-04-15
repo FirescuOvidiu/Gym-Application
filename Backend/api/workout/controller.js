@@ -15,7 +15,7 @@ const createWorkout = async (req, res, next) => {
     let workout = new Workout(req.body);
     workout = await workout.save();
 
-    res.status(200).json({ status: "The workout was created.", workout });
+    res.status(200).json({ status: "The workout has been created.", workout });
   } catch (error) {
     return next(error);
   }
@@ -26,10 +26,10 @@ const deleteWorkout = async (req, res, next) => {
     const workout = await Workout.findByIdAndDelete(req.params._workoutId);
 
     if (!workout) {
-      return next({ message: "The workout was not found." });
+      return next({ message: "The workout hasn't been found." });
     }
 
-    res.status(200).json({ status: "The workout was deleted." });
+    res.status(200).json({ status: "The workout has been deleted." });
   } catch (error) {
     return next(error);
   }

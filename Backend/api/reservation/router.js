@@ -1,9 +1,6 @@
 const reservationController = require("./controller");
 
-const {
-  checkUserAuth,
-  checkAdminAuth,
-} = require("../middleware/auth-validation");
+const { checkUserAuth } = require("../middleware/auth-validation");
 
 const router = require("express").Router();
 

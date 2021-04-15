@@ -1,6 +1,6 @@
 const UsersInGym = require("./model");
 
-const getUsersInGym = async (req, res, next) => {
+const getUsersFromGym = async (req, res, next) => {
   try {
     const usersInGym = await UsersInGym.find({ gym: req.params._gymId });
 
@@ -40,7 +40,7 @@ const deleteUserFromGym = async (req, res, next) => {
 };
 
 module.exports = {
-  getUsersInGym,
+  getUsersFromGym,
   createUserInGym,
   deleteUserFromGym,
 };

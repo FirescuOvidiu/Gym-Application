@@ -4,13 +4,13 @@ const jwt = require("jsonwebtoken");
 const User = require("./model");
 
 const getUser = async (req, res, next) => {
-  req.params._id = req.params._id || req.user.payload._id;
+  req.params._userId = req.params._userId || req.user.payload._id;
 
   try {
-    const user = await User.findById(req.params._id);
+    const user = await User.findById(req.params._userId);
 
     if (!user) {
-      return next({ message: "The user was not found." });
+      return next({ message: "The user hasn't been found." });
     }
 
     if (req.user.payload.role === "user" && user._id != req.user.payload._id) {
@@ -28,7 +28,6 @@ const register = async (req, res, next) => {
 
   try {
     let user = new User(req.body);
-    user.role = "user";
     user = await user.save();
 
     res.status(200).json({ status: "The registration has been completed." });
@@ -48,7 +47,6 @@ const login = async (req, res, next) => {
     //Use the payload to store information about the user
     let payload = user;
     payload["password"] = undefined;
-    payload["__v"] = undefined;
 
     // Create the access token
     const accessToken = jwt.sign({ payload }, process.env.ACCESS_TOKEN_SECRET, {
@@ -64,13 +62,13 @@ const login = async (req, res, next) => {
 
 // Method used to update a user
 const updateUser = async (req, res, next) => {
-  req.params._id = req.params._id || req.user.payload._id;
+  req.params._userId = req.params._userId || req.user.payload._id;
 
   try {
-    let user = await User.findById(req.params._id);
+    let user = await User.findById(req.params._userId);
 
     if (!user) {
-      return next({ message: "The user was not found." });
+      return next({ message: "The user hasn't been found." });
     }
 
     if (req.user.payload.role === "user" && user._id != req.user.payload._id) {
@@ -90,11 +88,10 @@ const updateUser = async (req, res, next) => {
       user.role = req.body.role || user.role;
     }
     user.date = req.body.date || user.date;
-    user.workouts = req.body.workouts || user.workouts;
 
     user = await user.save();
 
-    res.status(200).json({ status: "The user was updated." });
+    res.status(200).json({ status: "The user has been updated." });
   } catch (error) {
     return next(error);
   }
@@ -103,13 +100,13 @@ const updateUser = async (req, res, next) => {
 // Method used to delete a user
 const deleteUser = async (req, res, next) => {
   try {
-    const user = await User.findByIdAndDelete(req.params._id);
+    const user = await User.findByIdAndDelete(req.params._userId);
 
     if (!user) {
-      return next({ message: "The user was not found." });
+      return next({ message: "The user hasn't been found." });
     }
 
-    res.status(200).json({ status: "The user was deleted." });
+    res.status(200).json({ status: "The user has been deleted." });
   } catch (error) {
     return next(error);
   }

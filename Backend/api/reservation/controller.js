@@ -2,7 +2,7 @@ const Reservation = require("./model");
 
 const getReservations = async (req, res, next) => {
   try {
-    const reservations = await Reservation.find({ gymId: req.params._gymId });
+    const reservations = await Reservation.find({ gym: req.params._gymId });
 
     res.status(200).json({ reservations });
   } catch (error) {
@@ -17,7 +17,7 @@ const createReservation = async (req, res, next) => {
 
     res
       .status(200)
-      .json({ status: "The reservation was created.", reservation });
+      .json({ status: "The reservation has been created.", reservation });
   } catch (error) {
     return next(error);
   }
@@ -30,10 +30,10 @@ const deleteReservation = async (req, res, next) => {
     );
 
     if (!reservation) {
-      return next({ message: "The reservation was not found." });
+      return next({ message: "The reservation hasn't been found." });
     }
 
-    res.status(200).json({ status: "The reservation was deleted." });
+    res.status(200).json({ status: "The reservation has been deleted." });
   } catch (error) {
     return next(error);
   }

@@ -7,15 +7,15 @@ const reservationSchema = new mongoose.Schema({
     unique: true,
     ref: "User",
   },
+  gym: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "Gym",
+  },
   date: {
     type: Date,
     required: true,
     default: Date.now(),
-  },
-  gymId: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: "Gym",
   },
 });
 
