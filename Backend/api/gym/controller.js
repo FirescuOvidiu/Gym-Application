@@ -75,59 +75,9 @@ const deleteGym = async (req, res, next) => {
   }
 };
 
-const addUserInGym = async (req, res, next) => {
-  try {
-    let gym = await Gym.findById(req.params._gymId);
-    const user = await User.findById(req.body._id);
-
-    if (!gym) {
-      return next({ message: "The gym was not found." });
-    }
-    if (!user) {
-      return next({ message: "The user was not found." });
-    }
-    if (gym.usersInGym.includes(user._id)) {
-      return next({ message: "The user is already in the gym." });
-    }
-    gym.usersInGym.push(user._id);
-    gym = await gym.save();
-
-    res.status(200).json({ status: "The user has entered the gym.", gym });
-  } catch (error) {
-    return next(error);
-  }
-};
-
-const deleteUserFromGym = async (req, res, next) => {
-  try {
-    let gym = await Gym.findById(req.params._gymId);
-    const user = await User.findById(req.params._userId);
-
-    if (!gym) {
-      return next({ message: "The gym was not found." });
-    }
-    if (!user) {
-      return next({ message: "The user was not found." });
-    }
-    const index = gym.usersInGym.indexOf(user._id);
-
-    if (index === -1) {
-      return next({ message: "The user isn't in the gym." });
-    }
-    gym.usersInGym.splice(index, 1);
-    gym = await gym.save();
-
-    res.status(200).json({ status: "The user has left the gym.", gym });
-  } catch (error) {
-    return next(error);
-  }
-};
-
 module.exports = {
   getGym,
   createGym,
   updateGym,
   deleteGym,
-  addUserInGym,
-  deleteUserFromGym,
 };

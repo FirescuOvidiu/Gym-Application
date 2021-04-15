@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-// Create a schema (blueprint) for workouts
 const workoutSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -50,5 +49,4 @@ const workoutSchema = new mongoose.Schema({
 
 workoutSchema.index({ date: 1 }, { expireAfterSeconds: 24 * 60 * 60 });
 
-// Create a model for a workouts
 module.exports = mongoose.model("Workout", workoutSchema);

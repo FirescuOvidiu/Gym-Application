@@ -5,7 +5,11 @@ import {useSelector, useDispatch} from 'react-redux';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
 import SignButton from '../components/signButton';
-import {saveGym, _updateGym} from '../redux/thunks/gymThunks';
+import {
+  saveUsersInGym,
+  createUserInGym,
+  _deleteUserFromGym,
+} from '../redux/thunks/userInGymThunks';
 import {
   createReservation,
   _deleteReservation,
@@ -16,20 +20,36 @@ const QRCodeScreen = () => {
   const gymReducer = useSelector((state) => state.gymReducer);
   const userReducer = useSelector((state) => state.userReducer);
   const reservationReducer = useSelector((state) => state.reservationReducer);
+  const userInGymReducer = useSelector((state) => state.userInGymReducer);
   const dispatch = useDispatch();
   const [scan, setScan] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
-    dispatch(saveGym());
     dispatch(saveReservations({gymReducer}));
+    dispatch(saveUsersInGym({gym: gymReducer}));
     setDisabled(
       reservationReducer.ReservationsById[userReducer._id] !== undefined,
     );
   }, []);
 
   const handleSubmitButton = async (e) => {
-    dispatch(_updateGym({gym: gymReducer, user: userReducer, data: e.data}));
+    if (e.data === 'Someone entered the gym.') {
+      dispatch(
+        createUserInGym({
+          userInGym: {user: userReducer, gym: gymReducer},
+        }),
+      );
+    }
+
+    if (e.data === 'Someone exited the gym.') {
+      dispatch(
+        _deleteUserFromGym({
+          userInGym: userInGymReducer.usersInGymById[userReducer._id],
+        }),
+      );
+    }
+
     setScan(false);
   };
 
@@ -68,7 +88,7 @@ const QRCodeScreen = () => {
             disabled={
               disabled ||
               gymReducer.maxUsersInGym <=
-                gymReducer.usersInGym +
+                userInGymReducer.allUsersInGym.length +
                   reservationReducer.allReservations.length
                 ? true
                 : false
@@ -85,7 +105,7 @@ const QRCodeScreen = () => {
             <Text style={styles.signText}>Cancel Reservation</Text>
           </TouchableOpacity>
 
-          <Text>People in gym: {gymReducer.usersInGym.length}</Text>
+          <Text>People in gym: {userInGymReducer.allUsersInGym.length}</Text>
           <Text>
             Maximum number of people in gym: {gymReducer.maxUsersInGym}
           </Text>

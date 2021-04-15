@@ -52,12 +52,16 @@ export const gymPutRequest = async ({gym}) => {
   return await api.put(`/gym/${gym._id}`, gym);
 };
 
-export const gymAddUserRequest = async ({gym, user}) => {
-  return await api.post(`/gym/${gym._id}/user`, user);
+export const userInGymGetRequest = async ({gym}) => {
+  return await api.get(`/userInGym/${gym._id}`);
 };
 
-export const gymDeleteUserReqeust = async ({gym, user}) => {
-  return await api.delete(`/gym/${gym._id}/user/${user._id}`);
+export const userInGymPostRequest = async ({userInGym}) => {
+  return await api.post('/userInGym', userInGym);
+};
+
+export const userInGymDeleteRequest = async ({userInGym}) => {
+  return await api.delete(`/userInGym/${userInGym._id}`);
 };
 
 export const reservationGetRequest = async ({gymReducer}) => {

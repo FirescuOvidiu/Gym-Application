@@ -20,7 +20,7 @@ const reservationReducer = (state = INITIAL_STATE, action) => {
       const index = state.allReservations.indexOf(action.payload);
 
       state.allReservations.splice(index, 1);
-      delete state.ReservationsById[action.payload];
+      delete state.ReservationsById[action.payload.user];
       return state;
 
     case ADD_ALLRESERVATIONS:

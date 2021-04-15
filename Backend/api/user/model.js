@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-// Create a schema (blueprint) for a user
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -67,5 +66,4 @@ userSchema.options.toJSON = {
   },
 };
 
-// Create a model for a user
 module.exports = mongoose.model("User", userSchema);

@@ -31,12 +31,4 @@ router.put(
 
 router.delete("/:_id", checkUserAuth, gymController.deleteGym);
 
-router.post("/:_gymId/user", checkUserAuth, gymController.addUserInGym);
-
-router.delete(
-  "/:_gymId/user/:_userId",
-  checkUserAuth,
-  gymController.deleteUserFromGym
-);
-
 module.exports = router;
