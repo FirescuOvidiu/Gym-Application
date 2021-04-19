@@ -11,6 +11,8 @@ import CreateWorkoutScreen from '../screens/createWorkoutScreen';
 import WorkoutDetailsScreen from '../screens/workoutDetailsScreen';
 import QRCodeScreen from '../screens/qrCodeScreen';
 
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
@@ -59,25 +61,41 @@ const TabNavigatorRoutes = () => {
       <Tab.Screen
         name="GymDetails"
         component={GymDetailsScreen}
-        options={{title: 'Gym Details'}}
+        options={{
+          tabBarLabel: 'Gym Details',
+          tabBarIcon: ({color}) => <Icon name="home" color={color} size={25} />,
+        }}
       />
       <Tab.Screen
         name="Workouts"
         component={WorkoutsStack}
         options={{
           unmountOnBlur: true,
+          tabBarLabel: 'Workouts',
+          tabBarIcon: ({color}) => (
+            <Icon name="weight-lifter" color={color} size={25} />
+          ),
         }}
       />
       <Tab.Screen
         name="QRCode"
         component={QRCodeScreen}
-        options={{title: 'QR Code'}}
+        options={{
+          tabBarLabel: 'QR Code',
+          tabBarIcon: ({color}) => (
+            <Icon name="qrcode" color={color} size={25} />
+          ),
+        }}
       />
       <Tab.Screen
         name="Profile"
         component={ProfileStack}
         options={{
           unmountOnBlur: true,
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({color}) => (
+            <Icon name="account" color={color} size={25} />
+          ),
         }}
       />
     </Tab.Navigator>
