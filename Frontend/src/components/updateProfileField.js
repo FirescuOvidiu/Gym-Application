@@ -1,39 +1,47 @@
 import * as React from 'react';
-import {View, Text, TextInput, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
+import {Input} from 'react-native-elements';
 
 const UpdateProfileField = ({
   text,
   defaultValue,
   setData,
   secureTextEntry = false,
+  blurOnSubmit = false,
   placeholder = '',
 }) => {
   return (
     <View>
-      <Text style={styles.fieldName}>{text}</Text>
-      <TextInput
-        style={styles.fieldText}
-        defaultValue={defaultValue}
+      <Input
+        label={text}
+        labelStyle={styles.labelStyle}
+        inputContainerStyle={styles.inputContainerStyle}
+        inputStyle={styles.inputStyle}
+        containerStyle={styles.containerStyle}
         onChangeText={setData}
-        secureTextEntry={secureTextEntry}
         placeholder={placeholder}
+        blurOnSubmit={blurOnSubmit}
+        secureTextEntry={secureTextEntry}
+        defaultValue={defaultValue}
       />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  fieldName: {
-    color: 'gray',
-    paddingBottom: 5,
-    paddingTop: 10,
-    fontSize: 15,
-  },
-  fieldText: {
+  inputContainerStyle: {
     borderWidth: 2,
     borderColor: '#6da7f2',
-    marginBottom: 10,
     borderRadius: 10,
+    marginTop: 5,
+  },
+  labelStyle: {
+    fontSize: 15,
+    fontWeight: 'normal',
+    color: 'gray',
+  },
+  inputStyle: {
+    fontSize: 15,
   },
 });
 

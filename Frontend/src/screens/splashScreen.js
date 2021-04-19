@@ -1,5 +1,6 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
+import {ActivityIndicator} from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -11,7 +12,7 @@ const SplashScreen = ({navigation}) => {
 
   return (
     <View>
-      <Text>SplashScreen</Text>
+      <ActivityIndicator />
     </View>
   );
 };
