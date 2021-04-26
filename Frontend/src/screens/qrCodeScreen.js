@@ -4,6 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
+import ProfileField from '../components/profileField';
 import SignButton from '../components/signButton';
 import {
   saveUsersInGym,
@@ -91,65 +92,78 @@ const QRCodeScreen = () => {
   };
 
   return (
-    <>
-      {!scan && (
-        <View style={styles.body}>
-          <SignButton
-            submit={() => {
-              setScan(true);
-            }}
-            text=" Start Scan "
-          />
-          <TouchableOpacity
-            disabled={
-              disabled ||
-              gymReducer.maxUsersInGym <=
-                userInGymReducer.allUsersInGym.length +
-                  reservationReducer.allReservations.length
-                ? true
-                : false
-            }
-            style={styles.signButton}
-            onPress={handleMakeReservation}>
-            <Text style={styles.signText}>Make Reservation</Text>
-          </TouchableOpacity>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>QR Code</Text>
+      </View>
+      <View style={styles.body}>
+        <View style={styles.insideBody}>
+          {!scan && (
+            <View style={styles.body}>
+              <ProfileField
+                text={'People in gym'}
+                data={userInGymReducer.allUsersInGym.length}
+              />
+              <ProfileField
+                text={'Maximum number of people in gym'}
+                data={gymReducer.maxUsersInGym}
+              />
+              <ProfileField
+                text={'Reservations'}
+                data={reservationReducer.allReservations.length}
+              />
+              <SignButton
+                submit={() => {
+                  setScan(true);
+                }}
+                text=" Start Scan "
+              />
+              <TouchableOpacity
+                disabled={
+                  disabled ||
+                  gymReducer.maxUsersInGym <=
+                    userInGymReducer.allUsersInGym.length +
+                      reservationReducer.allReservations.length
+                    ? true
+                    : false
+                }
+                style={styles.signButton}
+                onPress={handleMakeReservation}>
+                <Text style={styles.signText}>Make Reservation</Text>
+              </TouchableOpacity>
 
-          <TouchableOpacity
-            disabled={!disabled}
-            style={styles.signButton}
-            onPress={handleCancelReservation}>
-            <Text style={styles.signText}>Cancel Reservation</Text>
-          </TouchableOpacity>
-
-          <Text>People in gym: {userInGymReducer.allUsersInGym.length}</Text>
-          <Text>
-            Maximum number of people in gym: {gymReducer.maxUsersInGym}
-          </Text>
-          <Text>Reservations: {reservationReducer.allReservations.length}</Text>
+              <TouchableOpacity
+                disabled={!disabled}
+                style={styles.signButton}
+                onPress={handleCancelReservation}>
+                <Text style={styles.signText}>Cancel Reservation</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          {scan && (
+            <View style={styles.container}>
+              <QRCodeScanner
+                showMarker={true}
+                topContent={
+                  <View style={styles.body}>
+                    <Text style={styles.title}>Scan the QR Code</Text>
+                  </View>
+                }
+                onRead={handleSubmitButton}
+                bottomContent={
+                  <View>
+                    <SignButton
+                      submit={() => setScan(false)}
+                      text=" Cancel Scan "
+                    />
+                  </View>
+                }
+              />
+            </View>
+          )}
         </View>
-      )}
-      {scan && (
-        <View style={styles.container}>
-          <QRCodeScanner
-            showMarker={true}
-            topContent={
-              <View style={styles.body}>
-                <Text style={styles.title}>Scan the QR Code</Text>
-              </View>
-            }
-            onRead={handleSubmitButton}
-            bottomContent={
-              <View>
-                <SignButton
-                  submit={() => setScan(false)}
-                  text=" Cancel Scan "
-                />
-              </View>
-            }
-          />
-        </View>
-      )}
-    </>
+      </View>
+    </View>
   );
 };
 
@@ -157,9 +171,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  body: {
+  header: {
     flex: 1,
+  },
+  headerText: {
+    color: 'black',
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: '5%',
+  },
+  body: {
+    backgroundColor: 'white',
+    flex: 10,
+  },
+  insideBody: {
     margin: '5%',
+    flex: 10,
   },
   title: {
     fontSize: 20,
