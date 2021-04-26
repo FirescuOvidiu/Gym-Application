@@ -30,7 +30,7 @@ const QRCodeScreen = () => {
     dispatch(saveReservations({gym: gymReducer}));
     dispatch(saveUsersInGym({gym: gymReducer}));
     setDisabled(
-      reservationReducer.ReservationsById[userReducer._id] !== undefined,
+      reservationReducer.reservationsById[userReducer._id] !== undefined,
     );
     setUserInGym(
       userInGymReducer.usersInGymById[userReducer._id] !== undefined,
@@ -84,7 +84,7 @@ const QRCodeScreen = () => {
   const handleCancelReservation = async () => {
     dispatch(
       deleteReservation({
-        reservation: reservationReducer.ReservationsById[userReducer._id],
+        reservation: reservationReducer.reservationsById[userReducer._id],
         setDisabled,
       }),
     );

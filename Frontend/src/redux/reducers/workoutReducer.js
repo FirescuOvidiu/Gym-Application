@@ -8,23 +8,35 @@ const INITIAL_STATE = {
 const workoutReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_WORKOUT:
-      state.allWorkouts.push(action.payload._id);
-      state.workoutsById[action.payload._id] = action.payload;
-      return state;
+      return {
+        allWorkouts: [action.payload._id, ...state.allWorkouts],
+        workoutsById: {
+          [action.payload._id]: action.payload,
+          ...state.workoutsById,
+        },
+      };
 
     case REMOVE_WORKOUT:
-      const index = state.allWorkouts.indexOf(action.payload);
+      const {[action.payload]: _, ...workoutsById} = state.workoutsById;
+      const allWorkouts = state.allWorkouts.filter(
+        (workout) => workout !== action.payload,
+      );
 
-      state.allWorkouts.splice(index, 1);
-      delete state.workoutsById[action.payload];
-      return state;
+      return {allWorkouts, workoutsById};
 
     case ADD_ALLWORKOUTS:
+      const _allWorkouts = [],
+        _workoutsById = {};
+
       action.payload.forEach((element) => {
-        state.allWorkouts.push(element._id);
-        state.workoutsById[element._id] = element;
+        _allWorkouts.push(element._id);
+        _workoutsById[element._id] = element;
       });
-      return state;
+
+      return {
+        allWorkouts: _allWorkouts,
+        workoutsById: _workoutsById,
+      };
 
     default:
       return state;

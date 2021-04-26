@@ -8,24 +8,35 @@ const INITIAL_STATE = {
 const userInGymReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_USERINGYM:
-      state.allUsersInGym.push(action.payload.user);
-      state.usersInGymById[action.payload.user] = action.payload;
-      return state;
+      return {
+        allUsersInGym: [action.payload.user, ...state.allUsersInGym],
+        usersInGymById: {
+          [action.payload.user]: action.payload,
+          ...state.usersInGymById,
+        },
+      };
 
     case REMOVE_USERFROMGYM:
-      const index = state.allUsersInGym.indexOf(action.payload);
+      const {[action.payload]: _, ...usersInGymById} = state.usersInGymById;
+      const allUsersInGym = state.allUsersInGym.filter(
+        (user) => user !== action.payload,
+      );
 
-      state.allUsersInGym.splice(index, 1);
-      delete state.usersInGymById[action.payload];
-      return state;
+      return {allUsersInGym, usersInGymById};
 
     case ADD_ALLUSERSINGYM:
-      state.allUsersInGym = [];
+      const _allUsersInGym = [],
+        _usersInGymById = {};
+
       action.payload.forEach((element) => {
-        state.allUsersInGym.push(element.user);
-        state.usersInGymById[element.user] = element;
+        _allUsersInGym.push(element.user);
+        _usersInGymById[element.user] = element;
       });
-      return state;
+
+      return {
+        allUsersInGym: _allUsersInGym,
+        usersInGymById: _usersInGymById,
+      };
 
     default:
       return state;

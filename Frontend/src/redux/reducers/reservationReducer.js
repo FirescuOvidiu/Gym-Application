@@ -6,30 +6,41 @@ import {
 
 const INITIAL_STATE = {
   allReservations: [],
-  ReservationsById: {},
+  reservationsById: {},
 };
 
 const reservationReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_RESERVATION:
-      state.allReservations.push(action.payload.user);
-      state.ReservationsById[action.payload.user] = action.payload;
-      return state;
+      return {
+        allReservations: [action.payload.user, ...state.allReservations],
+        reservationsById: {
+          [action.payload.user]: action.payload,
+          ...state.reservationsById,
+        },
+      };
 
     case REMOVE_RESERVATION:
-      const index = state.allReservations.indexOf(action.payload);
+      const {[action.payload]: _, ...reservationsById} = state.reservationsById;
+      const allReservations = state.allReservations.filter(
+        (reservation) => reservation !== action.payload,
+      );
 
-      state.allReservations.splice(index, 1);
-      delete state.ReservationsById[action.payload];
-      return state;
+      return {allReservations, reservationsById};
 
     case ADD_ALLRESERVATIONS:
-      state.allReservations = [];
+      const _allReservations = [],
+        _reservationsById = {};
+
       action.payload.forEach((element) => {
-        state.allReservations.push(element.user);
-        state.ReservationsById[element.user] = element;
+        _allReservations.push(element.user);
+        _reservationsById[element.user] = element;
       });
-      return state;
+
+      return {
+        allReservations: _allReservations,
+        reservationsById: _reservationsById,
+      };
 
     default:
       return state;
