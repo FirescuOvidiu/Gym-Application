@@ -14,6 +14,8 @@ target 'gymapplication' do
 
   pod 'RNPermissions', :path => '../node_modules/react-native-permissions'
 
+  pod 'RNGoogleSignin', :path => '../node_modules/@react-native-google-signin/google-signin'
+
   target 'gymapplicationTests' do
     inherit! :complete
     # Pods for testing

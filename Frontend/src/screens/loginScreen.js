@@ -15,6 +15,13 @@ const LoginScreen = ({navigation}) => {
   const [userPassword, setUserPassword] = useState('');
   const dispatch = useDispatch();
 
+  GoogleSignin.configure({
+    webClientId:
+      '263868959944-anvccrlas62a8qkl6gir168h2m8bvvk3.apps.googleusercontent.com',
+  });
+
+  const handleGoogleButton = async () => {};
+
   const handleSubmitButton = async () => {
     if (!userEmail) {
       alert('Please fill Email.');
