@@ -15,8 +15,6 @@ const LoginScreen = ({navigation}) => {
   const [userPassword, setUserPassword] = useState('');
   const dispatch = useDispatch();
 
-  GoogleSignin.configure();
-
   const handleSubmitButton = async () => {
     if (!userEmail) {
       alert('Please fill Email.');
