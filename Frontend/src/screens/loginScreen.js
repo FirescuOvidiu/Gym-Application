@@ -9,18 +9,37 @@ import SignButton from '../components/signButton';
 import AuthHeader from '../components/authHeader';
 
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth';
 
 const LoginScreen = ({navigation}) => {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const dispatch = useDispatch();
+  const [authenticated, setAutheticated] = useState(false);
 
   GoogleSignin.configure({
     webClientId:
       '263868959944-anvccrlas62a8qkl6gir168h2m8bvvk3.apps.googleusercontent.com',
   });
 
-  const handleGoogleButton = async () => {};
+  const handleGoogleButton = async () => {
+    try {
+      // Get the users ID token
+      const {idToken} = await GoogleSignin.signIn();
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      return auth().signInWithCredential(googleCredential);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  auth().onAuthStateChanged((user) => {
+    if (user) {
+      setAutheticated(true);
+      console.log(user);
+      console.log('1');
+    }
+  });
 
   const handleSubmitButton = async () => {
     if (!userEmail) {
@@ -62,6 +81,7 @@ const LoginScreen = ({navigation}) => {
             Forgot password?
           </Text>
           <SignButton submit={handleSubmitButton} text="Sign In" />
+          <SignButton submit={handleGoogleButton} text="Google sign In" />
           <View style={styles.signUp}>
             <Text style={styles.accountText}> Don't have an account ? </Text>
             <Text
