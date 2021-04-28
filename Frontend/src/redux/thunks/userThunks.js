@@ -8,6 +8,7 @@ import {
 } from '../actions/workoutActions';
 import {
   loginRequest,
+  googleLoginRequest,
   registerRequest,
   userGetRequest,
   userPutRequest,
@@ -20,6 +21,19 @@ export const loginUser = ({user, navigation}) => {
   return async () => {
     try {
       const response = await loginRequest({user});
+
+      await AsyncStorage.setItem('accessToken', response.data.accessToken);
+      navigation.replace('TabNavigatorRoutes');
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  };
+};
+
+export const googleLoginUser = ({credential, navigation}) => {
+  return async () => {
+    try {
+      const response = await googleLoginRequest({credential});
 
       await AsyncStorage.setItem('accessToken', response.data.accessToken);
       navigation.replace('TabNavigatorRoutes');

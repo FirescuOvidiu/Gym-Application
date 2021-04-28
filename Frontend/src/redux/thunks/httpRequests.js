@@ -20,6 +20,10 @@ export const loginRequest = async ({user}) => {
   return await api.post('/user/login', user);
 };
 
+export const googleLoginRequest = async ({credential}) => {
+  return await api.post('/user/googlelogin', credential);
+};
+
 export const registerRequest = async ({user}) => {
   return await api.post(`/user/register`, user);
 };

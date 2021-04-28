@@ -23,6 +23,8 @@ router.post(
 
 router.post("/login", userController.login);
 
+router.post("/googlelogin", userController.googlelogin);
+
 router.put(
   "/:_id?",
   checkUserAuth,

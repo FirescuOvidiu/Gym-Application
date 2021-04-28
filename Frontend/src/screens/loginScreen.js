@@ -2,20 +2,18 @@ import React, {useState} from 'react';
 import {ImageBackground, StyleSheet, View, Text} from 'react-native';
 import {useDispatch} from 'react-redux';
 
-import {loginUser} from '../redux/thunks/userThunks';
+import {loginUser, googleLoginUser} from '../redux/thunks/userThunks';
 
 import AuthInputField from '../components/authInputField';
 import SignButton from '../components/signButton';
 import AuthHeader from '../components/authHeader';
 
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import auth from '@react-native-firebase/auth';
 
 const LoginScreen = ({navigation}) => {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const dispatch = useDispatch();
-  const [authenticated, setAutheticated] = useState(false);
 
   GoogleSignin.configure({
     webClientId:
@@ -26,20 +24,21 @@ const LoginScreen = ({navigation}) => {
     try {
       // Get the users ID token
       const {idToken} = await GoogleSignin.signIn();
-      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-      return auth().signInWithCredential(googleCredential);
+
+      dispatch(
+        googleLoginUser({
+          credential: {
+            token: idToken,
+            clientId:
+              '263868959944-anvccrlas62a8qkl6gir168h2m8bvvk3.apps.googleusercontent.com',
+          },
+          navigation,
+        }),
+      );
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   };
-
-  auth().onAuthStateChanged((user) => {
-    if (user) {
-      setAutheticated(true);
-      console.log(user);
-      console.log('1');
-    }
-  });
 
   const handleSubmitButton = async () => {
     if (!userEmail) {
