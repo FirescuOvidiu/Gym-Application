@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
 import {ImageBackground, StyleSheet, View, Text} from 'react-native';
 import {useDispatch} from 'react-redux';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+} from '@react-native-google-signin/google-signin';
 
 import {loginUser, googleLoginUser} from '../redux/thunks/userThunks';
 
@@ -79,7 +82,12 @@ const LoginScreen = ({navigation}) => {
             Forgot password?
           </Text>
           <SignButton submit={handleSubmitButton} text="Sign In" />
-          <SignButton submit={handleGoogleButton} text="Google sign In" />
+          <GoogleSigninButton
+            style={styles.googleSignInButton}
+            size={GoogleSigninButton.Size.Wide}
+            color={GoogleSigninButton.Color.Dark}
+            onPress={handleGoogleButton}
+          />
           <View style={styles.signUp}>
             <Text style={styles.accountText}> Don't have an account ? </Text>
             <Text
@@ -126,6 +134,9 @@ const styles = StyleSheet.create({
   },
   accountText: {
     fontSize: 15,
+  },
+  googleSignInButton: {
+    marginBottom: '5%',
   },
 });
 
