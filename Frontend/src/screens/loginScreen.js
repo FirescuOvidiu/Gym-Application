@@ -1,14 +1,13 @@
 import React, {useState} from 'react';
 import {ImageBackground, StyleSheet, View, Text} from 'react-native';
 import {useDispatch} from 'react-redux';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 import {loginUser, googleLoginUser} from '../redux/thunks/userThunks';
 
 import AuthInputField from '../components/authInputField';
 import SignButton from '../components/signButton';
 import AuthHeader from '../components/authHeader';
-
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const LoginScreen = ({navigation}) => {
   const [userEmail, setUserEmail] = useState('');
@@ -22,7 +21,7 @@ const LoginScreen = ({navigation}) => {
 
   const handleGoogleButton = async () => {
     try {
-      // Get the users ID token
+      await GoogleSignin.hasPlayServices();
       const {idToken} = await GoogleSignin.signIn();
 
       dispatch(

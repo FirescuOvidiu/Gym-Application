@@ -38,22 +38,6 @@ const RegisterScreen = ({navigation}) => {
       alert('Please fill Re-type Password');
       return;
     }
-    if (!userPhone) {
-      alert('Please fill Phone');
-      return;
-    }
-    if (!userAddress) {
-      alert('Please fill Address');
-      return;
-    }
-    if (!userBirthday) {
-      alert('Please fill Birthday');
-      return;
-    }
-    if (!userGender) {
-      alert('Please fill Gender');
-      return;
-    }
     if (!userFirstName) {
       alert('Please fill First Name');
       return;

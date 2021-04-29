@@ -38,8 +38,6 @@ const isUserValid = [
     .matches(/(^$)|(^\d{10}$)/)
     .withMessage("Phone number must contain 10 digits."),
   check("birthday")
-    .notEmpty()
-    .withMessage("Birthday is required.")
     .matches(/(^$)|(^\d{4}-\d{2}-\d{2}$)/)
     .withMessage("Invalid birthday date. Format YYYY-MM-DD."),
   check("gender")
