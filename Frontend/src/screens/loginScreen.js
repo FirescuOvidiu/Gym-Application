@@ -13,13 +13,14 @@ import SignButton from '../components/signButton';
 import AuthHeader from '../components/authHeader';
 
 const LoginScreen = ({navigation}) => {
+  const webCliendId =
+    '263868959944-anvccrlas62a8qkl6gir168h2m8bvvk3.apps.googleusercontent.com';
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const dispatch = useDispatch();
 
   GoogleSignin.configure({
-    webClientId:
-      '263868959944-anvccrlas62a8qkl6gir168h2m8bvvk3.apps.googleusercontent.com',
+    webClientId: webCliendId,
   });
 
   const handleGoogleButton = async () => {
@@ -31,8 +32,7 @@ const LoginScreen = ({navigation}) => {
         googleLoginUser({
           credential: {
             token: idToken,
-            clientId:
-              '263868959944-anvccrlas62a8qkl6gir168h2m8bvvk3.apps.googleusercontent.com',
+            clientId: webCliendId,
           },
           navigation,
         }),
