@@ -65,9 +65,9 @@ const isUserValid = [
 const isGymValid = [
   check("name")
     .notEmpty()
-    .withMessage("First name is required.")
+    .withMessage("Name is required.")
     .matches(/^[a-zA-Z\s]+$/)
-    .withMessage("First name should contain only letters."),
+    .withMessage("Name should contain only letters."),
   check("email")
     .notEmpty()
     .withMessage("Email is required.")
@@ -127,8 +127,6 @@ const isWorkoutValid = [
     .matches(/^(\d)+$/)
     .withMessage("Exercise rest should be a number."),
   check("exercises.*.weight")
-    .notEmpty()
-    .withMessage("Exercise weight is required.")
     .matches(/^(\d)+$/)
     .withMessage("Exercise weight should be a number."),
 ];

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {View, StyleSheet, Modal} from 'react-native';
 
-import {createWorkout} from '../redux/thunks/userThunks';
+import {createWorkout} from '../redux/thunks/workoutThunks';
 
 import SignButton from '../components/signButton';
 import AuthInputField from '../components/authInputField';
@@ -42,13 +42,13 @@ const CreateWorkoutScreen = () => {
 
     dispatch(
       createWorkout({
-        userReducer,
         workout: {
           name: workoutName,
           date: workoutDate,
           type: workoutType,
           notes: workoutNotes,
           exercises: exercises,
+          user: userReducer,
         },
       }),
     );

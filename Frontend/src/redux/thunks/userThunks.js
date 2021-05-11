@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 
-import {addUser} from '../actions/userActions';
+import {addUser, updateUser} from '../actions/userActions';
 import {
   addWorkout,
   deleteWorkout,
@@ -56,14 +56,15 @@ export const saveUser = () => {
   };
 };
 
-export const _updateUser = ({userReducer, user, onFinish}) => {
-  return async () => {
+export const _updateUser = ({user}) => {
+  return async (dispatch) => {
     try {
-      const response = await userPutRequest({userReducer, user});
+      const response = await userPutRequest({user});
 
-      onFinish(null, response.data.status);
+      dispatch(updateUser(user));
+      alert(`${response.data.status}`);
     } catch (error) {
-      onFinish(error.response.data.message, null);
+      alert(error.response.data.message);
     }
   };
 };
@@ -71,7 +72,9 @@ export const _updateUser = ({userReducer, user, onFinish}) => {
 export const saveWorkouts = () => {
   return async (dispatch) => {
     try {
-      const workouts = await userGetWorkoutsRequest();
+      const user = await userGetRequest();
+      user = user.data.user;
+      const workouts = await userGetWorkoutsRequest({user});
 
       dispatch(addAllWorkouts(workouts.data.workouts));
     } catch (error) {

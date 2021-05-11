@@ -21,30 +21,53 @@ export const loginRequest = async ({user}) => {
 };
 
 export const registerRequest = async ({user}) => {
-  return await api.post(`/user/register`, user);
+  return await api.post('/user/register', user);
 };
 
 export const userGetRequest = async () => {
   return await api.get('/user');
 };
 
-export const userPutRequest = async ({userReducer, user}) => {
-  return await api.put(`/user/${userReducer._id}`, user);
+export const userPutRequest = async ({user}) => {
+  return await api.put(`/user/${user._id}`, user);
 };
 
-export const userGetWorkoutsRequest = async () => {
-  const user = await userGetRequest();
-  return await api.get(`/user/${user.data.user._id}/workouts`);
+export const workoutGetRequest = async ({user}) => {
+  return await api.get(`/workout/${user._id}`);
 };
 
-export const userDeleteWorkoutRequest = async ({userReducer, workout}) => {
-  return await api.delete(`/user/${userReducer._id}/workouts/${workout._id}`);
+export const workoutPostRequest = async ({workout}) => {
+  return await api.post('/workout', workout);
 };
 
-export const userPostWorkoutRequest = async ({userReducer, workout}) => {
-  return await api.post(`/user/${userReducer._id}/workouts`, workout);
+export const workoutDeleteRequest = async ({workout}) => {
+  return await api.delete(`/workout/${workout._id}`);
 };
 
 export const gymGetRequest = async () => {
   return await api.get('/gym');
+};
+
+export const userInGymGetRequest = async ({gym}) => {
+  return await api.get(`/userInGym/${gym._id}`);
+};
+
+export const userInGymPostRequest = async ({userInGym}) => {
+  return await api.post('/userInGym', userInGym);
+};
+
+export const userInGymDeleteRequest = async ({userInGym}) => {
+  return await api.delete(`/userInGym/${userInGym._id}`);
+};
+
+export const reservationGetRequest = async ({gym}) => {
+  return await api.get(`/reservation/${gym._id}`);
+};
+
+export const reservationPostRequest = async ({reservation}) => {
+  return await api.post('/reservation', reservation);
+};
+
+export const reservationDeleteRequest = async ({reservation}) => {
+  return await api.delete(`/reservation/${reservation._id}`);
 };

@@ -1,9 +1,6 @@
 const gymController = require("./controller");
 
-const {
-  checkUserAuth,
-  checkAdminAuth,
-} = require("../middleware/auth-validation");
+const { checkUserAuth } = require("../middleware/auth-validation");
 const {
   isGymValid,
   validationResults,
@@ -11,7 +8,7 @@ const {
 
 const router = require("express").Router();
 
-router.get("/:id?", checkUserAuth, gymController.getGym);
+router.get("/:_gymId?", checkUserAuth, gymController.getGym);
 
 router.post(
   "/",
@@ -22,13 +19,13 @@ router.post(
 );
 
 router.put(
-  "/:_id",
+  "/:_gymId",
   checkUserAuth,
   isGymValid,
   validationResults,
   gymController.updateGym
 );
 
-router.delete("/:_id", checkUserAuth, gymController.deleteGym);
+router.delete("/:_gymId", checkUserAuth, gymController.deleteGym);
 
 module.exports = router;

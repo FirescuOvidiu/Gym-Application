@@ -15,7 +15,7 @@ import ProfileField from '../components/profileField';
 
 import {saveUser} from '../redux/thunks/userThunks';
 import {saveGym} from '../redux/thunks/gymThunks';
-import {saveWorkouts} from '../redux/thunks/userThunks';
+import {saveWorkouts} from '../redux/thunks/workoutThunks';
 
 const GymDetailsScreen = ({navigation}) => {
   const gymReducer = useSelector((state) => state.gymReducer);
