@@ -9,7 +9,7 @@ import {
   Alert,
 } from 'react-native';
 
-import {_deleteWorkout} from '../redux/thunks/userThunks';
+import {deleteWorkout} from '../redux/thunks/workoutThunks';
 
 import ProfileField from '../components/profileField';
 
@@ -33,7 +33,7 @@ const WorkoutDetailsScreen = ({route, navigation}) => {
           <FlatList
             showsVerticalScrollIndicator={false}
             data={workout.exercises}
-            keyExtractor={(item) => item.name}
+            keyExtractor={(item) => item._id}
             renderItem={({item}) => {
               return (
                 <View>
@@ -62,7 +62,7 @@ const WorkoutDetailsScreen = ({route, navigation}) => {
                   {
                     text: 'Confirm',
                     onPress: () => {
-                      dispatch(_deleteWorkout({userReducer, workout}));
+                      dispatch(deleteWorkout({workout}));
                     },
                   },
                 ],

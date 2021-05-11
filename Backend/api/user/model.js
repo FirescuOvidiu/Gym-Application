@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-// Create a schema (blueprint) for a user
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -22,22 +21,20 @@ const userSchema = new mongoose.Schema({
   },
   phone: {
     type: String,
-    required: true,
-    minlength: 10,
-    maxlength: 10,
+    default: "",
   },
   address: {
     type: String,
-    required: true,
+    default: "",
   },
   birthday: {
     type: Date,
-    required: true,
     min: "1900-01-01",
+    default: "1900-01-01",
   },
   gender: {
     type: String,
-    required: true,
+    default: "",
   },
   name: {
     first: {
@@ -50,7 +47,6 @@ const userSchema = new mongoose.Schema({
     },
   },
   date: { type: Date, default: Date.now },
-  workouts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Workout" }],
   role: {
     type: String,
     required: true,
@@ -68,5 +64,4 @@ userSchema.options.toJSON = {
   },
 };
 
-// Create a model for a user
 module.exports = mongoose.model("User", userSchema);

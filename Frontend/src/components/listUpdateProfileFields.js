@@ -21,11 +21,13 @@ const ListUpdateProfileField = ({
         text="Email"
         defaultValue={userData.email}
         setData={setUserEmail}
+        placeholder="Enter Email"
       />
       <UpdateProfileField
         text="Username"
         defaultValue={userData.username}
         setData={setUserUsername}
+        placeholder="Enter Username"
       />
       <UpdateProfileField
         text="Password"
@@ -38,31 +40,37 @@ const ListUpdateProfileField = ({
         text="Phone"
         defaultValue={userData.phone}
         setData={setUserPhone}
+        placeholder="Enter Phone"
       />
       <UpdateProfileField
         text="Address"
         defaultValue={userData.address}
         setData={setUserAddress}
+        placeholder="Enter Address"
       />
       <UpdateProfileField
         text="Birthday"
         defaultValue={userData.birthday}
         setData={setUserBirthday}
+        placeholder="Enter birthday"
       />
       <UpdateProfileField
         text="Gender"
         defaultValue={userData.gender}
         setData={setUserGender}
+        placeholder="Enter Gender"
       />
       <UpdateProfileField
         text="First Name"
         defaultValue={userData.name.first}
         setData={setUserFirstName}
+        placeholder="Enter First Name"
       />
       <UpdateProfileField
         text="Last Name"
         defaultValue={userData.name.last}
         setData={setUserLastName}
+        placeholder="Enter Last Name"
       />
     </ScrollView>
   );

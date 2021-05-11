@@ -7,12 +7,11 @@ const {
 const {
   validationResults,
   isUserValid,
-  isWorkoutValid,
 } = require("../middleware/body-validation");
 
 const router = require("express").Router();
 
-router.get("/:_id?", checkUserAuth, userController.getUser);
+router.get("/:_userId?", checkUserAuth, userController.getUser);
 
 router.post(
   "/register",
@@ -23,30 +22,16 @@ router.post(
 
 router.post("/login", userController.login);
 
+router.post("/googlelogin", userController.googlelogin);
+
 router.put(
-  "/:_id?",
+  "/:_userId?",
   checkUserAuth,
   isUserValid,
   validationResults,
   userController.updateUser
 );
 
-router.delete("/:_id", checkAdminAuth, userController.deleteUser);
-
-router.get("/:_userId/workouts", checkUserAuth, userController.getWorkouts);
-
-router.post(
-  "/:_userId/workouts",
-  checkUserAuth,
-  isWorkoutValid,
-  validationResults,
-  userController.createWorkout
-);
-
-router.delete(
-  "/:_userId/workouts/:_workoutId",
-  checkUserAuth,
-  userController.deleteWorkout
-);
+router.delete("/:_userId", checkAdminAuth, userController.deleteUser);
 
 module.exports = router;

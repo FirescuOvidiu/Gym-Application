@@ -35,20 +35,13 @@ const isUserValid = [
     .matches(/[@$!%*?&]+/)
     .withMessage("Password must have at least one special character."),
   check("phone")
-    .notEmpty()
-    .withMessage("Phone is required.")
-    .matches(/^\d{10}$/)
+    .matches(/(^$)|(^\d{10}$)/)
     .withMessage("Phone number must contain 10 digits."),
-  check("address").notEmpty().withMessage("Address is required."),
   check("birthday")
-    .notEmpty()
-    .withMessage("Birthday is required.")
-    .matches(/^\d{4}-\d{2}-\d{2}$/)
+    .matches(/(^$)|(^\d{4}-\d{2}-\d{2}$)/)
     .withMessage("Invalid birthday date. Format YYYY-MM-DD."),
   check("gender")
-    .notEmpty()
-    .withMessage("Gender is required.")
-    .isIn(["male", "female"])
+    .isIn(["male", "female", ""])
     .withMessage("Gender should be male or female."),
   check("name.first")
     .notEmpty()
@@ -65,9 +58,9 @@ const isUserValid = [
 const isGymValid = [
   check("name")
     .notEmpty()
-    .withMessage("First name is required.")
+    .withMessage("Name is required.")
     .matches(/^[a-zA-Z\s]+$/)
-    .withMessage("First name should contain only letters."),
+    .withMessage("Name should contain only letters."),
   check("email")
     .notEmpty()
     .withMessage("Email is required.")
@@ -127,8 +120,6 @@ const isWorkoutValid = [
     .matches(/^(\d)+$/)
     .withMessage("Exercise rest should be a number."),
   check("exercises.*.weight")
-    .notEmpty()
-    .withMessage("Exercise weight is required.")
     .matches(/^(\d)+$/)
     .withMessage("Exercise weight should be a number."),
 ];
