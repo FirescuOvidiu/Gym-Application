@@ -1,5 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { OAuth2Client } = require("google-auth-library");
+const { v4: uuidv4 } = require("uuid");
 
 const User = require("./model");
 
@@ -48,7 +50,49 @@ const login = async (req, res, next) => {
     let payload = user;
     payload["password"] = undefined;
 
-    // Create the access token
+    const accessToken = jwt.sign({ payload }, process.env.ACCESS_TOKEN_SECRET, {
+      algorithm: "HS256",
+      expiresIn: process.env.ACCESS_TOKEN_LIFE,
+    });
+
+    res.status(200).send({ accessToken });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+const googlelogin = async (req, res, next) => {
+  const token = req.body.token,
+    clientId = req.body.clientId,
+    client = new OAuth2Client(clientId);
+
+  try {
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: clientId,
+    });
+    const userPayload = ticket.getPayload();
+    let user = await User.findOne({ email: userPayload.email });
+
+    if (!user) {
+      user = new User({
+        email: userPayload.email,
+        username: userPayload.email.slice(0, userPayload.email.search("@")),
+        password: uuidv4(),
+        name: {
+          first: userPayload.given_name,
+          last: userPayload.family_name,
+        },
+      });
+      user = await user.save();
+      user = await User.findOne({ email: req.body.email });
+    }
+
+    //Use the payload to store information about the user
+    let payload = user;
+    payload["password"] = undefined;
+    payload["__v"] = undefined;
+
     const accessToken = jwt.sign({ payload }, process.env.ACCESS_TOKEN_SECRET, {
       algorithm: "HS256",
       expiresIn: process.env.ACCESS_TOKEN_LIFE,
@@ -116,6 +160,7 @@ module.exports = {
   getUser,
   register,
   login,
+  googlelogin,
   updateUser,
   deleteUser,
 };

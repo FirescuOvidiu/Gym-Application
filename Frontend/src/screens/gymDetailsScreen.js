@@ -8,14 +8,14 @@ import {
   StyleSheet,
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import AsyncStorage from '@react-native-community/async-storage';
-
-import ProfileField from '../components/profileField';
 
 import {saveUser} from '../redux/thunks/userThunks';
 import {saveGym} from '../redux/thunks/gymThunks';
 import {saveWorkouts} from '../redux/thunks/workoutThunks';
+
+import ProfileField from '../components/profileField';
 
 const GymDetailsScreen = ({navigation}) => {
   const gymReducer = useSelector((state) => state.gymReducer);
@@ -72,7 +72,13 @@ const GymDetailsScreen = ({navigation}) => {
                   },
                   {
                     text: 'Confirm',
-                    onPress: () => {
+                    onPress: async () => {
+                      const isSignedIn = await GoogleSignin.isSignedIn();
+
+                      if (isSignedIn) {
+                        await GoogleSignin.revokeAccess();
+                        await GoogleSignin.signOut();
+                      }
                       AsyncStorage.clear();
                       navigation.replace('Auth');
                     },
