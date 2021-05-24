@@ -13,6 +13,8 @@ const router = require("express").Router();
 
 router.get("/:_userId?", checkUserAuth, userController.getUser);
 
+router.get("/confirm/:_confirmationCode", userController.verifyUser);
+
 router.post(
   "/register",
   isUserValid,

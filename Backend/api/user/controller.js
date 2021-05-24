@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { OAuth2Client } = require("google-auth-library");
 const { v4: uuidv4 } = require("uuid");
+const nodemailer = require("nodemailer");
 
 const User = require("./model");
 
@@ -26,13 +27,59 @@ const getUser = async (req, res, next) => {
 };
 
 const register = async (req, res, next) => {
+  const confirmationCode = jwt.sign({}, process.env.ACCESS_TOKEN_SECRET);
   req.body.password = bcrypt.hashSync(req.body.password, 10);
 
   try {
     let user = new User(req.body);
+    user.confirmationCode = confirmationCode;
+
+    console.log(user);
+
+    const transport = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: process.env.USER,
+        pass: process.env.PASS,
+      },
+    });
+    transport.sendMail({
+      from: "ovidiuoviovi174@gmail.com",
+      to: user.email,
+      subject: "Please confirm your account",
+      html: `<h1>Email Confirmation</h1>
+          <h2>Hello ${user.name.first} ${user.name.last}</h2>
+          <p>Please confirm your email by clicking on the following link</p>
+          <a href=http://192.168.100.2:3000/api/user/confirm/${confirmationCode}> Click here</a>
+          </div>`,
+    });
+
     user = await user.save();
 
-    res.status(200).json({ status: "The registration has been completed." });
+    res.status(200).json({
+      status:
+        "The registration has been completed. Please check your email for confirmation.",
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+const verifyUser = async (req, res, next) => {
+  try {
+    const user = User.findOne({
+      confirmationCode: req.params.confirmationCode,
+    });
+
+    if (!user) {
+      return res.status(404).send({ message: "User not found." });
+    }
+    user.status = "Active";
+    user = await user.save();
+
+    res.status(200).json({
+      status: "The registration has been completed.",
+    });
   } catch (error) {
     return next(error);
   }
@@ -42,12 +89,16 @@ const login = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });
 
-    if (!user || !bcrypt.compareSync(req.body.password, user.password)) {
+    if (!user) {
       return next({ message: "Email or password incorrect." });
     }
 
     if (user.status != "Active") {
       return next({ message: "Please verify your email!" });
+    }
+
+    if (!bcrypt.compareSync(req.body.password, user.password)) {
+      return next({ message: "Email or password incorrect." });
     }
 
     //Use the payload to store information about the user
@@ -167,4 +218,5 @@ module.exports = {
   googlelogin,
   updateUser,
   deleteUser,
+  verifyUser,
 };
