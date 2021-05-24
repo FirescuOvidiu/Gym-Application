@@ -7,7 +7,6 @@ const nodemailer = require("nodemailer");
 const User = require("./model");
 
 const getUser = async (req, res, next) => {
-  console.log(req.user);
   req.params._userId = req.params._userId || req.user.payload._id;
 
   try {
