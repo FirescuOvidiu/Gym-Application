@@ -78,7 +78,7 @@ const LoginScreen = ({navigation}) => {
           />
           <Text
             style={styles.forgotPassword}
-            onPress={() => navigation.navigate('')}>
+            onPress={() => navigation.navigate('ForgotPasswordScreen')}>
             Forgot password?
           </Text>
           <SignButton submit={handleSubmitButton} text="Sign In" />

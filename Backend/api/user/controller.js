@@ -46,7 +46,7 @@ const register = async (req, res, next) => {
     await transport.sendMail({
       from: "ovidiuoviovi174@gmail.com",
       to: user.email,
-      subject: "Please confirm your account",
+      subject: "Please confirm your account for Gym Application",
       html: `<h1>Email Confirmation</h1>
           <h2>Hello ${user.name.first} ${user.name.last}</h2>
           <p>Please confirm your email by clicking on the following link</p>
@@ -209,6 +209,32 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
+const sendEmail = async (req, res, next) => {
+  const email = req.body.email,
+    code = req.body.code;
+
+  try {
+    const transport = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: process.env.USER,
+        pass: process.env.PASS,
+      },
+    });
+    await transport.sendMail({
+      from: "ovidiuoviovi174@gmail.com",
+      to: email,
+      subject: "Reset Password Gym Application",
+      html: `<h1>Reset Password Code</h1>
+        <p>The code to reset your password is: ${code}</p>`,
+    });
+
+    res.status(200).json({ status: "The email has been send." });
+  } catch (error) {
+    return next(error);
+  }
+};
+
 module.exports = {
   getUser,
   register,
@@ -217,4 +243,5 @@ module.exports = {
   updateUser,
   deleteUser,
   verifyUser,
+  sendEmail,
 };

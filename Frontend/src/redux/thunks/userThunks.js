@@ -9,6 +9,7 @@ import {
 import {
   loginRequest,
   googleLoginRequest,
+  sendEmailRequest,
   registerRequest,
   userGetRequest,
   userPutRequest,
@@ -118,6 +119,33 @@ export const createWorkout = ({userReducer, workout}) => {
       const response = await userPostWorkoutRequest({userReducer, workout});
 
       dispatch(addWorkout(response.data.workout));
+      alert(`${response.data.status}`);
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  };
+};
+
+export const sendEmailUser = ({email, code}) => {
+  return async () => {
+    try {
+      const response = await sendEmailRequest({email, code});
+
+      alert(`${response.data.status}`);
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  };
+};
+
+export const forgotPasswordUser = ({email, password}) => {
+  return async () => {
+    try {
+      let user = await userGetRequest();
+      user.password = password;
+
+      const response = await userPutRequest({user});
+
       alert(`${response.data.status}`);
     } catch (error) {
       alert(error.response.data.message);

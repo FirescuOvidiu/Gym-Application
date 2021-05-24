@@ -26,6 +26,8 @@ router.post("/login", userController.login);
 
 router.post("/googlelogin", userController.googlelogin);
 
+router.post("/email", userController.sendEmail);
+
 router.put(
   "/:_userId?",
   checkUserAuth,
