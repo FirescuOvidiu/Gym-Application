@@ -57,6 +57,10 @@ const userSchema = new mongoose.Schema({
     enum: ["Pending", "Active"],
     default: "Pending",
   },
+  confirmationCode: {
+    type: String,
+    unique: true,
+  },
 });
 
 userSchema.options.toJSON = {
