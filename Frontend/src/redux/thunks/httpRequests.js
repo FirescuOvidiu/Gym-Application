@@ -36,6 +36,10 @@ export const userGetRequest = async () => {
   return await api.get('/user');
 };
 
+export const userGetByEmailRequest = async ({email}) => {
+  return await api.get(`/user/email/${email}`);
+};
+
 export const userPutRequest = async ({user}) => {
   return await api.put(`/user/${user._id}`, user);
 };

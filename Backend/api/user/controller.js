@@ -7,6 +7,7 @@ const nodemailer = require("nodemailer");
 const User = require("./model");
 
 const getUser = async (req, res, next) => {
+  console.log(req.user);
   req.params._userId = req.params._userId || req.user.payload._id;
 
   try {
@@ -18,6 +19,22 @@ const getUser = async (req, res, next) => {
 
     if (req.user.payload.role === "user" && user._id != req.user.payload._id) {
       return next({ message: "A user can't search for another user." });
+    }
+
+    res.status(200).json({ user });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+const getUserByEmail = async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      email: req.params._userEmail,
+    });
+
+    if (!user) {
+      return next({ message: "The user hasn't been found." });
     }
 
     res.status(200).json({ user });
@@ -168,22 +185,17 @@ const updateUser = async (req, res, next) => {
       return next({ message: "The user hasn't been found." });
     }
 
-    if (req.user.payload.role === "user" && user._id != req.user.payload._id) {
-      return next({ message: "A user can't update another user." });
-    }
-
     user.username = req.body.username || user.username;
     user.email = req.body.email || user.email;
     if (req.body.password)
       user.password = bcrypt.hashSync(req.body.password, 10) || user.password;
+
     user.phone = req.body.phone || user.phone;
     user.address = req.body.address || user.address;
     user.birthday = req.body.birthday || user.birthday;
     user.gender = req.body.gender || user.gender;
     user.name = req.body.name || user.name;
-    if (req.user.role === "admin") {
-      user.role = req.body.role || user.role;
-    }
+    user.role = req.body.role || user.role;
     user.date = req.body.date || user.date;
 
     user = await user.save();
@@ -244,4 +256,5 @@ module.exports = {
   deleteUser,
   verifyUser,
   sendEmail,
+  getUserByEmail,
 };

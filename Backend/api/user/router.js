@@ -13,6 +13,8 @@ const router = require("express").Router();
 
 router.get("/:_userId?", checkUserAuth, userController.getUser);
 
+router.get("/email/:_userEmail?", userController.getUserByEmail);
+
 router.get("/confirm/:_confirmationCode", userController.verifyUser);
 
 router.post(
@@ -30,7 +32,6 @@ router.post("/email", userController.sendEmail);
 
 router.put(
   "/:_userId?",
-  checkUserAuth,
   isUserValid,
   validationResults,
   userController.updateUser

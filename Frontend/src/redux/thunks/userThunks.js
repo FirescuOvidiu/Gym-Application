@@ -12,6 +12,7 @@ import {
   sendEmailRequest,
   registerRequest,
   userGetRequest,
+  userGetByEmailRequest,
   userPutRequest,
   userGetWorkoutsRequest,
   userDeleteWorkoutRequest,
@@ -141,7 +142,9 @@ export const sendEmailUser = ({email, code}) => {
 export const forgotPasswordUser = ({email, password}) => {
   return async () => {
     try {
-      let user = await userGetRequest();
+      let user = await userGetByEmailRequest({email});
+
+      user = user.data.user;
       user.password = password;
 
       const response = await userPutRequest({user});
