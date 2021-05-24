@@ -32,7 +32,9 @@ const register = async (req, res, next) => {
 
   try {
     let user = new User(req.body);
+
     user.confirmationCode = confirmationCode;
+    user = await user.save();
 
     const transport = nodemailer.createTransport({
       service: "Gmail",
@@ -41,7 +43,7 @@ const register = async (req, res, next) => {
         pass: process.env.PASS,
       },
     });
-    transport.sendMail({
+    await transport.sendMail({
       from: "ovidiuoviovi174@gmail.com",
       to: user.email,
       subject: "Please confirm your account",
@@ -51,8 +53,6 @@ const register = async (req, res, next) => {
           <a href=http://192.168.100.2:3000/api/user/confirm/${confirmationCode}> Click here</a>
           </div>`,
     });
-
-    user = await user.save();
 
     res.status(200).json({
       status:

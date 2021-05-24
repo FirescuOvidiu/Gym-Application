@@ -61,7 +61,9 @@ export const saveUser = () => {
       let user = await userGetRequest();
 
       user = user.data.user;
-      user.birthday = user.birthday.substring(0, 10);
+      if (user.birthday != null) {
+        user.birthday = user.birthday.substring(0, 10);
+      }
       user.date = user.date.substring(0, 10);
       dispatch(addUser(user));
     } catch (error) {
