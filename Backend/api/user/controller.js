@@ -46,6 +46,10 @@ const login = async (req, res, next) => {
       return next({ message: "Email or password incorrect." });
     }
 
+    if (user.status != "Active") {
+      return next({ message: "Please verify your email!" });
+    }
+
     //Use the payload to store information about the user
     let payload = user;
     payload["password"] = undefined;
