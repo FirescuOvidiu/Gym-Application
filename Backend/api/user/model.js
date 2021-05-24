@@ -52,6 +52,11 @@ const userSchema = new mongoose.Schema({
     required: true,
     default: "user",
   },
+  status: {
+    type: String,
+    enum: ["Pending", "Active"],
+    default: "Pending",
+  },
 });
 
 userSchema.options.toJSON = {
