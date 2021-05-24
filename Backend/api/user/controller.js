@@ -34,8 +34,6 @@ const register = async (req, res, next) => {
     let user = new User(req.body);
     user.confirmationCode = confirmationCode;
 
-    console.log(user);
-
     const transport = nodemailer.createTransport({
       service: "Gmail",
       auth: {
@@ -67,8 +65,8 @@ const register = async (req, res, next) => {
 
 const verifyUser = async (req, res, next) => {
   try {
-    const user = User.findOne({
-      confirmationCode: req.params.confirmationCode,
+    let user = await User.findOne({
+      confirmationCode: req.params._confirmationCode,
     });
 
     if (!user) {
