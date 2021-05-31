@@ -29,7 +29,7 @@ const ProfileStack = () => {
       <Stack.Screen
         name="UserInformations"
         component={UserInformationsScreen}
-        options={{title: 'User Informations'}}
+        options={{title: 'Account Informations'}}
       />
       <Stack.Screen
         name="UpdateProfile"

@@ -11,12 +11,16 @@ const UserInformationsScreen = ({navigation}) => {
     <View style={styles.container}>
       <View style={styles.body}>
         <View style={styles.insideBody}>
+          <ProfileField text={'Email'} data={userReducer.email} />
           <ProfileField text={'Username'} data={userReducer.username} />
-          <ProfileField text={'Role'} data={userReducer.role} />
           <ProfileField text={'Phone'} data={userReducer.phone} />
           <ProfileField text={'Address'} data={userReducer.address} />
           <ProfileField text={'Birthday'} data={userReducer.birthday} />
           <ProfileField text={'Gender'} data={userReducer.gender} />
+          <ProfileField text={'First Name'} data={userReducer.name.first} />
+          <ProfileField text={'Last Name'} data={userReducer.name.last} />
+          <ProfileField text={'Role'} data={userReducer.role} />
+          <ProfileField text={'Account creation'} data={userReducer.date} />
           <TouchableOpacity
             style={styles.updateButton}
             onPress={() => navigation.navigate('UpdateProfile')}>
