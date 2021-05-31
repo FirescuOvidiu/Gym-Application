@@ -8,27 +8,27 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-const ProfileScreen = ({navigation}) => {
+import ProfileField from '../components/profileField';
+
+const UserInformationsScreen = ({navigation}) => {
   const userReducer = useSelector((state) => state.userReducer);
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <ImageBackground
-          source={require('../images/profileBackground.jpg')}
-          style={styles.backgroundImage}>
-          <Text style={styles.headerTextName}>
-            Welcome {userReducer.name.first} {userReducer.name.last}
-          </Text>
-          <Text style={styles.headerTextEmail}>{userReducer.email}</Text>
-        </ImageBackground>
-      </View>
       <View style={styles.body}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate('AccountInformations')}>
-          <Text style={styles.buttonText}>Account Informations</Text>
-        </TouchableOpacity>
+        <View style={styles.insideBody}>
+          <ProfileField text={'Username'} data={userReducer.username} />
+          <ProfileField text={'Role'} data={userReducer.role} />
+          <ProfileField text={'Phone'} data={userReducer.phone} />
+          <ProfileField text={'Address'} data={userReducer.address} />
+          <ProfileField text={'Birthday'} data={userReducer.birthday} />
+          <ProfileField text={'Gender'} data={userReducer.gender} />
+          <TouchableOpacity
+            style={styles.updateButton}
+            onPress={() => navigation.navigate('UpdateProfile')}>
+            <Text style={styles.updateButtonText}>Update Profile</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -64,12 +64,16 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flex: 2,
   },
+  insideBody: {
+    flex: 2,
+    margin: '5%',
+  },
   backgroundImage: {
     flex: 1,
     resizeMode: 'cover',
     justifyContent: 'center',
   },
-  button: {
+  updateButton: {
     padding: 10,
     alignItems: 'center',
     justifyContent: 'center',
@@ -78,11 +82,11 @@ const styles = StyleSheet.create({
     marginTop: '7%',
     marginBottom: '5%',
   },
-  buttonText: {
+  updateButtonText: {
     color: 'white',
     fontSize: 15,
     fontWeight: 'bold',
   },
 });
 
-export default ProfileScreen;
+export default UserInformationsScreen;
