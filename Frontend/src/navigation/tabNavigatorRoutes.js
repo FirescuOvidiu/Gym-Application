@@ -11,6 +11,7 @@ import CreateWorkoutScreen from '../screens/createWorkoutScreen';
 import WorkoutDetailsScreen from '../screens/workoutDetailsScreen';
 import QRCodeScreen from '../screens/qrCodeScreen';
 import UserInformationsScreen from '../screens/userInformationsScreen';
+import MeasurementsScreen from '../screens/measurementsScreen';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -26,26 +27,19 @@ const ProfileStack = () => {
         options={{title: 'Profile', headerShown: false}}
       />
       <Stack.Screen
-        name="AccountInformations"
-        component={UserInformationsStack}
-        options={{title: 'Account Informations'}}
-      />
-    </Stack.Navigator>
-  );
-};
-
-const UserInformationsStack = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
         name="UserInformations"
         component={UserInformationsScreen}
-        options={{title: 'User Infromations', headerShown: false}}
+        options={{title: 'User Informations'}}
       />
       <Stack.Screen
         name="UpdateProfile"
         component={UpdateProfileScreen}
         options={{title: 'Update Profile'}}
+      />
+      <Stack.Screen
+        name="Measurements"
+        component={MeasurementsScreen}
+        options={{title: 'Measurements'}}
       />
     </Stack.Navigator>
   );

@@ -1,12 +1,6 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {
-  StyleSheet,
-  ImageBackground,
-  View,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 
 import ProfileField from '../components/profileField';
 

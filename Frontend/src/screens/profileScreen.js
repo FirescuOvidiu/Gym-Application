@@ -24,11 +24,18 @@ const ProfileScreen = ({navigation}) => {
         </ImageBackground>
       </View>
       <View style={styles.body}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate('AccountInformations')}>
-          <Text style={styles.buttonText}>Account Informations</Text>
-        </TouchableOpacity>
+        <View style={styles.insideBody}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('UserInformations')}>
+            <Text style={styles.buttonText}>Account Informations</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('Measurements')}>
+            <Text style={styles.buttonText}>Measurements</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -63,6 +70,10 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: 'white',
     flex: 2,
+  },
+  insideBody: {
+    flex: 2,
+    margin: '5%',
   },
   backgroundImage: {
     flex: 1,
