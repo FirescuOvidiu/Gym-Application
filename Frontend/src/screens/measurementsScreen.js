@@ -71,10 +71,10 @@ const MeasurementsScreen = () => {
           <Modal animationType="slide" visible={modalVisible}>
             <View style={styles.modalView}>
               <Text>
-                {'    '}Your BMI is {bmi}, indicating you're in the category for
-                adults of your height. For your height, a normal weight range
-                would be from {lowerNormalWeight} to {upperNormalWeight}.
-                {'\n\n'}
+                {'    '}Your BMI is {bmi}, indicating you're in the {category}{' '}
+                category for adults of your height. For your height, a normal
+                weight range would be from {lowerNormalWeight} to{' '}
+                {upperNormalWeight}.{'\n\n'}
                 {'    '}Your BMR is {bmr}. Based on your activity factor you
                 should consume:
               </Text>
