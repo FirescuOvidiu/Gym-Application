@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   fieldText: {
-    flex: 1,
+    flex: 2,
     textAlign: 'right',
     paddingBottom: 10,
     paddingTop: 10,

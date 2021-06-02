@@ -1,39 +1,30 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {
-  StyleSheet,
-  ImageBackground,
-  View,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 
-const ProfileScreen = ({navigation}) => {
+import ProfileField from '../components/profileField';
+
+const UserInformationsScreen = ({navigation}) => {
   const userReducer = useSelector((state) => state.userReducer);
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <ImageBackground
-          source={require('../images/profileBackground.jpg')}
-          style={styles.backgroundImage}>
-          <Text style={styles.headerTextName}>
-            Welcome {userReducer.name.first} {userReducer.name.last}
-          </Text>
-          <Text style={styles.headerTextEmail}>{userReducer.email}</Text>
-        </ImageBackground>
-      </View>
       <View style={styles.body}>
         <View style={styles.insideBody}>
+          <ProfileField text={'Email'} data={userReducer.email} />
+          <ProfileField text={'Username'} data={userReducer.username} />
+          <ProfileField text={'Phone'} data={userReducer.phone} />
+          <ProfileField text={'Address'} data={userReducer.address} />
+          <ProfileField text={'Birthday'} data={userReducer.birthday} />
+          <ProfileField text={'Gender'} data={userReducer.gender} />
+          <ProfileField text={'First Name'} data={userReducer.name.first} />
+          <ProfileField text={'Last Name'} data={userReducer.name.last} />
+          <ProfileField text={'Role'} data={userReducer.role} />
+          <ProfileField text={'Account creation'} data={userReducer.date} />
           <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate('UserInformations')}>
-            <Text style={styles.buttonText}>Account Informations</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate('Measurements')}>
-            <Text style={styles.buttonText}>Measurements</Text>
+            style={styles.updateButton}
+            onPress={() => navigation.navigate('UpdateProfile')}>
+            <Text style={styles.updateButtonText}>Update Profile</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -80,7 +71,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     justifyContent: 'center',
   },
-  button: {
+  updateButton: {
     padding: 10,
     alignItems: 'center',
     justifyContent: 'center',
@@ -89,11 +80,11 @@ const styles = StyleSheet.create({
     marginTop: '7%',
     marginBottom: '5%',
   },
-  buttonText: {
+  updateButtonText: {
     color: 'white',
     fontSize: 15,
     fontWeight: 'bold',
   },
 });
 
-export default ProfileScreen;
+export default UserInformationsScreen;
