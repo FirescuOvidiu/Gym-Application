@@ -6,6 +6,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import SplashScreen from '../screens/splashScreen';
 import LoginScreen from '../screens/loginScreen';
 import RegisterScreen from '../screens/registerScreen';
+import ForgotPasswordScreen from '../screens/forgotPasswordScreen';
 import TabNavigatorRoutes from './tabNavigatorRoutes';
 
 const Stack = createStackNavigator();
@@ -22,6 +23,11 @@ const Auth = () => {
         name="RegisterScreen"
         component={RegisterScreen}
         options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ForgotPasswordScreen"
+        component={ForgotPasswordScreen}
+        options={{title: 'Forgot Password'}}
       />
     </Stack.Navigator>
   );

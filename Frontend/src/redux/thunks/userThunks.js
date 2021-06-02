@@ -9,8 +9,10 @@ import {
 import {
   loginRequest,
   googleLoginRequest,
+  sendEmailRequest,
   registerRequest,
   userGetRequest,
+  userGetByEmailRequest,
   userPutRequest,
   userGetWorkoutsRequest,
   userDeleteWorkoutRequest,
@@ -61,7 +63,9 @@ export const saveUser = () => {
       let user = await userGetRequest();
 
       user = user.data.user;
-      user.birthday = user.birthday.substring(0, 10);
+      if (user.birthday != null) {
+        user.birthday = user.birthday.substring(0, 10);
+      }
       user.date = user.date.substring(0, 10);
       dispatch(addUser(user));
     } catch (error) {
@@ -116,6 +120,35 @@ export const createWorkout = ({userReducer, workout}) => {
       const response = await userPostWorkoutRequest({userReducer, workout});
 
       dispatch(addWorkout(response.data.workout));
+      alert(`${response.data.status}`);
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  };
+};
+
+export const sendEmailUser = ({email, code}) => {
+  return async () => {
+    try {
+      const response = await sendEmailRequest({email, code});
+
+      alert(`${response.data.status}`);
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  };
+};
+
+export const forgotPasswordUser = ({email, password}) => {
+  return async () => {
+    try {
+      let user = await userGetByEmailRequest({email});
+
+      user = user.data.user;
+      user.password = password;
+
+      const response = await userPutRequest({user});
+
       alert(`${response.data.status}`);
     } catch (error) {
       alert(error.response.data.message);

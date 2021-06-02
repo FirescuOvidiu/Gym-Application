@@ -24,12 +24,20 @@ export const googleLoginRequest = async ({credential}) => {
   return await api.post('/user/googlelogin', credential);
 };
 
+export const sendEmailRequest = async ({email, code}) => {
+  return await api.post('/user/email', {email: email, code: code});
+};
+
 export const registerRequest = async ({user}) => {
   return await api.post('/user/register', user);
 };
 
 export const userGetRequest = async () => {
   return await api.get('/user');
+};
+
+export const userGetByEmailRequest = async ({email}) => {
+  return await api.get(`/user/email/${email}`);
 };
 
 export const userPutRequest = async ({user}) => {
