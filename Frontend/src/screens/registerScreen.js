@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import {ImageBackground, StyleSheet, View, Text} from 'react-native';
+import {useDispatch} from 'react-redux';
+
+import {registerUser} from '../redux/thunks/userThunks';
 
 import ListAuthInputFields from '../components/listAuthInputFields';
 import SignButton from '../components/signButton';
 import AuthHeader from '../components/authHeader';
-
-const axios = require('axios').default;
 
 const RegisterScreen = ({navigation}) => {
   const [userName, setUserName] = useState('');
@@ -18,6 +19,7 @@ const RegisterScreen = ({navigation}) => {
   const [userGender, setUserGender] = useState('');
   const [userFirstName, setUserFirstName] = useState('');
   const [userLastName, setUserLastName] = useState('');
+  const dispatch = useDispatch();
 
   const handleSubmitButton = async () => {
     if (!userEmail) {
@@ -36,22 +38,6 @@ const RegisterScreen = ({navigation}) => {
       alert('Please fill Re-type Password');
       return;
     }
-    if (!userPhone) {
-      alert('Please fill Phone');
-      return;
-    }
-    if (!userAddress) {
-      alert('Please fill Address');
-      return;
-    }
-    if (!userBirthday) {
-      alert('Please fill Birthday');
-      return;
-    }
-    if (!userGender) {
-      alert('Please fill Gender');
-      return;
-    }
     if (!userFirstName) {
       alert('Please fill First Name');
       return;
@@ -65,27 +51,23 @@ const RegisterScreen = ({navigation}) => {
       return;
     }
 
-    try {
-      await axios.post(`http://192.168.100.2:3000/api/user/register`, {
-        username: userName,
-        email: userEmail,
-        password: userPassword,
-        phone: userPhone,
-        address: userAddress,
-        birthday: userBirthday,
-        gender: userGender,
-        name: {
-          first: userFirstName,
-          last: userLastName,
+    dispatch(
+      registerUser({
+        user: {
+          username: userName,
+          email: userEmail,
+          password: userPassword,
+          phone: userPhone,
+          address: userAddress,
+          birthday: userBirthday,
+          gender: userGender,
+          name: {
+            first: userFirstName,
+            last: userLastName,
+          },
         },
-      });
-
-      alert('Registration successful.');
-    } catch (error) {
-      error.response.data.errors.forEach((element) => {
-        alert(element.msg);
-      });
-    }
+      }),
+    );
   };
 
   return (
@@ -109,7 +91,7 @@ const RegisterScreen = ({navigation}) => {
           />
           <SignButton submit={handleSubmitButton} text="Sign Up" />
           <View style={styles.signIn}>
-            <Text style={{fontSize: 15}}> Already have an account ? </Text>
+            <Text style={styles.accountText}> Already have an account ? </Text>
             <Text
               style={styles.signInText}
               onPress={() => navigation.navigate('LoginScreen')}>
@@ -147,6 +129,9 @@ const styles = StyleSheet.create({
     color: '#6da7f2',
     fontSize: 15,
     fontWeight: 'bold',
+  },
+  accountText: {
+    fontSize: 15,
   },
 });
 

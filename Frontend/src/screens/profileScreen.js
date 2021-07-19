@@ -8,8 +8,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import ProfileField from '../components/profileField';
-
 const ProfileScreen = ({navigation}) => {
   const userReducer = useSelector((state) => state.userReducer);
 
@@ -26,18 +24,16 @@ const ProfileScreen = ({navigation}) => {
         </ImageBackground>
       </View>
       <View style={styles.body}>
-        <View style={{margin: '5%'}}>
-          <Text style={styles.title}> Account Informations</Text>
-          <ProfileField text={'Username'} data={userReducer.username} />
-          <ProfileField text={'Role'} data={userReducer.role} />
-          <ProfileField text={'Phone'} data={userReducer.phone} />
-          <ProfileField text={'Address'} data={userReducer.address} />
-          <ProfileField text={'Birthday'} data={userReducer.birthday} />
-          <ProfileField text={'Gender'} data={userReducer.gender} />
+        <View style={styles.insideBody}>
           <TouchableOpacity
-            style={styles.updateButton}
-            onPress={() => navigation.navigate('UpdateProfile')}>
-            <Text style={styles.updateButtonText}>Update Profile</Text>
+            style={styles.button}
+            onPress={() => navigation.navigate('UserInformations')}>
+            <Text style={styles.buttonText}>Account Informations</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('Measurements')}>
+            <Text style={styles.buttonText}>Measurements</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -75,12 +71,16 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flex: 2,
   },
+  insideBody: {
+    flex: 2,
+    margin: '5%',
+  },
   backgroundImage: {
     flex: 1,
     resizeMode: 'cover',
     justifyContent: 'center',
   },
-  updateButton: {
+  button: {
     padding: 10,
     alignItems: 'center',
     justifyContent: 'center',
@@ -89,10 +89,11 @@ const styles = StyleSheet.create({
     marginTop: '7%',
     marginBottom: '5%',
   },
-  updateButtonText: {
+  buttonText: {
     color: 'white',
     fontSize: 15,
     fontWeight: 'bold',
   },
 });
+
 export default ProfileScreen;

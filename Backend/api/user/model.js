@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-// Create a schema (blueprint) for a user
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -22,22 +21,20 @@ const userSchema = new mongoose.Schema({
   },
   phone: {
     type: String,
-    required: true,
-    minlength: 10,
-    maxlength: 10,
+    default: "",
   },
   address: {
     type: String,
-    required: true,
+    default: "",
   },
   birthday: {
     type: Date,
-    required: true,
     min: "1900-01-01",
+    default: "1900-01-01",
   },
   gender: {
     type: String,
-    required: true,
+    default: "",
   },
   name: {
     first: {
@@ -55,7 +52,25 @@ const userSchema = new mongoose.Schema({
     required: true,
     default: "user",
   },
+  status: {
+    type: String,
+    enum: ["Pending", "Active"],
+    default: "Pending",
+  },
+  confirmationCode: {
+    type: String,
+    unique: true,
+  },
 });
 
-// Create a model for a user
+userSchema.options.toJSON = {
+  getters: true,
+  virtuals: true,
+  minimize: false,
+  transform: function (doc, ret, options) {
+    delete ret.password;
+    return ret;
+  },
+};
+
 module.exports = mongoose.model("User", userSchema);

@@ -20,17 +20,13 @@ const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_USER:
       return {...state, ...action.payload};
+
     case UPDATE_USER:
       return {
         ...state,
-        email: action.payload.email,
-        username: action.payload.username,
-        phone: action.payload.phone,
-        address: action.payload.address,
-        birthday: action.payload.birthday,
-        gender: action.payload.gender,
-        name: action.payload.name,
+        ...action.payload,
       };
+
     default:
       return state;
   }

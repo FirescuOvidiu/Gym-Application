@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useEffect} from 'react';
 import {
   Text,
   View,
@@ -8,61 +8,23 @@ import {
   StyleSheet,
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import {useEffect} from 'react';
-
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import AsyncStorage from '@react-native-community/async-storage';
 
+import {saveUser} from '../redux/thunks/userThunks';
+import {saveGym} from '../redux/thunks/gymThunks';
+import {saveWorkouts} from '../redux/thunks/workoutThunks';
+
 import ProfileField from '../components/profileField';
-
-import {addUser} from '../redux/actions/userActions';
-import {addGym} from '../redux/actions/gymActions';
-
-import axios from 'axios';
 
 const GymDetailsScreen = ({navigation}) => {
   const gymReducer = useSelector((state) => state.gymReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const saveUser = async () => {
-      const token = await AsyncStorage.getItem('accessToken');
-      try {
-        let user = await axios.get('http://192.168.100.2:3000/api/user', {
-          headers: {
-            authorization: token,
-          },
-        });
-
-        if (user.data.user) {
-          delete user.data.user.__v;
-          delete user.data.user.password;
-        }
-        user.data.user.birthday = user.data.user.birthday.substring(0, 10);
-        user.data.user.date = user.data.user.date.substring(0, 10);
-        dispatch(addUser(user.data.user));
-      } catch (error) {
-        alert(error.response.data.message);
-      }
-    };
-    const saveGym = async () => {
-      const token = await AsyncStorage.getItem('accessToken');
-      try {
-        let gym = await axios.get('http://192.168.100.2:3000/api/gym', {
-          headers: {
-            authorization: token,
-          },
-        });
-
-        if (gym.data.gym) {
-          delete gym.data.gym[0].__v;
-        }
-        dispatch(addGym(gym.data.gym[0]));
-      } catch (error) {
-        alert(error.response.data.message);
-      }
-    };
-    saveUser();
-    saveGym();
+    dispatch(saveUser());
+    dispatch(saveGym());
+    dispatch(saveWorkouts());
   }, []);
 
   return (
@@ -110,7 +72,13 @@ const GymDetailsScreen = ({navigation}) => {
                   },
                   {
                     text: 'Confirm',
-                    onPress: () => {
+                    onPress: async () => {
+                      const isSignedIn = await GoogleSignin.isSignedIn();
+
+                      if (isSignedIn) {
+                        await GoogleSignin.revokeAccess();
+                        await GoogleSignin.signOut();
+                      }
                       AsyncStorage.clear();
                       navigation.replace('Auth');
                     },
@@ -150,19 +118,18 @@ const styles = StyleSheet.create({
     flex: 2,
     backgroundColor: 'white',
     paddingHorizontal: '5%',
-    paddingBottom: '5%',
-    paddingTop: '3%',
+    paddingBottom: '10%',
+    paddingTop: '5%',
     marginBottom: '5%',
   },
   gymOpeningHours: {
     flex: 1,
     backgroundColor: 'white',
     paddingHorizontal: '5%',
-    paddingTop: '3%',
-    paddingBottom: '10%',
-    marginBottom: '5%',
+    paddingBottom: '12%',
   },
   logout: {
+    margin: '5%',
     flex: 0.4,
   },
   logoutButton: {

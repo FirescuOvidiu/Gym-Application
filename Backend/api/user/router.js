@@ -5,31 +5,38 @@ const {
   checkAdminAuth,
 } = require("../middleware/auth-validation");
 const {
+  validationResults,
   isUserValid,
-  valdiationResults,
 } = require("../middleware/body-validation");
 
 const router = require("express").Router();
 
-router.get("/:id?", checkUserAuth, userController.getUser);
+router.get("/:_userId?", checkUserAuth, userController.getUser);
+
+router.get("/email/:_userEmail?", userController.getUserByEmail);
+
+router.get("/confirm/:_confirmationCode", userController.verifyUser);
 
 router.post(
   "/register",
   isUserValid,
-  valdiationResults,
+  validationResults,
   userController.register
 );
 
 router.post("/login", userController.login);
 
+router.post("/googlelogin", userController.googlelogin);
+
+router.post("/email", userController.sendEmail);
+
 router.put(
-  "/:_id",
-  checkUserAuth,
+  "/:_userId?",
   isUserValid,
-  valdiationResults,
+  validationResults,
   userController.updateUser
 );
 
-router.delete("/:_id", checkAdminAuth, userController.deleteUser);
+router.delete("/:_userId", checkAdminAuth, userController.deleteUser);
 
 module.exports = router;
